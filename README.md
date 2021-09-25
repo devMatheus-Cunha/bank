@@ -10,7 +10,7 @@ This project was developed with the following technologies:
 
 ## 🚀 How to run
 
-Project developed in partnership with [Matheus Gomes](https://github.com/devAndre-Isaac) where I will integrate backend made for Picpay challenge.
+Project developed in partnership with [Andre Isaac](https://github.com/devAndre-Isaac) where I will integrate backend made for Picpay challenge.
 
 ```bash
 $ git clone https://github.com/devMatheus-Gomes/picpay-frontend.git
