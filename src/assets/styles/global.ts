@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: "Tusker-Medium";
+  src: local("Tusker Grotesk 5500"), local("TuskerGrotesk-5500Medium"),
+    url("../fonts/TuskerGrotesk-5500Medium.ttf") format("truetype");
+}
+
   :root {
     --background: #F0F1E9;
     --green-picpay: #11c76f;
@@ -28,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: var(--background);
+    background: var(--green-picpay-dark);
     -webkit-font-smoothing: antialiased;
   }
 
