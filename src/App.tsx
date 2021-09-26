@@ -1,8 +1,17 @@
-import React from 'react';
+import React from "react";
+
+// global styles
+import { GlobalStyle } from "./assets/styles/global";
+
+// components
+import Header from "./components/Header";
 
 function App() {
   return (
-   <h1>Title Picpay</h1>
+    <>
+      <Header />
+      <GlobalStyle />
+    </>
   );
 }
 
