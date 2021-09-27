@@ -1,18 +1,21 @@
 import React from "react";
 
-// hooks
-import DataUser from "../../hooks/userData";
-
 // styles
 import { Container, ContentInfo, ContentBalance } from "./styles";
 
-const InfoUserContent: React.FC = () => {
-  const {name, wallet} = DataUser()
+// interface
+interface IInfoUserContent {
+  name: string
+  wallet: number,
+}
 
+const InfoUserContent = ({ name, wallet }: IInfoUserContent) => {
   return (
     <Container>
       <ContentInfo>
-        <h2>Olá, <strong>{name}</strong> </h2>
+        <h2>
+          Olá, <strong>{name}</strong>{" "}
+        </h2>
       </ContentInfo>
       <ContentBalance>
         <h1>Saldo</h1>
