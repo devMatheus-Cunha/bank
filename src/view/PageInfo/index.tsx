@@ -1,11 +1,16 @@
-import React from 'react';
-import UserContent from '../../container/UserContent';
+import React from "react";
 
+// container
+import ActionsBox from "../../container/ActionsBox";
+import UserContent from "../../container/UserContent";
 
 const PageInfo: React.FC = () => {
   return (
-    <UserContent />
+    <>
+      <UserContent />
+      <ActionsBox />
+    </>
   );
-}
+};
 
 export default PageInfo;
