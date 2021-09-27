@@ -1,18 +1,20 @@
-import React from "react";
+import React  from "react";
+
+// hooks
+import DataUser from "../../hooks/userData";
 
 // components
 import InfoUserContent from "../../components/InfoUserContent";
-import ActionsBox from "../../components/ActionsBox";
 
 // styles
 import { Container } from "./styles";
 
 const UserContent: React.FC = () => {
+  const {name, wallet} = DataUser()
 
   return (
     <Container>
-      <InfoUserContent />
-      <ActionsBox />
+      <InfoUserContent name={name} wallet={wallet}/>
     </Container>
   );
 };
