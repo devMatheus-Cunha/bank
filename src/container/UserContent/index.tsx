@@ -1,12 +1,11 @@
 import React, { useState, useCallback, useContext } from "react";
-import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 
 // contexts
 import { GetIdContext } from "../../contexts/getIdProvider";
 
 // requisition
-import { PostDeposit } from "../../models/requests";
+import { PostDeposit, PostTransfer } from "../../models/requests";
 
 // content modal
 import Deposit from "./items/deposit";
@@ -33,17 +32,22 @@ const UserContent = () => {
     useState(false);
 
     // handle actions modal
-  const handleDepositWallet = (values: any) => {
+  const handleDepositWallet = (data: any) => {
     const formatedData = {
-      value: parseFloat(values),
+      value: parseFloat(data),
     };
     PostDeposit(userData.id, formatedData);
     handleOnCloseModal();
   };
 
-  const handleTransferWallet = useCallback(() => {
-    setIsTransferWalletModalOpen(false);
-  }, []);
+  const handleTransferWallet = useCallback((data: any) => {
+    const formatedData = {
+      sendId: data.toId,
+      value: parseFloat(data.value),
+    };
+    PostTransfer(userData.id, formatedData);
+    handleOnCloseModal();
+  }, [userData.id]);
 
   // handle open modal
   const handleOpenModaTransfer = () => {
