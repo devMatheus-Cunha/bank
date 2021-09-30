@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { Container, ContentButton } from './styles';
+import { Container, ContentButton } from "./styles";
 
 interface IButtonProps {
-    name: string;
-    onClick: () => void;
+  name: string;
+  onClick: () => void;
 }
-const Button = (props: IButtonProps) => {
+const Button = ({ name, onClick }: IButtonProps) => {
   return (
-      <Container>
-          <ContentButton type="submit" onClick={props.onClick} >
-              {props.name} 
-          </ContentButton>
-      </Container>
-  )
-}
+    <Container>
+      <ContentButton type="submit" onClick={onClick}>
+        {name}
+      </ContentButton>
+    </Container>
+  );
+};
 
 export default Button;
