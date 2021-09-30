@@ -26,7 +26,7 @@ import { ContainerActionsButtons, ContentButton } from "./styles";
 
 const UserContent = () => {
   // hooks
-  const { userData, userId } = useContext<IUserDataProps>(GetIdContext)
+  const { userData, userId } = useContext<IUserDataProps>(GetIdContext);
 
   // state modal
   const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] =
@@ -34,20 +34,23 @@ const UserContent = () => {
   const [isDepositWalletModalOpen, setIsDepositWalletModalOpen] =
     useState(false);
 
-    // handle actions modal
-  const handleDepositWallet = (data: number) => {
+  // handle actions modal
+  const handleDepositWallet = useCallback((data: number) => {
     PostDeposit(userId, data);
-    handleOnCloseModal()
-  };
-
-  const handleTransferWallet = useCallback((data: IValuesTransferProps) => {
-    const formatedData = {
-      sendId: data.sendId,
-      value: data.value,
-    };
-    PostTransfer(userId, formatedData);
     handleOnCloseModal();
   }, [userId]);
+
+  const handleTransferWallet = useCallback(
+    (data: IValuesTransferProps) => {
+      const formatedData = {
+        sendId: data.sendId,
+        value: data.value,
+      };
+      PostTransfer(userId, formatedData);
+      handleOnCloseModal();
+    },
+    [userId]
+  );
 
   // handle open modal
   const handleOpenModaTransfer = () => {
@@ -88,7 +91,7 @@ const UserContent = () => {
         >
           <Deposit
             onCloseModal={handleOnCloseModal}
-            handleDepositWallet={handleDepositWallet}
+            handleSubmit={handleDepositWallet}
           />
         </Modal>
         <ContentButton>
