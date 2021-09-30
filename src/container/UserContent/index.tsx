@@ -36,7 +36,7 @@ const UserContent = () => {
     const formatedData = {
       value: parseFloat(values),
     };
-    PostDeposit("6155ea46d68aa02eac0287cf", formatedData);
+    PostDeposit(formatedData);
     handleOnCloseModal();
   };
 
