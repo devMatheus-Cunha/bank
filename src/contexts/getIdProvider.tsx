@@ -10,7 +10,7 @@ export const GetIdContext = createContext({} as IUserDataProps);
 
 // url api
 const api = axios.create({
-  baseURL: "http://506e-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io",
+  baseURL: "http://d266-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io",
 });
 
 const GetIdProvider = ({ children }: IGetIdProvider) => {

@@ -35,10 +35,16 @@ const UserContent = () => {
     useState(false);
 
   // handle actions modal
-  const handleDepositWallet = useCallback((data: number) => {
-    PostDeposit(userId, data);
-    handleOnCloseModal();
-  }, [userId]);
+  const handleDepositWallet = useCallback(
+    (data: number) => {
+      const formatedData = {
+        value: data,
+      };
+      PostDeposit(userId, formatedData);
+      handleOnCloseModal();
+    },
+    [userId]
+  );
 
   const handleTransferWallet = useCallback(
     (data: IValuesTransferProps) => {

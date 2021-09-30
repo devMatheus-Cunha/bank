@@ -35,6 +35,10 @@ export interface ITransferProps {
 /////////////////////////
 // interface for Deposit
 /////////////////////////
+export interface IValuesDepostiProps {
+  value: number;
+}
+
 export interface IDepositProps {
   onCloseModal: () => void;
   handleSubmit: (data: number) => void
