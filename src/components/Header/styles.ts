@@ -11,10 +11,10 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   width: 20%;
-  height: 35px;
+  height:28px;
   border-radius: 2rem;
 
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.1rem;
   font-family: 'Inter', sans-serif;
   color: var(--white);
