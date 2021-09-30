@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 
+// interface
+import { ITransferProps, IValuesTransferProps } from "../../../../interface";
+
 // styles
 import { Container, Content, ContentButton } from "../shared/styles";
 
-interface ITransferProps {
-  handleSubmit: (values: IValuesTransferProps) => void;
-  onCloseModal: () => void;
-}
-
-interface IValuesTransferProps {
-  toId: string;
-  value: string;
-}
-
 const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
   const [valuesTransfer, setValuesTransfer] = useState<IValuesTransferProps>({
-    toId: "",
-    value: "",
+    sendId: "",
+    value: 0,
   });
 
   return (
@@ -29,7 +22,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
           onChange={(event) =>
             setValuesTransfer({
               ...valuesTransfer,
-              toId: event.target.value,
+              sendId: event.target.value,
             })
           }
         />
@@ -40,13 +33,15 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
           onChange={(event) =>
             setValuesTransfer({
               ...valuesTransfer,
-              value: event.target.value,
+              value: parseFloat(event.target.value),
             })
           }
         />
         <ContentButton>
           <button onClick={() => onCloseModal()}>Cancelar</button>
-          <button onClick={() => handleSubmit(valuesTransfer)}>Transferir</button>
+          <button onClick={() => handleSubmit(valuesTransfer)}>
+            Transferir
+          </button>
         </ContentButton>
       </Content>
     </Container>
