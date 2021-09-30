@@ -16,7 +16,6 @@ const api = axios.create({
 const GetIdProvider = ({ children }: IGetIdProvider) => {
   const [userData, setUserData] = useState<IDataProps>();
   const [userId] = useState("6156223abe4fe81d80da773d");
-  // const { id } = useParams<any>();
 
   useEffect(() => {
     api.get(`/picpay/admin/user/${userId}`).then((response) => {
