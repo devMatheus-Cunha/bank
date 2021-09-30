@@ -10,10 +10,12 @@ const api = axios.create({
 
 export const PostDeposit = (id: string, data: IValuesDepostiProps) => {
   api.post(`/picpay/deposit/save/${id}`, data).then((response) => {
+    window.location.reload();
   });
 };
 
 export const PostTransfer = (id: string, data: IValuesTransferProps) => {
   api.post(`/picpay/transactions/${id}`, data).then((response) => {
+    window.location.reload();
   });
 };
