@@ -9,12 +9,12 @@ interface IInfoUserContent {
   wallet: number,
 }
 
-const InfoUserContent = ({ name, wallet }: any) => {
+const InfoUserContent = ({ name, wallet }: IInfoUserContent) => {
   return (
     <Container>
       <ContentInfo>
         <h2>
-          Olá, <strong>{name}</strong>{" "}
+          Olá, <strong>{name || "Usurario"}</strong>{" "}
         </h2>
       </ContentInfo>
       <ContentBalance>
