@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
+// interface
+import { IDepositProps } from "../../../../interface";
+
 // styles
 import { Container, Content, ContentButton } from "../shared/styles";
 
-interface ITransferProps {
-  onCloseModal: () => void;
-  handleDepositWallet: any
-}
 
-const Deposit = ({ onCloseModal, handleDepositWallet }: ITransferProps) => {
-  const [valueDeposit, setValueDeposit] = useState<number>();
+const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
+  const [valueDeposit, setValueDeposit] = useState<number>(0);
 
   return (
     <Container>
@@ -22,7 +21,7 @@ const Deposit = ({ onCloseModal, handleDepositWallet }: ITransferProps) => {
           />
         <ContentButton>
           <button type="button" onClick={() => onCloseModal()}>Cancelar</button>
-          <button type="submit" onClick={() => handleDepositWallet(valueDeposit)}>Depositar</button>
+          <button type="submit" onClick={() => handleSubmit(valueDeposit)}>Depositar</button>
         </ContentButton>
       </Content>
     </Container>
