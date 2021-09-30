@@ -9,7 +9,7 @@ interface IInfoUserContent {
   wallet: number,
 }
 
-const InfoUserContent = ({ name, wallet }: IInfoUserContent) => {
+const InfoUserContent = ({ name, wallet }: any) => {
   return (
     <Container>
       <ContentInfo>
