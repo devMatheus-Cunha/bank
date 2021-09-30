@@ -1,14 +1,18 @@
 import React from "react";
 
 // container
-import ActionsBox from "../../container/ActionsBox";
 import UserContent from "../../container/UserContent";
+
+// component
+import Header from "../../components/Header";
+import { GlobalStyle } from "../../assets/styles/global";
 
 const PageInfo: React.FC = () => {
   return (
     <>
+      <Header />
       <UserContent />
-      <ActionsBox />
+      <GlobalStyle />
     </>
   );
 };
