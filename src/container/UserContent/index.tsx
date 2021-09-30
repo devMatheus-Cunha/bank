@@ -18,12 +18,15 @@ import { FiSend } from "react-icons/fi";
 // components
 import InfoUserContent from "../../components/InfoUserContent";
 
+// interface
+import { IUserDataProps, IValuesTransferProps } from "../../interface";
+
 // styles
 import { ContainerActionsButtons, ContentButton } from "./styles";
 
 const UserContent = () => {
   // hooks
-  const { userData } = useContext(GetIdContext)
+  const { userData, userId } = useContext<IUserDataProps>(GetIdContext)
 
   // state modal
   const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] =
@@ -32,22 +35,19 @@ const UserContent = () => {
     useState(false);
 
     // handle actions modal
-  const handleDepositWallet = (data: any) => {
-    const formatedData = {
-      value: parseFloat(data),
-    };
-    PostDeposit(userData.id, formatedData);
-    handleOnCloseModal();
+  const handleDepositWallet = (data: number) => {
+    PostDeposit(userId, data);
+    handleOnCloseModal()
   };
 
-  const handleTransferWallet = useCallback((data: any) => {
+  const handleTransferWallet = useCallback((data: IValuesTransferProps) => {
     const formatedData = {
-      sendId: data.toId,
-      value: parseFloat(data.value),
+      sendId: data.sendId,
+      value: data.value,
     };
-    PostTransfer(userData.id, formatedData);
+    PostTransfer(userId, formatedData);
     handleOnCloseModal();
-  }, [userData.id]);
+  }, [userId]);
 
   // handle open modal
   const handleOpenModaTransfer = () => {
@@ -65,8 +65,8 @@ const UserContent = () => {
   return (
     <>
       <InfoUserContent
-        name={userData.data?.complete_name}
-        wallet={userData.data?.wallet}
+        name={userData?.complete_name}
+        wallet={userData?.wallet}
       />
       <ContainerActionsButtons>
         <Modal
