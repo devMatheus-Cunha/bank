@@ -19,5 +19,5 @@ function App() {
     </>
   );
 }
-
+console.log("Bernardo aqui")
 export default App;
