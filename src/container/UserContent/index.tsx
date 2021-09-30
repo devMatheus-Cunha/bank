@@ -1,31 +1,106 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useCallback, useContext } from "react";
+import Modal from "react-modal";
+
+// contexts
+import { GetIdContext } from "../../contexts/getIdProvider";
+
+// requisition
+import { PostDeposit } from "../../models/requests";
+
+// content modal
+import Deposit from "./items/deposit";
+import Transfer from "./items/transfer";
+
+// icons
+import { FcMoneyTransfer } from "react-icons/fc";
+import { FiSend } from "react-icons/fi";
 
 // components
 import InfoUserContent from "../../components/InfoUserContent";
 
 // styles
-import { Container } from "./styles";
+import { ContainerActionsButtons, ContentButton } from "./styles";
 
-const UserContent: React.FC = () => {
-  const [state, setState] = useState<any>([]);
-  const api = axios.create({
-    baseURL: "http://7aa1-2804-14c-5b80-80b4-f050-4dc1-95a5-8c5e.ngrok.io",
-  });
+const UserContent = () => {
+  // hooks
+  const { userData } = useContext(GetIdContext)
 
-  useEffect(() => {
-    api
-      .get("/picpay/admin/user/614e2c38f49bb04a582ad344")
-      .then((response) => setState(response.data)) 
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
+  // state modal
+  const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] =
+    useState(false);
+  const [isDepositWalletModalOpen, setIsDepositWalletModalOpen] =
+    useState(false);
+
+    // handle actions modal
+  const handleDepositWallet = (values: any) => {
+    const formatedData = {
+      value: parseFloat(values),
+    };
+    PostDeposit("6155ea46d68aa02eac0287cf", formatedData);
+    handleOnCloseModal();
+  };
+
+  const handleTransferWallet = useCallback(() => {
+    setIsTransferWalletModalOpen(false);
   }, []);
-  
+
+  // handle open modal
+  const handleOpenModaTransfer = () => {
+    setIsTransferWalletModalOpen(true);
+  };
+
+  const handleOpenModalDeposit = () => {
+    setIsDepositWalletModalOpen(true);
+  };
+  // handle close modal
+  const handleOnCloseModal = () => {
+    setIsTransferWalletModalOpen(false);
+    setIsDepositWalletModalOpen(false);
+  };
   return (
-    <Container>
-      <InfoUserContent name={state?.complete_name} wallet={state?.wallet} />
-    </Container>
+    <>
+      <InfoUserContent
+        name={userData?.complete_name}
+        wallet={userData?.wallet}
+      />
+      <ContainerActionsButtons>
+        <Modal
+          isOpen={isTransferWalletModalOpen}
+          onRequestClose={handleOnCloseModal}
+          overlayClassName="react-modal-overlay"
+          className="react-modal-content"
+        >
+          <Transfer
+            handleSubmit={handleTransferWallet}
+            onCloseModal={handleOnCloseModal}
+          />
+        </Modal>
+        <Modal
+          isOpen={isDepositWalletModalOpen}
+          onRequestClose={handleOnCloseModal}
+          overlayClassName="react-modal-overlay"
+          className="react-modal-content"
+        >
+          <Deposit
+            onCloseModal={handleOnCloseModal}
+            handleDepositWallet={handleDepositWallet}
+          />
+        </Modal>
+        <ContentButton>
+          <button type="button" onClick={() => handleOpenModaTransfer()}>
+            <FiSend />
+          </button>
+
+          <p>Transferir</p>
+        </ContentButton>
+        <ContentButton>
+          <button type="button" onClick={() => handleOpenModalDeposit()}>
+            <FcMoneyTransfer />
+          </button>
+          <p>Depositar</p>
+        </ContentButton>
+      </ContainerActionsButtons>
+    </>
   );
 };
 
