@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
+import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 
 // contexts
@@ -36,7 +37,7 @@ const UserContent = () => {
     const formatedData = {
       value: parseFloat(values),
     };
-    PostDeposit(formatedData);
+    PostDeposit(userData.id, formatedData);
     handleOnCloseModal();
   };
 
@@ -60,8 +61,8 @@ const UserContent = () => {
   return (
     <>
       <InfoUserContent
-        name={userData?.complete_name}
-        wallet={userData?.wallet}
+        name={userData.data?.complete_name}
+        wallet={userData.data?.wallet}
       />
       <ContainerActionsButtons>
         <Modal

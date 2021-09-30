@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -8,13 +9,20 @@ const api = axios.create({
 });
 
 const GetIdProvider = (props: any) => {
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<any>({
+    data: {},
+    id: "615606414b0a0e1c84bf14a9",
+  });
+  // const { id } = useParams<any>();
 
   useEffect(() => {
-    api.get(`/picpay/admin/user/615606414b0a0e1c84bf14a9`).then((response) => {
-      setUserData(response.data);
+    api.get(`/picpay/admin/user/${userData.id}`).then((response) => {
+      setUserData({
+        ...userData,
+        data: response.data,
+      });
     });
-  }, [props.id]);
+  }, [userData.id]);
 
   return (
     <GetIdContext.Provider
@@ -27,4 +35,4 @@ const GetIdProvider = (props: any) => {
   );
 };
 
-export default GetIdProvider
+export default GetIdProvider;
