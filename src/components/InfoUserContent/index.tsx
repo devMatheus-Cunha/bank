@@ -5,8 +5,8 @@ import { Container, ContentInfo, ContentBalance } from "./styles";
 
 // interface
 interface IInfoUserContent {
-  name: string
-  wallet: number,
+  name?: string,
+  wallet?: number,
 }
 
 const InfoUserContent = ({ name, wallet }: IInfoUserContent) => {
