@@ -23,7 +23,7 @@ const InfoUserContent = ({ name, wallet }: IInfoUserContent) => {
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(wallet.toFixed(2) as unknown as number)}
+          }).format(wallet?.toFixed(2) as unknown as number)}
         </h2>
       </ContentBalance>
     </Container>
