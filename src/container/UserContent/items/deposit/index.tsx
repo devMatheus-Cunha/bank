@@ -9,7 +9,7 @@ interface ITransferProps {
 }
 
 const Deposit = ({ onCloseModal, handleDepositWallet }: ITransferProps) => {
-  const [valueDeposit, setValueDeposit] = useState("");
+  const [valueDeposit, setValueDeposit] = useState<number>();
 
   return (
     <Container>
@@ -18,7 +18,7 @@ const Deposit = ({ onCloseModal, handleDepositWallet }: ITransferProps) => {
             type="number"
             name="value"
             placeholder="Valor..."
-            onChange={(event) => setValueDeposit(event.target.value)}
+            onChange={(event) => setValueDeposit(parseFloat(event.target.value))}
           />
         <ContentButton>
           <button type="button" onClick={() => onCloseModal()}>Cancelar</button>
