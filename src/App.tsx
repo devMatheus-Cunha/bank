@@ -2,8 +2,9 @@ import React from "react";
 import Modal from "react-modal";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-// components
-import PageInfo from "./view/PageInfo";
+// view
+import Auth from "./view/auth";
+import PageInfo from "./view/home";
 
 // contexts
 import GetIdProvider from "./contexts/getIdProvider";
@@ -18,7 +19,8 @@ function App() {
     <BrowserRouter>
       <GetIdProvider>
         <Switch>
-          <Route path="/" component={PageInfo} />
+          <Route path="/" exact component={Auth} />
+          <Route path="/home/:id" component={PageInfo} />
           <GlobalStyle />
         </Switch>
       </GetIdProvider>
