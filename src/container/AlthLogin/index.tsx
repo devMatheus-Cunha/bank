@@ -14,6 +14,7 @@ const AlthLogin: React.FC = () => {
             <label htmlFor="user">User</label>
             <input type="text" name="user" placeholder="E-mail" />
           </ContentInput>
+          
           <ContentInput>
             <label htmlFor="user">Password</label>
             <input type="password" name="password" placeholder="Password" />
