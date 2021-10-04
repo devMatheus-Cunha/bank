@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from "axios";
-import { useEffect } from "react";
 
 // interface
 import {
@@ -16,17 +15,13 @@ const api = axios.create({
 
 export const PostDeposit = (id: string, data: IValuesDepostiProps) => {
 	api.post(`/picpay/deposit/save/${id}`, data).then(() => {
-		useEffect(() => {
-			api.get(`/picpay/admin/user/${id}`)
-		}, []);
+		window.location.reload()
 	});
 };
 
 export const PostTransfer = (id: string, data: IValuesTransferProps) => {
 	api.post(`/picpay/transactions/${id}`, data).then(() => {
-		useEffect(() => {
-			api.get(`/picpay/admin/user/${id}`)
-		}, []);
+		window.location.reload()
 	});
 };
 
