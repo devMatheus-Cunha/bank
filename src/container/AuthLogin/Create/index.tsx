@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 //
-import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "./shared/styles";
+import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "../shared/styles";
 
 function initalState() {
   return { user: "", password: "" };
 }
 
-const UserLogin = () => {
+const UserCreate = () => {
   const [values, setvalues] = useState(initalState);
 
   function onChange(event: any) {
@@ -37,28 +37,7 @@ const UserLogin = () => {
               required
             />
           </ContentInput>
-          <ContentInput>
-            <label htmlFor="user">CPF - CNPJ</label>
-            <input
-              type="text"
-              name="cpf_cnpj"
-              placeholder="CPF-CNPJ"
-              onChange={onChange}
-              value={values.password}
-              required
-            />
-          </ContentInput>
-          <ContentInput>
-            <label htmlFor="user">Email</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="E-mail"
-              onChange={onChange}
-              value={values.user}
-              required
-            />
-          </ContentInput>
+
           <ContentInput>
             <label htmlFor="user">Password</label>
             <input
@@ -77,4 +56,4 @@ const UserLogin = () => {
     </>
   );
 };
-export default UserLogin;
+export default UserCreate;
