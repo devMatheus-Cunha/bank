@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 
 // contexts
 import { FcMoneyTransfer } from "react-icons/fc";
 import { FiSend } from "react-icons/fi";
-import { GetIdContext } from "../../contexts/getIdProvider";
 
 // requisition
 import { PostDeposit, PostTransfer } from "../../models/requests";
@@ -14,16 +14,18 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 import InfoUserContent from "../../components/InfoUserContent";
+import useDataUser from "../../hooks/useDataUser";
 
 // interface
-import { IUserDataProps, IValuesTransferProps } from "../../interface";
+import { IValuesTransferProps } from "../../interface";
 
 // styles
 import { ContainerActionsButtons, ContentButton } from "./styles";
 
 const UserContent = () => {
 	// hooks
-	const { userData, id } = useContext<IUserDataProps>(GetIdContext);
+	const { id } = useParams<{ id: string }>();
+	const { userData } = useDataUser(id);
 
 	// state modal
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
