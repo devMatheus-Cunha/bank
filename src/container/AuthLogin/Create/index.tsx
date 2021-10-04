@@ -1,23 +1,27 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 //
-import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin, CreateAccount } from "../shared/styles";
-
-function initalState() {
-  return { user: "", password: "" };
-}
+import {
+  Container,
+  Form,
+  ContentInput,
+  ContentTitleLogin,
+  ButtonLogin,
+  CreateAccount,
+} from "../shared/styles";
 
 const UserCreate = () => {
-  const [values, setvalues] = useState(initalState);
+  // states
+  const [values, setvalues] = useState({
+    complete_name: "",
+    cpf_cnpj: "",
+    email: "",
+    password: "",
+  });
 
-  function onChange(event: any) {
-    const { value, name } = event.target;
-
-    setvalues({
-      ...values,
-      [name]: value,
-    });
-  }
+  // hooks
+  const history = useHistory();
 
   return (
     <>
@@ -30,10 +34,15 @@ const UserCreate = () => {
             <label htmlFor="user">User</label>
             <input
               type="text"
-              name="user"
-              placeholder="E-mail"
-              onChange={onChange}
-              value={values.user}
+              name="complete_name"
+              placeholder="Nome"
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  complete_name: event.target.value,
+                });
+              }}
+              value={values.complete_name}
               required
             />
           </ContentInput>
@@ -43,8 +52,13 @@ const UserCreate = () => {
               type="text"
               name="cpf_cnpj"
               placeholder="Cpf/Cnpj"
-              onChange={onChange}
-              value={values.password}
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  cpf_cnpj: event.target.value,
+                });
+              }}
+              value={values.cpf_cnpj}
               required
             />
           </ContentInput>
@@ -54,8 +68,13 @@ const UserCreate = () => {
               type="text"
               name="email"
               placeholder="E-mail"
-              onChange={onChange}
-              value={values.user}
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  email: event.target.value,
+                });
+              }}
+              value={values.email}
               required
             />
           </ContentInput>
@@ -66,14 +85,19 @@ const UserCreate = () => {
               type="password"
               name="password"
               placeholder="Password"
-              onChange={onChange}
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  password: event.target.value,
+                });
+              }}
               value={values.password}
               required
             />
           </ContentInput>
         </Form>
         <ButtonLogin>Criar conta</ButtonLogin>
-        <CreateAccount>Login</CreateAccount>
+        <CreateAccount onClick={() => history.push("/")}>Login</CreateAccount>
       </Container>
     </>
   );
