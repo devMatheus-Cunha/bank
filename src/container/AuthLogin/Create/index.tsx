@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //
-import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "../shared/styles";
+import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin, CreateAccount } from "../shared/styles";
 
 function initalState() {
   return { user: "", password: "" };
@@ -23,7 +23,7 @@ const UserCreate = () => {
     <>
       <Container>
         <ContentTitleLogin>
-          <h1 className="user-login-title">Login</h1>
+          <h1 className="user-login-title">Criar Conta</h1>
         </ContentTitleLogin>
         <Form>
           <ContentInput>
@@ -31,6 +31,28 @@ const UserCreate = () => {
             <input
               type="text"
               name="user"
+              placeholder="E-mail"
+              onChange={onChange}
+              value={values.user}
+              required
+            />
+          </ContentInput>
+          <ContentInput>
+            <label htmlFor="user">Cpf/Cnpj</label>
+            <input
+              type="text"
+              name="cpf_cnpj"
+              placeholder="Cpf/Cnpj"
+              onChange={onChange}
+              value={values.password}
+              required
+            />
+          </ContentInput>
+          <ContentInput>
+            <label htmlFor="user">Email</label>
+            <input
+              type="text"
+              name="email"
               placeholder="E-mail"
               onChange={onChange}
               value={values.user}
@@ -50,8 +72,8 @@ const UserCreate = () => {
             />
           </ContentInput>
         </Form>
-
-        <ButtonLogin>Log in</ButtonLogin>
+        <ButtonLogin>Criar conta</ButtonLogin>
+        <CreateAccount>Login</CreateAccount>
       </Container>
     </>
   );

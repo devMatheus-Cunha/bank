@@ -1,14 +1,10 @@
-import React  from "react";
+import React from "react";
 
 // container
-import AuthLogin from "../../container/AuthLogin"
+import AuthLogin from "../../container/AuthLogin";
 
 const Auth: React.FC = () => {
-  return (
-    <>
-        <AuthLogin />
-    </>
-  );
+  return <AuthLogin />;
 };
 
 export default Auth;

@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 
-// import { Container } from './styles';
+//container
 
-const Create: React.FC = () => {
-  return <div />;
-}
+import CreateAccount from "../../../container/AuthLogin/Create";
 
+const Create = () => {
+  return <CreateAccount />;
+};
 export default Create;

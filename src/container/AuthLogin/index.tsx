@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //
-import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "./shared/styles";
+import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin, CreateAccount } from "./shared/styles";
 
 function initalState() {
   return { user: "", password: "" };
@@ -31,34 +31,12 @@ const UserLogin = () => {
             <input
               type="text"
               name="user"
-              placeholder="E-mail"
+              placeholder="Name"
               onChange={onChange}
               value={values.user}
               required
             />
-          </ContentInput>
-          <ContentInput>
-            <label htmlFor="user">CPF - CNPJ</label>
-            <input
-              type="text"
-              name="cpf_cnpj"
-              placeholder="CPF-CNPJ"
-              onChange={onChange}
-              value={values.password}
-              required
-            />
-          </ContentInput>
-          <ContentInput>
-            <label htmlFor="user">Email</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="E-mail"
-              onChange={onChange}
-              value={values.user}
-              required
-            />
-          </ContentInput>
+          </ContentInput>          
           <ContentInput>
             <label htmlFor="user">Password</label>
             <input
@@ -71,8 +49,9 @@ const UserLogin = () => {
             />
           </ContentInput>
         </Form>
-
         <ButtonLogin>Log in</ButtonLogin>
+        <CreateAccount>Create Account</CreateAccount>
+
       </Container>
     </>
   );
