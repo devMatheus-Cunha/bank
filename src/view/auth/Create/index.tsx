@@ -1,10 +1,9 @@
 import React from "react";
 
-//container
-
+// container
 import CreateAccount from "../../../container/AuthLogin/Create";
 
 const Create = () => {
-  return <CreateAccount />;
+	return <CreateAccount />;
 };
 export default Create;

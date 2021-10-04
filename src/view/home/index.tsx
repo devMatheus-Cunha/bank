@@ -8,13 +8,13 @@ import Header from "../../components/Header";
 import { GlobalStyle } from "../../assets/styles/global";
 
 const PageInfo = () => {
-  return (
-    <>
-      <Header />
-      <UserContent />
-      <GlobalStyle />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<UserContent />
+			<GlobalStyle />
+		</>
+	);
 };
 
 export default PageInfo;
