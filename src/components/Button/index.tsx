@@ -7,13 +7,13 @@ interface IButtonProps {
   onClick: () => void;
 }
 const Button = ({ name, onClick }: IButtonProps) => {
-  return (
-    <Container>
-      <ContentButton type="submit" onClick={onClick}>
-        {name}
-      </ContentButton>
-    </Container>
-  );
+	return (
+		<Container>
+			<ContentButton type="submit" onClick={onClick}>
+				{name}
+			</ContentButton>
+		</Container>
+	);
 };
 
 export default Button;
