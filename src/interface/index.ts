@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-/////////////////////////
+/// //////////////////////
 // interface for dataProps
-/////////////////////////
+/// //////////////////////
 export interface IUserDataProps {
   userData: IDataProps;
-  userId: string;
+  id: string;
 }
 
 export interface IDataProps {
@@ -19,9 +19,9 @@ export interface IDataProps {
       wallet?: number;
 }
 
-/////////////////////////
+/// //////////////////////
 // interface for Transfer
-/////////////////////////
+/// //////////////////////
 export interface IValuesTransferProps {
   sendId: string;
   value: number;
@@ -32,9 +32,9 @@ export interface ITransferProps {
   onCloseModal: () => void;
 }
 
-/////////////////////////
+/// //////////////////////
 // interface for Deposit
-/////////////////////////
+/// //////////////////////
 export interface IValuesDepostiProps {
   value: number;
 }
@@ -44,9 +44,22 @@ export interface IDepositProps {
   handleSubmit: (data: number) => void
 }
 
-/////////////////////////
+/// //////////////////////
+// interface for Login
+/// //////////////////////
+export interface IValuesLoginProps {
+  email: string;
+  password: string;
+}
+
+export interface IDepositProps {
+  onCloseModal: () => void;
+  handleSubmit: (data: number) => void
+}
+
+/// //////////////////////
 // interface  context
-/////////////////////////
+/// //////////////////////
 export interface IGetIdProvider {
   children: ReactNode
 }
