@@ -1,23 +1,23 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 //
-import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin, CreateAccount } from "./shared/styles";
-
-function initalState() {
-  return { user: "", password: "" };
-}
+import {
+  Container,
+  Form,
+  ContentInput,
+  ContentTitleLogin,
+  ButtonLogin,
+  CreateAccount,
+} from "./shared/styles";
 
 const UserLogin = () => {
-  const [values, setvalues] = useState(initalState);
+  // states
+  const [values, setvalues] = useState({ complete_name: "", password: "" });
+  console.log(values);
 
-  function onChange(event: any) {
-    const { value, name } = event.target;
-
-    setvalues({
-      ...values,
-      [name]: value,
-    });
-  }
+  // hooks
+  const history = useHistory();
 
   return (
     <>
@@ -30,28 +30,39 @@ const UserLogin = () => {
             <label htmlFor="user">User</label>
             <input
               type="text"
-              name="user"
+              name="uscomplete_nameer"
               placeholder="Name"
-              onChange={onChange}
-              value={values.user}
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  complete_name: event.target.value,
+                });
+              }}
+              value={values.complete_name}
               required
             />
-          </ContentInput>          
+          </ContentInput>
           <ContentInput>
             <label htmlFor="user">Password</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              onChange={onChange}
+              onChange={(event) => {
+                setvalues({
+                  ...values,
+                  password: event.target.value,
+                });
+              }}
               value={values.password}
               required
             />
           </ContentInput>
         </Form>
-        <ButtonLogin>Log in</ButtonLogin>
-        <CreateAccount>Create Account</CreateAccount>
-
+        <ButtonLogin>Logar</ButtonLogin>
+        <CreateAccount onClick={() => history.push("./create")}>
+          Criar conta
+        </CreateAccount>
       </Container>
     </>
   );
