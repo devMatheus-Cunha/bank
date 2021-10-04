@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Container, Form, ContentInput, ContentTitleLogin } from "./styles";
+//
+import Button from "../../components/Button";
 
-const AlthLogin: React.FC = () => {
+import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "./styles";
+
+function initalState() {
+  return { user: "", password: "" };
+}
+
+const UserLogin = () => {
+  const [values, setvalues] = useState(initalState);
+
+  function onChange(event: any) {
+    const { value, name } = event.target;
+    setvalues({
+      ...values,
+      [name]: value,
+    });
+  }
+
   return (
     <>
       <Container>
@@ -12,17 +29,29 @@ const AlthLogin: React.FC = () => {
         <Form>
           <ContentInput>
             <label htmlFor="user">User</label>
-            <input type="text" name="user" placeholder="E-mail" />
+            <input
+              type="text"
+              name="user"
+              placeholder="E-mail"
+              onChange={onChange}
+              value={values.user}
+            />
           </ContentInput>
-          
+
           <ContentInput>
             <label htmlFor="user">Password</label>
-            <input type="password" name="password" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={onChange}
+              value={values.password}
+            />
           </ContentInput>
         </Form>
+        <ButtonLogin>Depositar</ButtonLogin>
       </Container>
     </>
   );
 };
-
-export default AlthLogin;
+export default UserLogin;

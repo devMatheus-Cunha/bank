@@ -17,3 +17,7 @@ export const ContentInput = styled.div`
   
 `;
 
+export const ButtonLogin = styled.button`
+  
+`;
+
