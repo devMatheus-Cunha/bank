@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 //
-import Button from "../../components/Button";
-
 import { Container, Form, ContentInput, ContentTitleLogin, ButtonLogin } from "./styles";
 
 function initalState() {
@@ -14,6 +12,7 @@ const UserLogin = () => {
 
   function onChange(event: any) {
     const { value, name } = event.target;
+
     setvalues({
       ...values,
       [name]: value,
@@ -35,6 +34,7 @@ const UserLogin = () => {
               placeholder="E-mail"
               onChange={onChange}
               value={values.user}
+              required
             />
           </ContentInput>
 
@@ -46,10 +46,12 @@ const UserLogin = () => {
               placeholder="Password"
               onChange={onChange}
               value={values.password}
+              required
             />
           </ContentInput>
         </Form>
-        <ButtonLogin>Depositar</ButtonLogin>
+
+        <ButtonLogin>Log in</ButtonLogin>
       </Container>
     </>
   );
