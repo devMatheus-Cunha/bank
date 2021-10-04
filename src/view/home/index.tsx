@@ -7,7 +7,7 @@ import UserContent from "../../container/UserContent";
 import Header from "../../components/Header";
 import { GlobalStyle } from "../../assets/styles/global";
 
-const PageInfo: React.FC = () => {
+const PageInfo = () => {
   return (
     <>
       <Header />
