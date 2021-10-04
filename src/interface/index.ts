@@ -52,11 +52,6 @@ export interface IValuesLoginProps {
   password: string;
 }
 
-export interface IDepositProps {
-  onCloseModal: () => void;
-  handleSubmit: (data: number) => void
-}
-
 /// //////////////////////
 // interface  context
 /// //////////////////////
