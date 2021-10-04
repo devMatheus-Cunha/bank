@@ -1,12 +1,12 @@
 import React  from "react";
 
 // container
-import AlthLogin from "../../container/AlthLogin"
+import AuthLogin from "../../container/AuthLogin"
 
 const Auth: React.FC = () => {
   return (
     <>
-        <AlthLogin />
+        <AuthLogin />
     </>
   );
 };
