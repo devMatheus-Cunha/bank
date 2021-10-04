@@ -1,5 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+
+// interface
+import { IValuesCreateAccountProps } from "../../../interface";
 
 //
 import {
@@ -12,16 +18,40 @@ import {
 } from "../shared/styles";
 
 const UserCreate = () => {
+	// hooks
+	const history = useHistory();
+
+	// url api
+	const api = "http://ade5-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
+
 	// states
-	const [values, setvalues] = useState({
+	const [statesCreateAccount, setStateCreateAccount] = useState({
 		complete_name: "",
 		cpf_cnpj: "",
 		email: "",
 		password: "",
+		isSeller: false,
+		wallet: 0,
 	});
 
-	// hooks
-	const history = useHistory();
+	const handleSubmitCreateAccount = (datas: IValuesCreateAccountProps) => {
+		const formated = {
+			email: datas.email,
+			password: datas.password,
+			complete_name: datas.complete_name,
+			cpf_cnpj: datas.cpf_cnpj,
+			isSeller: datas.isSeller,
+			wallet: datas.wallet,
+		};
+
+		try {
+			axios.post(`${api}/picpay/user`, formated).then((response) => {
+				history.push(`/home/${response.data?.id}`);
+			})
+		} catch (error) {
+			console.log(`Error aqui carai: ${error}`)
+		}
+	};
 
 	return (
 		<>
@@ -38,12 +68,12 @@ const UserCreate = () => {
 							name="complete_name"
 							placeholder="Nome"
 							onChange={(event) => {
-								setvalues({
-									...values,
+								setStateCreateAccount({
+									...statesCreateAccount,
 									complete_name: event.target.value,
 								});
 							}}
-							value={values.complete_name}
+							value={statesCreateAccount.complete_name}
 							required
 						/>
 					</ContentInput>
@@ -55,12 +85,12 @@ const UserCreate = () => {
 							name="cpf_cnpj"
 							placeholder="Cpf/Cnpj"
 							onChange={(event) => {
-								setvalues({
-									...values,
+								setStateCreateAccount({
+									...statesCreateAccount,
 									cpf_cnpj: event.target.value,
 								});
 							}}
-							value={values.cpf_cnpj}
+							value={statesCreateAccount.cpf_cnpj}
 							required
 						/>
 					</ContentInput>
@@ -72,12 +102,12 @@ const UserCreate = () => {
 							id="email"
 							placeholder="E-mail"
 							onChange={(event) => {
-								setvalues({
-									...values,
+								setStateCreateAccount({
+									...statesCreateAccount,
 									email: event.target.value,
 								});
 							}}
-							value={values.email}
+							value={statesCreateAccount.email}
 							required
 						/>
 					</ContentInput>
@@ -85,22 +115,39 @@ const UserCreate = () => {
 					<ContentInput>
 						<label htmlFor="password">Password</label>
 						<input
-						  id="password"
+							id="password"
 							type="password"
 							name="password"
 							placeholder="Password"
 							onChange={(event) => {
-								setvalues({
-									...values,
+								setStateCreateAccount({
+									...statesCreateAccount,
 									password: event.target.value,
 								});
 							}}
-							value={values.password}
+							value={statesCreateAccount.password}
 							required
 						/>
 					</ContentInput>
+					<FormControlLabel
+						control={(
+							<Switch
+								checked={statesCreateAccount.isSeller}
+								onChange={(event) => {
+									setStateCreateAccount({
+										...statesCreateAccount,
+										isSeller: event.target.checked,
+									});
+								}}
+								name="checkedA"
+							/>
+						)}
+						label="Lojista"
+					/>
 				</Form>
-				<ButtonLogin>Criar conta</ButtonLogin>
+				<ButtonLogin onClick={() => handleSubmitCreateAccount(statesCreateAccount)}>
+					Criar conta
+				</ButtonLogin>
 				<CreateAccount onClick={() => history.push("/")}>Login</CreateAccount>
 			</Container>
 		</>

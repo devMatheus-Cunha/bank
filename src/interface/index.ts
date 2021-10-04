@@ -53,6 +53,18 @@ export interface IValuesLoginProps {
 }
 
 /// //////////////////////
+// interface for Create Account
+/// //////////////////////
+export interface IValuesCreateAccountProps {
+  complete_name: string,
+  cpf_cnpj: string,
+  email: string,
+  password: string,
+  isSeller: boolean,
+  wallet: number
+}
+
+/// //////////////////////
 // interface  context
 /// //////////////////////
 export interface IGetIdProvider {

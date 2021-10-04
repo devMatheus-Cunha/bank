@@ -34,7 +34,7 @@ const UserLogin = () => {
 			password: datas.password,
 		};
 
-		axios.post(`${api}/api/user/auth`, formated).then((response) => {
+		axios.post(`${api}/picpay/user/auth`, formated).then((response) => {
 			history.push(`/home/${response.data.validUser.id}`);
 		});
 	};
