@@ -14,9 +14,10 @@ export const ContentButton = styled.div`
   justify-content: center;
 
   width: 50%;
-  height: 80px;
+  height: 70px;
   border-radius: 2rem;
   background-color: var(--blue-light);
+  margin-top: 1rem;
 
   svg {
     width: 23px;
