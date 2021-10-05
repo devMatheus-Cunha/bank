@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 // interface
-import { IUserDataProps } from "../interface";
+import { IDataProps, IUserDataProps } from "../interface";
 
 // context
 export const GetIdContext = createContext({} as IUserDataProps);
@@ -13,7 +13,7 @@ const api = axios.create({
 });
 
 const useDataUser = (id: string) => {
-	const [userData, setUserData] = useState<any>();
+	const [userData, setUserData] = useState<IDataProps>();
 
 	useEffect(() => {
 		api.get(`/picpay/admin/user/${id}`).then((response) => {
