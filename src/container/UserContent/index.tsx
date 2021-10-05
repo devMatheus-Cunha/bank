@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 
 // contexts
-import { FcMoneyTransfer } from "react-icons/fc";
-import { FiSend } from "react-icons/fi";
+import { BiTransfer } from "react-icons/bi";
+import { IoWalletOutline } from "react-icons/io5";
 
 // requisition
 import { PostDeposit, PostTransfer } from "../../models/requests";
@@ -21,6 +21,7 @@ import { IValuesTransferProps } from "../../interface";
 
 // styles
 import { ContainerActionsButtons, ContentButton } from "./styles";
+import { Button } from "../../components/Header/styles";
 
 const UserContent = () => {
 	// hooks
@@ -98,16 +99,15 @@ const UserContent = () => {
 					/>
 				</Modal>
 				<ContentButton>
-					<button type="button" onClick={() => handleOpenModaTransfer()}>
-						<FiSend />
-					</button>
-
+					<Button type="button" onClick={() => handleOpenModaTransfer()}>
+						<BiTransfer />
+					</Button>
 					<p>Transferir</p>
 				</ContentButton>
 				<ContentButton>
-					<button type="button" onClick={() => handleOpenModalDeposit()}>
-						<FcMoneyTransfer />
-					</button>
+					<Button type="button" onClick={() => handleOpenModalDeposit()}>
+						<IoWalletOutline />
+					</Button>
 					<p>Depositar</p>
 				</ContentButton>
 			</ContainerActionsButtons>
