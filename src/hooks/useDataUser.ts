@@ -16,7 +16,7 @@ const useDataUser = (id: string) => {
 		}).then((response) => setUserData(response))
 	}, [id]);
 
-	return { userData };
+	return { userData, setUserData };
 };
 
 export default useDataUser;

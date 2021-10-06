@@ -31,7 +31,7 @@ import { Button } from "../../components/Header/styles";
 const UserContent = () => {
 	// hooks
 	const { id } = useParams<{ id: string }>();
-	const { userData } = useDataUser(id);
+	const { userData, setUserData } = useDataUser(id);
 
 	// state modal
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
@@ -64,6 +64,7 @@ const UserContent = () => {
 
 			response.then((response) => {
 				if (response) {
+					setUserData(response)
 					handleOnCloseModal();
 					toast.success(<ToastContent content="Deposito feito" />);
 				} else {
@@ -71,13 +72,13 @@ const UserContent = () => {
 				}
 			});
 		},
-		[id],
+		[id, setUserData],
 	);
 
 	const handleTransferWallet = useCallback(
 		(data: IValuesTransferProps) => {
 			const formatedData = {
-				sendId: data.cpf_cnpj,
+				cpf_cnpj: data.cpf_cnpj,
 				value: data.value,
 			};
 
@@ -87,16 +88,18 @@ const UserContent = () => {
 			});
 
 			response.then((response) => {
-				if (response) {
+				if (!response.Message) {
 					handleOnCloseModal();
+					setUserData(response[1]?.TransactionsDataOfSend)
 					toast.success(<ToastContent content="Transação feita" />);
 				} else {
-					toast.error(<ToastContent content="Erro ao fazer a Transação!" />);
+					toast.error(<ToastContent content="CPF ou CNPJ invalido!" />);
 				}
 			});
 		},
-		[id],
+		[id, setUserData],
 	);
+
 	return (
 		<>
 			<InfoUserContent
