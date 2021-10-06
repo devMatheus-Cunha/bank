@@ -1,13 +1,19 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { toast } from "react-toastify";
+
+// models
+import { ModelPost } from "../../../models/modelPost";
+
+// compoenents
+import ToastContent from "../../../components/ToastContent";
 
 // interface
 import { IValuesCreateAccountProps } from "../../../interface";
 
-//
+// styles
 import {
 	Container,
 	Form,
@@ -20,9 +26,6 @@ import {
 const UserCreate = () => {
 	// hooks
 	const history = useHistory();
-
-	// url api
-	const api = "http://ade5-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
 
 	// states
 	const [statesCreateAccount, setStateCreateAccount] = useState({
@@ -44,13 +47,19 @@ const UserCreate = () => {
 			wallet: datas.wallet,
 		};
 
-		try {
-			axios.post(`${api}/picpay/user`, formated).then((response) => {
-				history.push(`/home/${response.data?.id}`);
-			})
-		} catch (error) {
-			console.log(`Error aqui carai: ${error}`)
-		}
+		const response = ModelPost({
+			route: "/picpay/user",
+			body: formated,
+		})
+
+		response.then(async (response) => {
+			if (response?.validUser?.id) {
+				await history.push(`/home/${response?.validUser?.id}`)
+				toast.success(<ToastContent content="Conta criada!" />);
+			} else {
+				toast.error(<ToastContent content="Dados invalidos!" />);
+			}
+		})
 	};
 
 	return (
