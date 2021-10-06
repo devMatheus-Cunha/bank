@@ -92,8 +92,12 @@ const UserContent = () => {
 					handleOnCloseModal();
 					setUserData(response[1]?.TransactionsDataOfSend)
 					toast.success(<ToastContent content="Transação feita" />);
-				} else {
+				} else if (response.Message === "Insufficient funds") {
+					toast.error(<ToastContent content="Saldo insuficiente" />);
+				} else if (response.Message === "Identification does not exist") {
 					toast.error(<ToastContent content="CPF ou CNPJ invalido!" />);
+				} else {
+					toast.error(<ToastContent content="Erro! Aguarde um momento" />);
 				}
 			});
 		},
