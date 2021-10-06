@@ -64,7 +64,6 @@ const UserContent = () => {
 
 			response.then((response) => {
 				if (response) {
-					window.location.reload()
 					handleOnCloseModal();
 					toast.success(<ToastContent content="Deposito feito" />);
 				} else {

@@ -53,8 +53,8 @@ const UserCreate = () => {
 		})
 
 		response.then(async (response) => {
-			if (response?.validUser?.id) {
-				await history.push(`/home/${response?.validUser?.id}`)
+			if (response?.id) {
+				await history.push(`/home/${response?.id}`)
 				toast.success(<ToastContent content="Conta criada!" />);
 			} else {
 				toast.error(<ToastContent content="Dados invalidos!" />);

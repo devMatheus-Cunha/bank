@@ -43,7 +43,7 @@ const UserLogin = () => {
 			body: formated,
 		})
 
-		response.then(async (response: any) => {
+		response.then(async (response) => {
 			if (response?.validUser?.id) {
 				await history.push(`/home/${response?.validUser?.id}`)
 				toast.success(<ToastContent content="Login feito!" />);
