@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import axios from "axios";
+import { toast } from "react-toastify";
+
+// models
+import { ModelPost } from "../../models/modelPost";
+
+// toast
+import ToastContent from "../../components/ToastContent";
 
 // interface
 import { IValuesLoginProps } from "../../interface";
@@ -26,17 +32,25 @@ const UserLogin = () => {
 	const history = useHistory();
 
 	// url api
-	const api = "http://ade5-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io"
 	// functions
 	const handleSubmitLogin = (datas: IValuesLoginProps) => {
 		const formated = {
 			email: datas.email,
 			password: datas.password,
 		};
+		const response =	ModelPost({
+			route: "/picpay/user/auth",
+			body: formated,
+		})
 
-		axios.post(`${api}/picpay/user/auth`, formated).then((response) => {
-			history.push(`/home/${response.data.validUser.id}`);
-		});
+		response.then(async (response: any) => {
+			if (response?.validUser?.id) {
+				await history.push(`/home/${response?.validUser?.id}`)
+				toast.success(<ToastContent content="Login feito!" />);
+			} else {
+				toast.error(<ToastContent content="Email ou Senha invalido!" />);
+			}
+		})
 	};
 
 	return (
@@ -64,9 +78,7 @@ const UserLogin = () => {
 						/>
 					</ContentInput>
 					<ContentInput>
-						<label htmlFor="password">
-							Password
-						</label>
+						<label htmlFor="password">Password</label>
 						<input
 							type="password"
 							name="password"
