@@ -61,12 +61,12 @@ const UserLogin = () => {
 				</ContentTitleLogin>
 				<Form>
 					<ContentInput>
-						<label htmlFor="email">User</label>
+						<label htmlFor="email">E-mail</label>
 						<input
 							type="email"
 							name="email"
 							id="email"
-							placeholder="Name"
+							placeholder="E-mail"
 							onChange={(event) => {
 								setStatesLogin({
 									...statesLogin,
