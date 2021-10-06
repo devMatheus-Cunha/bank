@@ -1,19 +1,24 @@
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 
 // contexts
 import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
-// requisition
-import { PostDeposit, PostTransfer } from "../../models/requests";
+// models
+import { ModelPost } from "../../models/modelPost";
 
 // content modal
 import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
+// components
+import ToastContent from "../../components/ToastContent";
 import InfoUserContent from "../../components/InfoUserContent";
+
+// hooks
 import useDataUser from "../../hooks/useDataUser";
 
 // interface
@@ -32,7 +37,7 @@ const UserContent = () => {
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
 	const [isDepositWalletModalOpen, setIsDepositWalletModalOpen] = useState(false);
 
-  	// handle open modal
+	// handle open modal
 	const handleOpenModaTransfer = () => {
 		setIsTransferWalletModalOpen(true);
 	};
@@ -52,8 +57,20 @@ const UserContent = () => {
 			const formatedData = {
 				value: data,
 			};
-			PostDeposit(id, formatedData);
-			handleOnCloseModal();
+			const response = ModelPost({
+				route: `/picpay/deposit/save/${id}`,
+				body: formatedData,
+			});
+
+			response.then((response) => {
+				if (response) {
+					window.location.reload()
+					handleOnCloseModal();
+					toast.success(<ToastContent content="Deposito feito" />);
+				} else {
+					toast.error(<ToastContent content="Erro ao fazer o Deposito" />);
+				}
+			});
 		},
 		[id],
 	);
@@ -64,8 +81,20 @@ const UserContent = () => {
 				sendId: data.sendId,
 				value: data.value,
 			};
-			PostTransfer(id, formatedData);
-			handleOnCloseModal();
+
+			const response = ModelPost({
+				route: `/picpay/transactions/${id}`,
+				body: formatedData,
+			});
+
+			response.then((response) => {
+				if (response) {
+					handleOnCloseModal();
+					toast.success(<ToastContent content="Transação feita" />);
+				} else {
+					toast.error(<ToastContent content="Erro ao fazer a Transação!" />);
+				}
+			});
 		},
 		[id],
 	);
