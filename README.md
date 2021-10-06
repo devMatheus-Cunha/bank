@@ -1,4 +1,5 @@
 ## 🧪 Technologies
+@MeMoGroup
 
 This project was developed with the following technologies:
 

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
 
-// contexts
+// icons
 import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
