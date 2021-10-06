@@ -8,7 +8,7 @@ import { Container, Content, ContentButton } from "../shared/styles";
 
 const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 	const [valuesTransfer, setValuesTransfer] = useState<IValuesTransferProps>({
-		sendId: "",
+		cpf_cnpj: "",
 		value: 0,
 	});
 
@@ -22,7 +22,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 					onChange={(event) =>
 						setValuesTransfer({
 							...valuesTransfer,
-							sendId: event.target.value,
+							cpf_cnpj: event.target.value,
 						})}
 				/>
 				<input

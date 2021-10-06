@@ -77,7 +77,7 @@ const UserContent = () => {
 	const handleTransferWallet = useCallback(
 		(data: IValuesTransferProps) => {
 			const formatedData = {
-				sendId: data.sendId,
+				sendId: data.cpf_cnpj,
 				value: data.value,
 			};
 

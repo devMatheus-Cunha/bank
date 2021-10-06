@@ -23,7 +23,7 @@ export interface IDataProps {
 // interface for Transfer
 /// //////////////////////
 export interface IValuesTransferProps {
-  sendId: string;
+  cpf_cnpj: string;
   value: number;
 }
 
