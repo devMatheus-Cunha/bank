@@ -16,7 +16,7 @@ export const Button = styled.button`
 
   font-size: 14px;
   letter-spacing: 0.1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: var(--white);
 
   background-color: var(--blue-light);

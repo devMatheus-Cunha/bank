@@ -1,11 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: "Tusker-Medium";
-  src: local("Tusker Grotesk 5500"), local("TuskerGrotesk-5500Medium"),
-    url("../fonts/TuskerGrotesk-5500Medium.ttf") format("truetype");
-}
   :root {
     --background: #F0F1E9;
     --green-picpay: #11c76f;
@@ -31,14 +26,14 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 87.5%; // 14px
     }
   }
-
+  
   body {
     background: var(--green-picpay-dark);
     -webkit-font-smoothing: antialiased;
+    font-family: 'Poppins', sans-serif !important;
   }
-
+  
   body, input, textarea, button {
-    font-family: 'Poppins', sans-serif;
     font-weight: 400;
   }
 

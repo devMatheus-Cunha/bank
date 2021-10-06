@@ -33,7 +33,7 @@ export const ContentButton = styled.div`
   p {
     font-size: 15px;
     letter-spacing: 0.1rem;
-    font-family: "Inter", sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--white);
   }
 `;
