@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "semantic-ui-css/semantic.min.css"
 
 // view
 import Auth from "./view/auth";
