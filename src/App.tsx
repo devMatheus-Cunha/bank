@@ -14,9 +14,6 @@ import Create from "./view/auth/Create";
 // contexts
 import { GetIdProvider } from "./contexts/getIdProvider";
 
-// global styles
-import { GlobalStyle } from "./assets/styles/global";
-
 Modal.setAppElement("#root");
 
 function App() {
@@ -28,7 +25,6 @@ function App() {
 						<Route path="/" exact component={Auth} />
 						<Route path="/home/:id" component={PageInfo} />
 						<Route path="/create" exact component={Create} />
-						<GlobalStyle />
 					</Switch>
 				</GetIdProvider.Provider>
 			</BrowserRouter>
