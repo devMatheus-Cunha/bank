@@ -5,25 +5,42 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const ContentTitleLogin = styled.div`
+export const Content = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 140px;
+    height: 130px;
+  }
+`;
+
+export const ContentTitle = styled.div`
   h1 {
-    font-weight: 40px;
+    font-weight: 37px;
     color: #11c76f;
-    margin-bottom: 50px;
     text-align: center;
+    font-size: 27px;
+    transform: translate(5.5%, -70%);
   }
 `;
 export const Form = styled.form`
-  margin: 5%;
+  margin: 3% 0;
+  width: 90%;
+  padding: 2.5%;
 `;
+
 export const ContentInput = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 13px;
   label {
     margin-bottom: 5px;
-    color: #11c76f;
-    font-size: 16px;
+    color: #ffff;
+    font-size: 14px;
   }
   input {
     border-radius: 4px;
@@ -33,7 +50,7 @@ export const ContentInput = styled.div`
   }
 `;
 
-export const ButtonLogin = styled.button`
+export const HandleSubmitButton = styled.button`
   padding: 15px 100px;
   margin: 10px auto 0 auto;
   text-transform: uppercase;
@@ -43,7 +60,7 @@ export const ButtonLogin = styled.button`
   transition-property: background-color, color;
   border: 0;
   font-size: 16px;
-  text-align: center;
+  text-align: c enter;
   font-weight: 600;
   cursor: pointer;
   background-color: #11c76f;
@@ -51,7 +68,8 @@ export const ButtonLogin = styled.button`
   display: flex;
   color: #fff;
 `;
-export const CreateAccount = styled.button`
+
+export const IsBackButton = styled.button`
   padding: 15px;
   margin: 0 auto;
   text-transform: uppercase;
@@ -67,5 +85,19 @@ export const CreateAccount = styled.button`
   background-color: transparent;
   justify-content: center;
   display: flex;
-  color: #11c76f;
+  color: #ffff;
+`;
+
+export const ContentFormControlLabel = styled.div`
+  label {
+    > span {
+      color: white;
+      &:first-child > span {
+        color: #11c76f !important;
+      }
+      .MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track {
+        background-color: #11c76f !important;
+      }
+    }
+  }
 `;

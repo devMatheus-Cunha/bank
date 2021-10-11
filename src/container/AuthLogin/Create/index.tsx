@@ -13,14 +13,19 @@ import ToastContent from "../../../components/ToastContent";
 // interface
 import { IValuesCreateAccountProps } from "../../../interface";
 
+// utils
+import logoPicPay from "../../../assets/img/logo.svg";
+
 // styles
 import {
 	Container,
+	Content,
 	Form,
 	ContentInput,
-	ContentTitleLogin,
-	ButtonLogin,
-	CreateAccount,
+	ContentTitle,
+	HandleSubmitButton,
+	IsBackButton,
+	ContentFormControlLabel,
 } from "../shared/styles";
 
 const UserCreate = () => {
@@ -65,99 +70,111 @@ const UserCreate = () => {
 	return (
 		<>
 			<Container>
-				<ContentTitleLogin>
-					<h1 className="user-login-title">Criar Conta</h1>
-				</ContentTitleLogin>
-				<Form>
-					<ContentInput>
-						<label htmlFor="complete_name">User</label>
-						<input
-							type="text"
-							id="complete_name"
-							name="complete_name"
-							placeholder="Nome"
-							onChange={(event) => {
-								setStateCreateAccount({
-									...statesCreateAccount,
-									complete_name: event.target.value,
-								});
-							}}
-							value={statesCreateAccount.complete_name}
-							required
-						/>
-					</ContentInput>
-					<ContentInput>
-						<label htmlFor="cpf_cnpj">Cpf/Cnpj</label>
-						<input
-							type="text"
-							id="cpf_cnpj"
-							name="cpf_cnpj"
-							placeholder="Cpf/Cnpj"
-							onChange={(event) => {
-								setStateCreateAccount({
-									...statesCreateAccount,
-									cpf_cnpj: event.target.value,
-								});
-							}}
-							value={statesCreateAccount.cpf_cnpj}
-							required
-						/>
-					</ContentInput>
-					<ContentInput>
-						<label htmlFor="email">Email</label>
-						<input
-							type="text"
-							name="email"
-							id="email"
-							placeholder="E-mail"
-							onChange={(event) => {
-								setStateCreateAccount({
-									...statesCreateAccount,
-									email: event.target.value,
-								});
-							}}
-							value={statesCreateAccount.email}
-							required
-						/>
-					</ContentInput>
-
-					<ContentInput>
-						<label htmlFor="password">Password</label>
-						<input
-							id="password"
-							type="password"
-							name="password"
-							placeholder="Password"
-							onChange={(event) => {
-								setStateCreateAccount({
-									...statesCreateAccount,
-									password: event.target.value,
-								});
-							}}
-							value={statesCreateAccount.password}
-							required
-						/>
-					</ContentInput>
-					<FormControlLabel
-						control={(
-							<Switch
-								checked={statesCreateAccount.isSeller}
+				<Content>
+					<img
+						width="120"
+						height="40"
+						src={logoPicPay}
+						alt="Logo do PicPay"
+						loading="lazy"
+						decoding="async"
+					/>
+					<ContentTitle>
+						<h1 className="user-login-title">Criar Conta</h1>
+					</ContentTitle>
+					<Form>
+						<ContentInput>
+							<label htmlFor="complete_name">User</label>
+							<input
+								type="text"
+								id="complete_name"
+								name="complete_name"
+								placeholder="Nome"
 								onChange={(event) => {
 									setStateCreateAccount({
 										...statesCreateAccount,
-										isSeller: event.target.checked,
+										complete_name: event.target.value,
 									});
 								}}
-								name="checkedA"
+								value={statesCreateAccount.complete_name}
+								required
 							/>
-						)}
-						label="Lojista"
-					/>
-				</Form>
-				<ButtonLogin onClick={() => handleSubmitCreateAccount(statesCreateAccount)}>
-					Criar conta
-				</ButtonLogin>
-				<CreateAccount onClick={() => history.push("/")}>Login</CreateAccount>
+						</ContentInput>
+						<ContentInput>
+							<label htmlFor="cpf_cnpj">Cpf/Cnpj</label>
+							<input
+								type="text"
+								id="cpf_cnpj"
+								name="cpf_cnpj"
+								placeholder="Cpf/Cnpj"
+								onChange={(event) => {
+									setStateCreateAccount({
+										...statesCreateAccount,
+										cpf_cnpj: event.target.value,
+									});
+								}}
+								value={statesCreateAccount.cpf_cnpj}
+								required
+							/>
+						</ContentInput>
+						<ContentInput>
+							<label htmlFor="email">Email</label>
+							<input
+								type="text"
+								name="email"
+								id="email"
+								placeholder="E-mail"
+								onChange={(event) => {
+									setStateCreateAccount({
+										...statesCreateAccount,
+										email: event.target.value,
+									});
+								}}
+								value={statesCreateAccount.email}
+								required
+							/>
+						</ContentInput>
+
+						<ContentInput>
+							<label htmlFor="password">Password</label>
+							<input
+								id="password"
+								type="password"
+								name="password"
+								placeholder="Password"
+								onChange={(event) => {
+									setStateCreateAccount({
+										...statesCreateAccount,
+										password: event.target.value,
+									});
+								}}
+								value={statesCreateAccount.password}
+								required
+							/>
+						</ContentInput>
+						<ContentFormControlLabel>
+							<FormControlLabel
+								control={(
+									<Switch
+										checked={statesCreateAccount.isSeller}
+										onChange={(event) => {
+											setStateCreateAccount({
+												...statesCreateAccount,
+												isSeller: event.target.checked,
+											});
+										}}
+										color="primary"
+									/>
+								)}
+								label="Lojista"
+							/>
+						</ContentFormControlLabel>
+					</Form>
+					<HandleSubmitButton onClick={() => handleSubmitCreateAccount(statesCreateAccount)}>
+						Criar conta
+					</HandleSubmitButton>
+					<IsBackButton onClick={() => history.push("/")}>Login</IsBackButton>
+				</Content>
 			</Container>
 		</>
 	);

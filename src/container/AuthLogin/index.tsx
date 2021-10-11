@@ -11,14 +11,18 @@ import ToastContent from "../../components/ToastContent";
 // interface
 import { IValuesLoginProps } from "../../interface";
 
+// utils
+import logoPicPay from "../../assets/img/logo.svg";
+
 // styles
 import {
 	Container,
+	Content,
 	Form,
 	ContentInput,
-	ContentTitleLogin,
-	ButtonLogin,
-	CreateAccount,
+	ContentTitle,
+	HandleSubmitButton,
+	IsBackButton,
 } from "./shared/styles";
 
 const UserLogin = () => {
@@ -56,51 +60,61 @@ const UserLogin = () => {
 	return (
 		<>
 			<Container>
-				<ContentTitleLogin>
-					<h1 className="user-login-title">Login</h1>
-				</ContentTitleLogin>
-				<Form>
-					<ContentInput>
-						<label htmlFor="email">E-mail</label>
-						<input
-							type="email"
-							name="email"
-							id="email"
-							placeholder="E-mail"
-							onChange={(event) => {
-								setStatesLogin({
-									...statesLogin,
-									email: event.target.value,
-								});
-							}}
-							value={statesLogin.email}
-							required
-						/>
-					</ContentInput>
-					<ContentInput>
-						<label htmlFor="password">Password</label>
-						<input
-							type="password"
-							name="password"
-							id="password"
-							placeholder="Password"
-							onChange={(event) => {
-								setStatesLogin({
-									...statesLogin,
-									password: event.target.value,
-								});
-							}}
-							value={statesLogin.password}
-							required
-						/>
-					</ContentInput>
-				</Form>
-				<ButtonLogin onClick={() => handleSubmitLogin(statesLogin)}>
-					Logar
-				</ButtonLogin>
-				<CreateAccount onClick={() => history.push("/create")}>
-					Criar conta
-				</CreateAccount>
+				<Content>
+					<img
+						width="120"
+						height="40"
+						src={logoPicPay}
+						alt="Logo do PicPay"
+						loading="lazy"
+						decoding="async"
+					/>
+					<ContentTitle>
+						<h1 className="user-login-title">Login</h1>
+					</ContentTitle>
+					<Form>
+						<ContentInput>
+							<label htmlFor="email">E-mail</label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								placeholder="E-mail"
+								onChange={(event) => {
+									setStatesLogin({
+										...statesLogin,
+										email: event.target.value,
+									});
+								}}
+								value={statesLogin.email}
+								required
+							/>
+						</ContentInput>
+						<ContentInput>
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								name="password"
+								id="password"
+								placeholder="Password"
+								onChange={(event) => {
+									setStatesLogin({
+										...statesLogin,
+										password: event.target.value,
+									});
+								}}
+								value={statesLogin.password}
+								required
+							/>
+						</ContentInput>
+					</Form>
+					<HandleSubmitButton onClick={() => handleSubmitLogin(statesLogin)}>
+						Logar
+					</HandleSubmitButton>
+					<IsBackButton onClick={() => history.push("/create")}>
+						Criar conta
+					</IsBackButton>
+				</Content>
 			</Container>
 		</>
 	);
