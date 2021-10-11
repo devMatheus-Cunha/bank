@@ -2,21 +2,38 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
-export const ContentButton = styled.button`
-  background-color: #007aff;
+export const ContentButton = styled.div`
+display: flex;
+flex-direction:column;
+align-items: center;
+justify-content: center;
+
+  button{
+  background-color: var(--blue-light);
+  outline: none;
   border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  font-size: 2px;
-  border-radius: 15px;
-  cursor: pointer;
-  &:hover {
-    background-color: #365AD6;
+  color: var(--white);
+
+  border: none;
+
+  width: 100%;
+  height: 70px;
+  border-radius: 2rem;
+  margin-top: 1rem;
+
+    svg {
+      width: 23px;
+      height: 23px;
+    }
+  
+    p {
+      font-size: 15px;
+      letter-spacing: 0.1rem;
+      font-family: 'Poppins', sans-serif;
+      color: var(--white);
+    }
   }
+
 `;

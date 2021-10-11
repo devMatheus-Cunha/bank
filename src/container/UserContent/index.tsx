@@ -17,6 +17,7 @@ import Transfer from "./items/transfer";
 // components
 import ToastContent from "../../components/ToastContent";
 import InfoUserContent from "../../components/InfoUserContent";
+import ButtonComponent from "../../components/Button"
 
 // hooks
 import useDataUser from "../../hooks/useDataUser";
@@ -25,8 +26,7 @@ import useDataUser from "../../hooks/useDataUser";
 import { IValuesTransferProps } from "../../interface";
 
 // styles
-import { ContainerActionsButtons, ContentButton } from "./styles";
-import { Button } from "../../components/Header/styles";
+import { ContainerActionsButtons } from "./styles";
 
 const UserContent = () => {
 	// hooks
@@ -107,6 +107,14 @@ const UserContent = () => {
 				wallet={userData?.wallet}
 			/>
 			<ContainerActionsButtons>
+				<ButtonComponent onClick={() => handleOpenModaTransfer()}>
+					<BiTransfer />
+					<p>Transferir</p>
+				</ButtonComponent>
+				<ButtonComponent onClick={() => handleOpenModalDeposit()}>
+					<IoWalletOutline />
+					<p>Depositar</p>
+				</ButtonComponent>
 				<Modal
 					isOpen={isTransferWalletModalOpen}
 					onRequestClose={handleOnCloseModal}
@@ -129,18 +137,6 @@ const UserContent = () => {
 						handleSubmit={handleDepositWallet}
 					/>
 				</Modal>
-				<ContentButton>
-					<Button type="button" onClick={() => handleOpenModaTransfer()}>
-						<BiTransfer />
-					</Button>
-					<p>Transferir</p>
-				</ContentButton>
-				<ContentButton>
-					<Button type="button" onClick={() => handleOpenModalDeposit()}>
-						<IoWalletOutline />
-					</Button>
-					<p>Depositar</p>
-				</ContentButton>
 			</ContainerActionsButtons>
 		</>
 	);

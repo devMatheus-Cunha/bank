@@ -4,19 +4,18 @@ export const ContainerActionsButtons = styled.div`
   display: flex;
   gap: 1rem;
   margin: 0.8rem;
-  justify-content: center;
-`;
+  `;
 
 export const ContentButton = styled.div`
   display: flex;
   flex-direction:column;
   align-items: center;
   justify-content: center;
+  background-color: var(--blue-light);
 
   width: 50%;
   height: 70px;
   border-radius: 2rem;
-  background-color: var(--blue-light);
   margin-top: 1rem;
 
   svg {
