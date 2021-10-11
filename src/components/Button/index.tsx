@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Container, ContentButton } from "./styles";
+import { Container } from "./styles";
 
 interface IButtonProps {
   onClick: () => void;
@@ -9,13 +9,11 @@ interface IButtonProps {
 const Button = ({ onClick, children }: IButtonProps) => {
 	return (
 		<Container>
-			<ContentButton>
-				<button type="button" onClick={onClick}>
-					{children}
-				</button>
-			</ContentButton>
+			<button type="button" onClick={onClick}>
+				{children}
+			</button>
 		</Container>
 	);
-}; 
+};
 
 export default Button;
