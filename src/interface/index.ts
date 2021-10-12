@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 /// //////////////////////
 export interface IUserDataProps {
   userData: IDataProps;
+  setUserData: any
   id: string;
 }
 
