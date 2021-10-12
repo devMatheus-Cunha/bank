@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding: 1rem;
   margin: 0.8rem;
   border-radius: 1rem;
+  min-height: 100px;
 
   display: flex;
   justify-content: space-between;
@@ -19,11 +20,13 @@ export const ContentInfo = styled.div`
 `;
 export const ContentBalance = styled.div`
   h1 {
-    margin-bottom: 0.2rem;
     color: var(--text-title);
     font-size: 17px;
+    padding: 0;
+    margin: 0;
   }
   h2 {
+    margin: 0.4rem 0;
     color: var(--text-title);
     font-size: 20px;
   }
