@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 // models
-import { ModelPost } from "../../models/modelPost";
+import { Model } from "../../models";
 
 // toast
 import ToastContent from "../../components/ToastContent";
@@ -37,24 +37,24 @@ const UserLogin = () => {
 
 	// url api
 	// functions
-	const handleSubmitLogin = (datas: IValuesLoginProps) => {
+	const handleSubmitLogin = async (datas: IValuesLoginProps) => {
 		const formated = {
 			email: datas.email,
 			password: datas.password,
 		};
-		const response =	ModelPost({
+
+		const request = await	Model({
+			method: "POST",
 			route: "/picpay/user/auth",
 			body: formated,
 		})
 
-		response.then(async (response) => {
-			if (response?.validUser?.id) {
-				await history.push(`/home/${response?.validUser?.id}`)
-				toast.success(<ToastContent content="Login feito!" />);
-			} else {
-				toast.error(<ToastContent content="Email ou Senha invalido!" />);
-			}
-		})
+		if (request) {
+			await history.push(`/home/${request.data?.validUser?.id}`)
+			toast.success(<ToastContent content="Login feito!" />);
+		} else {
+			toast.error(<ToastContent content={request?.response?.data} />);
+		}
 	};
 
 	return (
