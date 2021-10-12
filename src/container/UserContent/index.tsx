@@ -14,6 +14,9 @@ import { Model } from "../../models";
 import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
+// utils
+import { mensageErrorDefault } from "../../utils";
+
 // components
 import ToastContent from "../../components/ToastContent";
 import InfoUserContent from "../../components/InfoUserContent";
@@ -57,12 +60,15 @@ const UserContent = () => {
 			route: `/picpay/admin/user/${id}`,
 			method: "GET",
 		});
-		if (request?.data) {
-			setTimeout(() => {
+		setTimeout(() => {
+			if (request?.data) {
 				setLoading(true);
-			}, 750);
-			setUserData(request?.data);
-		}
+				setUserData(request?.data);
+			} else {
+				toast.error(<ToastContent content={mensageErrorDefault} />);
+				setLoading(true);
+			}
+		}, 750);
 	}, [id]);
 
 	// handle actions modal
@@ -79,12 +85,16 @@ const UserContent = () => {
 			});
 
 			if (request?.data) {
-				await	toast.success(<ToastContent content="Deposito feito" />);
+				await toast.success(<ToastContent content="Deposito feito" />);
 				responseRequest();
 				handleOnCloseModal();
 				setLoading(false);
 			} else {
-				toast.error(<ToastContent content="Erro ao fazer o Deposito" />);
+				toast.error(
+					<ToastContent
+						content={request?.response?.data}
+					/>,
+				);
 			}
 		},
 		[id, responseRequest],
@@ -109,7 +119,11 @@ const UserContent = () => {
 				handleOnCloseModal();
 				setLoading(false);
 			} else {
-				toast.error(<ToastContent content={request?.response?.data} />);
+				toast.error(
+					<ToastContent
+						content={request?.response?.data}
+					/>,
+				);
 			}
 		},
 		[id, responseRequest],

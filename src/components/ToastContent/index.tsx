@@ -1,5 +1,8 @@
 import React from "react";
 
+// utils
+import { mensageErrorDefault } from "../../utils";
+
 // styles
 import { Container } from "./styles";
 
@@ -12,7 +15,7 @@ const ToastContent = ({ content }: IToastProps) => {
 	return (
 		<>
 			<Container>
-				<div>{content}</div>
+				<div>{content || mensageErrorDefault}</div>
 			</Container>
 		</>
 	);
