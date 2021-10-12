@@ -5,7 +5,7 @@ import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
 
 // models
-import { ModelPost } from "../../../models/modelPost";
+import { Model } from "../../../models";
 
 // compoenents
 import ToastContent from "../../../components/ToastContent";
@@ -42,7 +42,7 @@ const UserCreate = () => {
 		wallet: 0,
 	});
 
-	const handleSubmitCreateAccount = (datas: IValuesCreateAccountProps) => {
+	const handleSubmitCreateAccount = async (datas: IValuesCreateAccountProps) => {
 		const formated = {
 			email: datas.email,
 			password: datas.password,
@@ -52,19 +52,18 @@ const UserCreate = () => {
 			wallet: datas.wallet,
 		};
 
-		const response = ModelPost({
+		const request = await	Model({
+			method: "POST",
 			route: "/picpay/user",
 			body: formated,
 		})
 
-		response.then(async (response) => {
-			if (response?.id) {
-				await history.push(`/home/${response?.id}`)
-				toast.success(<ToastContent content="Conta criada!" />);
-			} else {
-				toast.error(<ToastContent content="Dados invalidos!" />);
-			}
-		})
+		if (request?.data.id) {
+			await history.push(`/home/${request.data?.id}`)
+			toast.success(<ToastContent content="Conta criada!" />);
+		} else {
+			toast.error(<ToastContent content={request?.data} />);
+		}
 	};
 
 	return (
