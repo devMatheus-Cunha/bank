@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
 // models
-import { ModelPost } from "../../models/modelPost";
+import { Model } from "../../models";
 
 // content modal
 import Deposit from "./items/deposit";
@@ -17,25 +17,25 @@ import Transfer from "./items/transfer";
 // components
 import ToastContent from "../../components/ToastContent";
 import InfoUserContent from "../../components/InfoUserContent";
-import ButtonComponent from "../../components/Button"
-
-// hooks
-import useDataUser from "../../hooks/useDataUser";
+import ButtonComponent from "../../components/Button";
 
 // interface
-import { IValuesTransferProps } from "../../interface";
+import { IDataProps, IValuesTransferProps } from "../../interface";
 
 // styles
-import { ContainerActionsButtons } from "./styles";
+import { ContainerActionsButtons, ContentButton } from "./styles";
 
 const UserContent = () => {
-	// hooks
-	const { id } = useParams<{ id: string }>();
-	const { userData, setUserData } = useDataUser(id);
+	// states
+	const [loading, setLoading] = useState(false);
+	const [userData, setUserData] = useState<IDataProps>();
 
 	// state modal
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
 	const [isDepositWalletModalOpen, setIsDepositWalletModalOpen] = useState(false);
+
+	// hooks
+	const { id } = useParams<{ id: string }>();
 
 	// handle open modal
 	const handleOpenModaTransfer = () => {
@@ -51,70 +51,92 @@ const UserContent = () => {
 		setIsDepositWalletModalOpen(false);
 	};
 
+	// request get data
+	const responseRequest = useCallback(async () => {
+		const request = await Model({
+			route: `/picpay/admin/user/${id}`,
+			method: "GET",
+		});
+		if (request?.data) {
+			setTimeout(() => {
+				setLoading(true);
+			}, 750);
+			setUserData(request?.data);
+		}
+	}, [id]);
+
 	// handle actions modal
 	const handleDepositWallet = useCallback(
-		(data: number) => {
-			const formatedData = {
+		async (data: number) => {
+			const formated = {
 				value: data,
 			};
-			const response = ModelPost({
+
+			const request = await Model({
+				method: "POST",
 				route: `/picpay/deposit/save/${id}`,
-				body: formatedData,
+				body: formated,
 			});
 
-			response.then((response) => {
-				if (response) {
-					setUserData(response)
-					handleOnCloseModal();
-					toast.success(<ToastContent content="Deposito feito" />);
-				} else {
-					toast.error(<ToastContent content="Erro ao fazer o Deposito" />);
-				}
-			});
+			if (request?.data) {
+				await	toast.success(<ToastContent content="Deposito feito" />);
+				responseRequest();
+				handleOnCloseModal();
+				setLoading(false);
+			} else {
+				toast.error(<ToastContent content="Erro ao fazer o Deposito" />);
+			}
 		},
-		[id, setUserData],
+		[id, responseRequest],
 	);
 
 	const handleTransferWallet = useCallback(
-		(data: IValuesTransferProps) => {
-			const formatedData = {
+		async (data: IValuesTransferProps) => {
+			const formated = {
 				cpf_cnpj: data.cpf_cnpj,
 				value: data.value,
 			};
 
-			const response = ModelPost({
+			const request = await Model({
+				method: "POST",
 				route: `/picpay/transactions/${id}`,
-				body: formatedData,
+				body: formated,
 			});
 
-			response.then((response) => {
-				if (!response.Message) {
-					handleOnCloseModal();
-					setUserData(response[1]?.TransactionsDataOfSend)
-					toast.success(<ToastContent content="Transação feita" />);
-				} else {
-					toast.error(<ToastContent content={response.Message} />);
-				}
-			});
+			if (request?.data) {
+				await toast.success(<ToastContent content="Transação feita" />);
+				responseRequest();
+				handleOnCloseModal();
+				setLoading(false);
+			} else {
+				toast.error(<ToastContent content={request?.response?.data} />);
+			}
 		},
-		[id, setUserData],
+		[id, responseRequest],
 	);
+
+	useEffect(() => {
+		responseRequest();
+	}, [responseRequest]);
 
 	return (
 		<>
 			<InfoUserContent
 				name={userData?.complete_name}
 				wallet={userData?.wallet}
+				loading={loading}
 			/>
 			<ContainerActionsButtons>
-				<ButtonComponent onClick={() => handleOpenModaTransfer()}>
-					<BiTransfer />
-					<p>Transferir</p>
-				</ButtonComponent>
-				<ButtonComponent onClick={() => handleOpenModalDeposit()}>
-					<IoWalletOutline />
-					<p>Depositar</p>
-				</ButtonComponent>
+				<ContentButton>
+					<ButtonComponent onClick={() => handleOpenModaTransfer()}>
+						<BiTransfer />
+						<p>Transferir</p>
+					</ButtonComponent>
+					<ButtonComponent onClick={() => handleOpenModalDeposit()}>
+						<IoWalletOutline />
+						<p>Depositar</p>
+					</ButtonComponent>
+				</ContentButton>
 				<Modal
 					isOpen={isTransferWalletModalOpen}
 					onRequestClose={handleOnCloseModal}
