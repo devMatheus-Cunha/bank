@@ -57,10 +57,7 @@ export const ContentInput = styled.div`
   }
 `;
 export const ContentInputPassword = styled.div`
-  display: flex;
-  flex-direction: row;
   margin-bottom: 13px;
-  background: var(--white);
   border-radius: 4px;
 
   button {
@@ -68,15 +65,6 @@ export const ContentInputPassword = styled.div`
     border: none;
     outline: 0;
     padding-right: 0.2rem;
-  }
-
-  label {
-    color: #ffff;
-    font-size: 14px;
-  }
-
-  > input {
-    width: 90%;
   }
 `;
 

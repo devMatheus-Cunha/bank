@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import {
-	Button, Input,
+	Button,
+	Input,
+	FormLabel,
+	InputGroup,
+	InputRightElement,
 } from "@chakra-ui/react";
 
 // models
@@ -35,7 +39,7 @@ const UserLogin = () => {
 		email: "",
 		password: "",
 	});
-	const [show, setShow] = useState(false)
+	const [show, setShow] = useState(false);
 
 	// hooks
 	const history = useHistory();
@@ -48,14 +52,14 @@ const UserLogin = () => {
 			password: datas.password,
 		};
 
-		const request = await	Model({
+		const request = await Model({
 			method: "POST",
 			route: "/picpay/user/auth",
 			body: formated,
-		})
+		});
 
 		if (request.data?.validUser?.id) {
-			await history.push(`/home/${request.data?.validUser?.id}`)
+			await history.push(`/home/${request.data?.validUser?.id}`);
 			toast.success(<ToastContent content="Login feito!" />);
 		} else {
 			toast.error(<ToastContent content={request?.response?.data} />);
@@ -95,25 +99,29 @@ const UserLogin = () => {
 								required
 							/>
 						</ContentInput>
-						<label htmlFor="password">Senha</label>
 						<ContentInputPassword>
-							<Input
-								type={show ? "text" : "password"}
-								placeholder="Senha"
-								name="password"
-								isInvalid
-								isRequired={false}
-								errorBorderColor="red"
-								onChange={(event) => {
-									setStatesLogin({
-										...statesLogin,
-										password: event.target.value,
-									});
-								}}
-							/>
-							<Button h="2.5rem" onClick={() => setShow(!show)}>
-								{show ? "Hide" : "Show"}
-							</Button>
+							<FormLabel>Senha</FormLabel>
+							<InputGroup size="md">
+								<Input
+									type={show ? "text" : "password"}
+									placeholder="Senha"
+									name="password"
+									pr="4.5rem"
+									width="100%"
+									errorBorderColor="red"
+									onChange={(event) => {
+										setStatesLogin({
+											...statesLogin,
+											password: event.target.value,
+										});
+									}}
+								/>
+								<InputRightElement>
+									<Button h="2.5rem" onClick={() => setShow(!show)}>
+										{show ? "Tampar" : "Exibir"}
+									</Button>
+								</InputRightElement>
+							</InputGroup>
 						</ContentInputPassword>
 					</Form>
 					<HandleSubmitButton onClick={() => handleSubmitLogin(statesLogin)}>

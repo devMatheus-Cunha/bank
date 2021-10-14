@@ -3,6 +3,13 @@ import { useHistory } from "react-router-dom";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
+import {
+	Button,
+	Input,
+	FormLabel,
+	InputGroup,
+	InputRightElement,
+} from "@chakra-ui/react";
 
 // models
 import { Model } from "../../../models";
@@ -144,25 +151,29 @@ const UserCreate = () => {
 							/>
 						</ContentInput>
 
-						<label htmlFor="password">Password</label>
 						<ContentInputPassword>
-							<input
-								type={show ? "text" : "password"}
-								name="password"
-								id="password"
-								placeholder="Password"
-								onChange={(event) => {
-									setStateCreateAccount({
-										...statesCreateAccount,
-										password: event.target.value,
-									});
-								}}
-								value={statesCreateAccount.password}
-								required
-							/>
-							<button type="button" onClick={() => setShow(!show)}>
-								exibir
-							</button>
+							<FormLabel>Senha</FormLabel>
+							<InputGroup size="md">
+								<Input
+									type={show ? "text" : "password"}
+									placeholder="Senha"
+									name="password"
+									pr="4.5rem"
+									width="100%"
+									errorBorderColor="red"
+									onChange={(event) => {
+										setStateCreateAccount({
+											...statesCreateAccount,
+											password: event.target.value,
+										});
+									}}
+								/>
+								<InputRightElement>
+									<Button h="2.5rem" onClick={() => setShow(!show)}>
+										{show ? "Tampar" : "Exibir"}
+									</Button>
+								</InputRightElement>
+							</InputGroup>
 						</ContentInputPassword>
 						<ContentFormControlLabel>
 							<FormControlLabel
