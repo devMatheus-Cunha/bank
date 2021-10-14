@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import {
+	Button, Input,
+} from "@chakra-ui/react";
 
 // models
 import { Model } from "../../models";
@@ -20,6 +23,7 @@ import {
 	Content,
 	Form,
 	ContentInput,
+	ContentInputPassword,
 	ContentTitle,
 	HandleSubmitButton,
 	IsBackButton,
@@ -31,6 +35,7 @@ const UserLogin = () => {
 		email: "",
 		password: "",
 	});
+	const [show, setShow] = useState(false)
 
 	// hooks
 	const history = useHistory();
@@ -49,7 +54,7 @@ const UserLogin = () => {
 			body: formated,
 		})
 
-		if (request) {
+		if (request.data?.validUser?.id) {
 			await history.push(`/home/${request.data?.validUser?.id}`)
 			toast.success(<ToastContent content="Login feito!" />);
 		} else {
@@ -90,23 +95,26 @@ const UserLogin = () => {
 								required
 							/>
 						</ContentInput>
-						<ContentInput>
-							<label htmlFor="password">Password</label>
-							<input
-								type="password"
+						<label htmlFor="password">Senha</label>
+						<ContentInputPassword>
+							<Input
+								type={show ? "text" : "password"}
+								placeholder="Senha"
 								name="password"
-								id="password"
-								placeholder="Password"
+								isInvalid
+								isRequired={false}
+								errorBorderColor="red"
 								onChange={(event) => {
 									setStatesLogin({
 										...statesLogin,
 										password: event.target.value,
 									});
 								}}
-								value={statesLogin.password}
-								required
 							/>
-						</ContentInput>
+							<Button h="2.5rem" onClick={() => setShow(!show)}>
+								{show ? "Hide" : "Show"}
+							</Button>
+						</ContentInputPassword>
 					</Form>
 					<HandleSubmitButton onClick={() => handleSubmitLogin(statesLogin)}>
 						Logar

@@ -26,6 +26,7 @@ import {
 	HandleSubmitButton,
 	IsBackButton,
 	ContentFormControlLabel,
+	ContentInputPassword,
 } from "../shared/styles";
 
 const UserCreate = () => {
@@ -41,8 +42,11 @@ const UserCreate = () => {
 		isSeller: false,
 		wallet: 0,
 	});
+	const [show, setShow] = useState(false);
 
-	const handleSubmitCreateAccount = async (datas: IValuesCreateAccountProps) => {
+	const handleSubmitCreateAccount = async (
+		datas: IValuesCreateAccountProps,
+	) => {
 		const formated = {
 			email: datas.email,
 			password: datas.password,
@@ -52,17 +56,23 @@ const UserCreate = () => {
 			wallet: datas.wallet,
 		};
 
-		const request = await	Model({
-			method: "POST",
-			route: "/picpay/user",
-			body: formated,
-		})
+		const validateValues = formated.complete_name.length && formated.email.length && formated.password.length && formated.cpf_cnpj.length > 0
 
-		if (request?.data.id) {
-			await history.push(`/home/${request.data?.id}`)
-			toast.success(<ToastContent content="Conta criada!" />);
+		if (validateValues) {
+			const request = await Model({
+				method: "POST",
+				route: "/picpay/user",
+				body: formated,
+			});
+
+			if (request?.data?.id) {
+				await history.push(`/home/${request?.data?.id}`);
+				toast.success(<ToastContent content="Conta criada!" />);
+			} else {
+				toast.error(<ToastContent content={request?.data} />);
+			}
 		} else {
-			toast.error(<ToastContent content={request?.data} />);
+			toast.error(<ToastContent content="Preencha todos os campos abaixo!" />);
 		}
 	};
 
@@ -134,12 +144,12 @@ const UserCreate = () => {
 							/>
 						</ContentInput>
 
-						<ContentInput>
-							<label htmlFor="password">Password</label>
+						<label htmlFor="password">Password</label>
+						<ContentInputPassword>
 							<input
-								id="password"
-								type="password"
+								type={show ? "text" : "password"}
 								name="password"
+								id="password"
 								placeholder="Password"
 								onChange={(event) => {
 									setStateCreateAccount({
@@ -150,7 +160,10 @@ const UserCreate = () => {
 								value={statesCreateAccount.password}
 								required
 							/>
-						</ContentInput>
+							<button type="button" onClick={() => setShow(!show)}>
+								exibir
+							</button>
+						</ContentInputPassword>
 						<ContentFormControlLabel>
 							<FormControlLabel
 								control={(
@@ -169,7 +182,9 @@ const UserCreate = () => {
 							/>
 						</ContentFormControlLabel>
 					</Form>
-					<HandleSubmitButton onClick={() => handleSubmitCreateAccount(statesCreateAccount)}>
+					<HandleSubmitButton
+						onClick={() => handleSubmitCreateAccount(statesCreateAccount)}
+					>
 						Criar conta
 					</HandleSubmitButton>
 					<IsBackButton onClick={() => history.push("/")}>Login</IsBackButton>

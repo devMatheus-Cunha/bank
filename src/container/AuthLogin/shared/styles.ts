@@ -12,7 +12,21 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
 
-  img{
+  label {
+    color: #ffff;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    outline: 0;
+    padding: 5px 10px;
+  }
+  
+  img {
     width: 140px;
     height: 130px;
   }
@@ -36,17 +50,33 @@ export const Form = styled.form`
 export const ContentInput = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 13px;
+  margin-bottom: 15px;
   label {
-    margin-bottom: 5px;
     color: #ffff;
     font-size: 14px;
   }
-  input {
-    border-radius: 4px;
-    border: 1px solid #11c76f;
-    height: 36px;
-    padding: 5px 10px;
+`;
+export const ContentInputPassword = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 13px;
+  background: var(--white);
+  border-radius: 4px;
+
+  button {
+    background: transparent;
+    border: none;
+    outline: 0;
+    padding-right: 0.2rem;
+  }
+
+  label {
+    color: #ffff;
+    font-size: 14px;
+  }
+
+  > input {
+    width: 90%;
   }
 `;
 
