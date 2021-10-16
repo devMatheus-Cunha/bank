@@ -9,6 +9,9 @@ import {
 	InputRightElement,
 } from "@chakra-ui/react";
 
+// icons
+import { BsEyeSlash, BsEye } from "react-icons/bs";
+
 // models
 import { Model } from "../../models";
 
@@ -118,7 +121,7 @@ const UserLogin = () => {
 								/>
 								<InputRightElement>
 									<Button h="2.5rem" onClick={() => setShow(!show)}>
-										{show ? "Tampar" : "Exibir"}
+										{show ? <BsEyeSlash /> : <BsEye />}
 									</Button>
 								</InputRightElement>
 							</InputGroup>

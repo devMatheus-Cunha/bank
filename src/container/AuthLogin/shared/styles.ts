@@ -66,6 +66,11 @@ export const ContentInputPassword = styled.div`
     outline: 0;
     padding-right: 0.2rem;
   }
+  button > svg{
+    height: 18px;
+    width: 18px;
+    margin-right: 0.3rem;
+  }
 `;
 
 export const HandleSubmitButton = styled.button`
