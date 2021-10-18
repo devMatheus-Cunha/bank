@@ -179,7 +179,7 @@ const UserContent = () => {
 					/>
 				</Modal>
 			</ContainerActionsButtons>
-			<Title>Ultima Transação:</Title>
+			<Title>Ultimas Transações:</Title>
 			<InfoListTransactions
 				toSend="Matheus"
 				fromWho="André"
