@@ -30,12 +30,7 @@ const InfoUserContent = ({ name, wallet, loading }: IInfoUserContent) => {
 						<ContentBalance>
 							<h1>Saldo</h1>
 							<h2>
-								{
-									new Intl.NumberFormat("pt-BR", {
-										style: "currency",
-										currency: "BRL",
-									}).format(wallet?.toFixed(2) as unknown as number)
-								}
+								{new Intl.NumberFormat("pt-BR", {	style: "currency",	currency: "BRL"	}).format((wallet?.toFixed(2) || 0)as unknown as number)}
 							</h2>
 						</ContentBalance>
 					</>

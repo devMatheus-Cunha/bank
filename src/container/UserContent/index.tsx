@@ -15,7 +15,7 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import { mensageErrorDefault } from "../../utils";
+import { generetePDF, mensageErrorDefault, pdfConfig } from "../../utils";
 
 // components
 import ToastContent from "../../components/ToastContent";
@@ -132,6 +132,15 @@ const UserContent = () => {
 	useEffect(() => {
 		responseRequest();
 	}, [responseRequest]);
+
+	const handleGetPDF = async () => {
+		const request = await Model({
+			route: "/picpay/admin/user/report",
+			method: "GET",
+			pdf: pdfConfig,
+		});
+		generetePDF(request.data)
+	}
 
 	return (
 		<>
