@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
+import { ChakraProvider } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
 // icons
@@ -21,12 +22,15 @@ import { generetePDF, mensageErrorDefault, pdfConfig } from "../../utils";
 import ToastContent from "../../components/ToastContent";
 import InfoUserContent from "../../components/InfoUserContent";
 import ButtonComponent from "../../components/Button";
+import InfoListTransactions from "../../components/InfoListTransactions";
 
 // interface
 import { IDataProps, IValuesTransferProps } from "../../interface";
 
 // styles
-import { ContainerActionsButtons, ContentButton } from "./styles";
+import {
+	Contaienr, ContainerActionsButtons, ContentButton, Title,
+} from "./styles";
 
 const UserContent = () => {
 	// states
@@ -90,11 +94,7 @@ const UserContent = () => {
 				handleOnCloseModal();
 				setLoading(false);
 			} else {
-				toast.error(
-					<ToastContent
-						content={request?.response?.data}
-					/>,
-				);
+				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
 		[id, responseRequest],
@@ -119,11 +119,7 @@ const UserContent = () => {
 				handleOnCloseModal();
 				setLoading(false);
 			} else {
-				toast.error(
-					<ToastContent
-						content={request?.response?.data}
-					/>,
-				);
+				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
 		[id, responseRequest],
@@ -135,25 +131,20 @@ const UserContent = () => {
 			method: "GET",
 			pdf: pdfConfig,
 		});
-		generetePDF(request.data)
-	}
+		generetePDF(request.data);
+	};
 
 	useEffect(() => {
 		responseRequest();
 	}, [responseRequest]);
 
 	return (
-		<>
+		<Contaienr>
 			<InfoUserContent
 				name={userData?.complete_name}
 				wallet={userData?.wallet}
 				loading={loading}
 			/>
-			<button type="button" onClick={() => handleGetPDF()}>Teste</button>
-			<br />
-			<br />
-			<br />
-
 			<ContainerActionsButtons>
 				<ContentButton>
 					<ButtonComponent onClick={() => handleOpenModaTransfer()}>
@@ -188,7 +179,20 @@ const UserContent = () => {
 					/>
 				</Modal>
 			</ContainerActionsButtons>
-		</>
+			<Title>Ultima Transação:</Title>
+			<InfoListTransactions
+				toSend="Matheus"
+				fromWho="André"
+				date={new Date()}
+				value={100}
+			/>
+			<InfoListTransactions
+				toSend="Matheus"
+				fromWho="André"
+				date={new Date()}
+				value={100}
+			/>
+		</Contaienr>
 	);
 };
 
