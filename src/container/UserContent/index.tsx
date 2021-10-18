@@ -129,10 +129,6 @@ const UserContent = () => {
 		[id, responseRequest],
 	);
 
-	useEffect(() => {
-		responseRequest();
-	}, [responseRequest]);
-
 	const handleGetPDF = async () => {
 		const request = await Model({
 			route: "/picpay/admin/user/report",
@@ -142,6 +138,10 @@ const UserContent = () => {
 		generetePDF(request.data)
 	}
 
+	useEffect(() => {
+		responseRequest();
+	}, [responseRequest]);
+
 	return (
 		<>
 			<InfoUserContent
@@ -149,6 +149,11 @@ const UserContent = () => {
 				wallet={userData?.wallet}
 				loading={loading}
 			/>
+			<button type="button" onClick={() => handleGetPDF()}>Teste</button>
+			<br />
+			<br />
+			<br />
+
 			<ContainerActionsButtons>
 				<ContentButton>
 					<ButtonComponent onClick={() => handleOpenModaTransfer()}>
