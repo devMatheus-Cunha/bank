@@ -16,7 +16,7 @@ import Transfer from "./items/transfer";
 
 // utils
 import {
-	dataMockTransactions, generetePDF, mensageErrorDefault, pdfConfig,
+	dataMockTransactions, generetePDF, mensageErrorDefault,
 } from "../../utils";
 
 // components
@@ -118,7 +118,7 @@ const UserContent = () => {
 				const request = await Model({
 					route: "/picpay/admin/user/report",
 					request: "GET",
-					pdf: pdfConfig,
+					pdf: "arraybuffer",
 				});
 				generetePDF(request.data);
 			};

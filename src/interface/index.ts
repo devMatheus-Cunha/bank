@@ -72,10 +72,6 @@ export interface IGetIdProvider {
 export interface IModelRequest {
   route: string;
   request: "GET" | "POST" | "DELETE" | "PUT";
-  body?:
-    | IValuesCreateAccountProps
-    | IValuesLoginProps
-    | IValuesDepostiProps
-    | IValuesTransferProps;
-  pdf?: any;
+  body?: IValuesCreateAccountProps| IValuesLoginProps| IValuesDepostiProps | IValuesTransferProps | number
+  pdf?: "arraybuffer" | "blob";
 }

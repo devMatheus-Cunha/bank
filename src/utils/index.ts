@@ -7,7 +7,7 @@ export const headers = {
 
 export const mensageErrorDefault = "Erro! Tente novamente mais tarde...";
 
-export const generetePDF = (data: any) => {
+export const generetePDF = (data: string) => {
 	const url = window.URL.createObjectURL(
 		new Blob([data], { type: "application/pdf" }),
 	);
