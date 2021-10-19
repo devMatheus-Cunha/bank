@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
-import { ChakraProvider } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
 // icons
@@ -16,7 +15,9 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import { generetePDF, mensageErrorDefault, pdfConfig } from "../../utils";
+import {
+	dataMockTransactions, generetePDF, mensageErrorDefault, pdfConfig,
+} from "../../utils";
 
 // components
 import ToastContent from "../../components/ToastContent";
@@ -113,10 +114,20 @@ const UserContent = () => {
 				body: formated,
 			});
 
+			const handleGetPDF = async () => {
+				const request = await Model({
+					route: "/picpay/admin/user/report",
+					method: "GET",
+					pdf: pdfConfig,
+				});
+				generetePDF(request.data);
+			};
+
 			if (request?.data) {
 				await toast.success(<ToastContent content="Transação feita" />);
 				responseRequest();
 				handleOnCloseModal();
+				handleGetPDF()
 				setLoading(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
@@ -124,15 +135,6 @@ const UserContent = () => {
 		},
 		[id, responseRequest],
 	);
-
-	const handleGetPDF = async () => {
-		const request = await Model({
-			route: "/picpay/admin/user/report",
-			method: "GET",
-			pdf: pdfConfig,
-		});
-		generetePDF(request.data);
-	};
 
 	useEffect(() => {
 		responseRequest();
@@ -181,16 +183,8 @@ const UserContent = () => {
 			</ContainerActionsButtons>
 			<Title>Ultimas Transações:</Title>
 			<InfoListTransactions
-				toSend="Matheus"
-				fromWho="André"
-				date={new Date()}
-				value={100}
-			/>
-			<InfoListTransactions
-				toSend="Matheus"
-				fromWho="André"
-				date={new Date()}
-				value={100}
+				loading={loading}
+				data={dataMockTransactions}
 			/>
 		</Contaienr>
 	);
