@@ -83,7 +83,6 @@ export const HandleSubmitButton = styled.button`
   transition-property: background-color, color;
   border: 0;
   font-size: 16px;
-  text-align: c enter;
   font-weight: 600;
   cursor: pointer;
   background-color: #11c76f;
@@ -93,8 +92,7 @@ export const HandleSubmitButton = styled.button`
 `;
 
 export const IsBackButton = styled.button`
-  padding: 15px;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   text-transform: uppercase;
   border-radius: 6px;
   text-decoration: underline;
