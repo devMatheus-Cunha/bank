@@ -7,40 +7,43 @@ import LoaderExampleLoader from "../Loading";
 import { Container, Content, InfoData } from "./styles";
 
 type DatasProps = {
-  fromWho: string;
-  toWho: string;
+  from_who: string;
+  to_who: string;
   value: number;
-  date: any;
+  date: Date;
 };
 
 type InfoListTransactionsAndDepositProps = {
   loading: boolean;
-  data: DatasProps[];
+  datas: DatasProps[];
 };
 
 const InfoListTransactionsAndDeposit = ({
 	loading,
-	data,
+	datas,
 }: InfoListTransactionsAndDepositProps) => {
+	console.log("====================================");
+	console.log(datas);
+	console.log("====================================");
 	return (
 		<Container>
 			{loading ? (
-				data.map((datas: DatasProps) => (
+				datas.map((data: DatasProps) => (
 					<>
 						<Content>
 							<InfoData>
 								<h4>De quem:</h4>
-								<p>{datas.fromWho}</p>
+								<p>{data.from_who}</p>
 							</InfoData>
 							<InfoData>
 								<h4>Para quem:</h4>
-								<p>{datas.toWho}</p>
+								<p>{data.to_who}</p>
 							</InfoData>
 							<InfoData>
 								<h4>Data:</h4>
 								<p>
 									{new Intl.DateTimeFormat("pt-BR").format(
-										new Date(datas.date),
+										new Date(data.date),
 									)}
 								</p>
 							</InfoData>
@@ -50,7 +53,7 @@ const InfoListTransactionsAndDeposit = ({
 									{new Intl.NumberFormat("pt-BR", {
 										style: "currency",
 										currency: "BRL",
-									}).format(datas.value as unknown as number)}
+									}).format(data.value as unknown as number)}
 								</p>
 							</InfoData>
 						</Content>

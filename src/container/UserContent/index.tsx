@@ -184,7 +184,7 @@ const UserContent = () => {
 			<Title>Ultimas Transações:</Title>
 			<InfoListTransactions
 				loading={loading}
-				data={dataMockTransactions}
+				datas={dataMockTransactions}
 			/>
 		</Contaienr>
 	);

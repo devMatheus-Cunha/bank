@@ -25,20 +25,20 @@ export const pdfConfig = "arraybuffer";
 
 export const dataMockTransactions = [
 	{
-		fromWho: "Matheus",
-		toWho: "Andre",
+		from_who: "Matheus",
+		to_who: "Andre",
 		date: new Date(),
 		value: 100,
 	},
 	{
-		fromWho: "Pedro",
-		toWho: "Marcos",
+		from_who: "Pedro",
+		to_who: "Marcos",
 		date: new Date(),
 		value: 100,
 	},
 	{
-		fromWho: "Websiter",
-		toWho: "Andre",
+		from_who: "Websiter",
+		to_who: "Andre",
 		date: new Date(),
 		value: 100,
 	},
