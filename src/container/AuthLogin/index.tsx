@@ -56,7 +56,7 @@ const UserLogin = () => {
 		};
 
 		const request = await Model({
-			method: "POST",
+			request: "POST",
 			route: "/picpay/user/auth",
 			body: formated,
 		});

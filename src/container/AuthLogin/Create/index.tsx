@@ -70,7 +70,7 @@ const UserCreate = () => {
 
 		if (validateValues) {
 			const request = await Model({
-				method: "POST",
+				request: "POST",
 				route: "/picpay/user",
 				body: formated,
 			});

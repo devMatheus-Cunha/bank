@@ -63,7 +63,7 @@ const UserContent = () => {
 	const responseRequest = useCallback(async () => {
 		const request = await Model({
 			route: `/picpay/admin/user/${id}`,
-			method: "GET",
+			request: "GET",
 		});
 		setTimeout(() => {
 			if (request?.data) {
@@ -84,7 +84,7 @@ const UserContent = () => {
 			};
 
 			const request = await Model({
-				method: "POST",
+				request: "POST",
 				route: `/picpay/deposit/save/${id}`,
 				body: formated,
 			});
@@ -109,7 +109,7 @@ const UserContent = () => {
 			};
 
 			const request = await Model({
-				method: "POST",
+				request: "POST",
 				route: `/picpay/transactions/${id}`,
 				body: formated,
 			});
@@ -117,7 +117,7 @@ const UserContent = () => {
 			const handleGetPDF = async () => {
 				const request = await Model({
 					route: "/picpay/admin/user/report",
-					method: "GET",
+					request: "GET",
 					pdf: pdfConfig,
 				});
 				generetePDF(request.data);

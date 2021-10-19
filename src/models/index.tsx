@@ -1,12 +1,16 @@
 import axios from "axios";
+
+// interface
+import { IModelRequest } from "../interface";
+
 // utils
 import { url, headers } from "../utils";
 
 export const Model = async ({
-	route, method, body, pdf,
-}: any) => {
+	route, request, body, pdf,
+}: IModelRequest) => {
 	const response = await axios({
-		method,
+		method: request,
 		url: `${url}${route}`,
 		data: body,
 		headers,

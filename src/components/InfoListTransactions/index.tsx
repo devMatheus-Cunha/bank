@@ -22,9 +22,6 @@ const InfoListTransactionsAndDeposit = ({
 	loading,
 	datas,
 }: InfoListTransactionsAndDepositProps) => {
-	console.log("====================================");
-	console.log(datas);
-	console.log("====================================");
 	return (
 		<Container>
 			{loading ? (
