@@ -8,7 +8,7 @@ import { Container, Content, InfoData } from "./styles";
 
 type DatasProps = {
   fromWho: string;
-  toSend: string;
+  toWho: string;
   value: number;
   date: any;
 };
@@ -34,7 +34,7 @@ const InfoListTransactionsAndDeposit = ({
 							</InfoData>
 							<InfoData>
 								<h4>Para quem:</h4>
-								<p>{datas.toSend}</p>
+								<p>{datas.toWho}</p>
 							</InfoData>
 							<InfoData>
 								<h4>Data:</h4>
