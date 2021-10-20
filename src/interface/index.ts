@@ -67,6 +67,16 @@ export interface IGetIdProvider {
 }
 
 /// //////////////////////
+// interface  transactions datas
+/// //////////////////////
+export interface TransactionsDatasProps {
+  from_who: string;
+  to_who: string;
+  value: number;
+  date: Date;
+}
+
+/// //////////////////////
 // interface  context
 /// //////////////////////
 export interface IModelRequest {
