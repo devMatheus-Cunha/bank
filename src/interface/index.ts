@@ -74,6 +74,7 @@ export interface TransactionsDatasProps {
   to_who: string;
   value: number;
   date: Date;
+  type: "deposit" | "transaction"
 }
 
 /// //////////////////////
