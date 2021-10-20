@@ -15,9 +15,7 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import {
-	dataMockTransactions, generetePDF, mensageErrorDefault,
-} from "../../utils";
+import { generetePDF, mensageErrorDefault } from "../../utils";
 
 // components
 import ToastContent from "../../components/ToastContent";
@@ -26,17 +24,27 @@ import ButtonComponent from "../../components/Button";
 import InfoListTransactions from "../../components/InfoListTransactions";
 
 // interface
-import { IDataProps, IValuesTransferProps } from "../../interface";
+import {
+	IDataProps,
+	IValuesTransferProps,
+	TransactionsDatasProps,
+} from "../../interface";
 
 // styles
 import {
-	Contaienr, ContainerActionsButtons, ContentButton, Title,
+	Contaienr,
+	ContainerActionsButtons,
+	ContentButton,
+	Title,
 } from "./styles";
 
 const UserContent = () => {
 	// states
 	const [loading, setLoading] = useState(false);
 	const [userData, setUserData] = useState<IDataProps>();
+	const [trasactionsDatas, setTrasactionsDatas] = useState<
+    TransactionsDatasProps[]
+  >([]);
 
 	// state modal
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
@@ -60,15 +68,22 @@ const UserContent = () => {
 	};
 
 	// request get data
-	const responseRequest = useCallback(async () => {
-		const request = await Model({
+	const responseRequestUserData = useCallback(async () => {
+		const requestDatas = await Model({
 			route: `/picpay/admin/user/${id}`,
 			request: "GET",
 		});
+
+		const requestTransactions = await Model({
+			route: `/picpay/transactions/log/${requestDatas?.data?.cpf_cnpj}`,
+			request: "GET",
+		});
+
 		setTimeout(() => {
-			if (request?.data) {
+			if (requestDatas?.data) {
 				setLoading(true);
-				setUserData(request?.data);
+				setUserData(requestDatas?.data);
+				setTrasactionsDatas(requestTransactions?.data);
 			} else {
 				toast.error(<ToastContent content={mensageErrorDefault} />);
 				setLoading(true);
@@ -90,15 +105,15 @@ const UserContent = () => {
 			});
 
 			if (request?.data) {
-				await toast.success(<ToastContent content="Deposito feito" />);
-				responseRequest();
+				toast.success(<ToastContent content="Deposito feito" />);
+				responseRequestUserData();
 				handleOnCloseModal();
 				setLoading(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
-		[id, responseRequest],
+		[id, responseRequestUserData],
 	);
 
 	const handleTransferWallet = useCallback(
@@ -124,21 +139,20 @@ const UserContent = () => {
 			};
 
 			if (request?.data) {
-				await toast.success(<ToastContent content="Transação feita" />);
-				responseRequest();
+				toast.success(<ToastContent content="Transação feita" />);
+				responseRequestUserData();
 				handleOnCloseModal();
-				handleGetPDF()
 				setLoading(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
-		[id, responseRequest],
+		[id, responseRequestUserData],
 	);
 
 	useEffect(() => {
-		responseRequest();
-	}, [responseRequest]);
+		responseRequestUserData();
+	}, [responseRequestUserData]);
 
 	return (
 		<Contaienr>
@@ -158,6 +172,7 @@ const UserContent = () => {
 						<p>Depositar</p>
 					</ButtonComponent>
 				</ContentButton>
+
 				<Modal
 					isOpen={isTransferWalletModalOpen}
 					onRequestClose={handleOnCloseModal}
@@ -182,10 +197,7 @@ const UserContent = () => {
 				</Modal>
 			</ContainerActionsButtons>
 			<Title>Ultimas Transações:</Title>
-			<InfoListTransactions
-				loading={loading}
-				datas={dataMockTransactions}
-			/>
+			<InfoListTransactions loading={loading} datas={trasactionsDatas} />
 		</Contaienr>
 	);
 };
