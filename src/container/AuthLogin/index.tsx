@@ -47,7 +47,6 @@ const UserLogin = () => {
 	// hooks
 	const history = useHistory();
 
-	// url api
 	// functions
 	const handleSubmitLogin = async (datas: IValuesLoginProps) => {
 		const formated = {

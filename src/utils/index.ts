@@ -1,4 +1,4 @@
-export const url = "http://d0a9-201-17-210-95.ngrok.io";
+export const url = "http://8081-2804-14c-5b80-80b4-f8e4-f3be-574d-69e4.ngrok.io";
 
 export const headers = {
 	Accept: "application/json",
@@ -20,8 +20,6 @@ export const generetePDF = (data: string) => {
 	// document.body.appendChild(link);
 	// link.click();
 };
-
-export const pdfConfig = "arraybuffer";
 
 export const dataMockTransactions = [
 	{

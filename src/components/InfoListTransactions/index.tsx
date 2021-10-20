@@ -1,21 +1,17 @@
 import React from "react";
 
+// interfaces
+import { TransactionsDatasProps } from "../../interface";
+
 // components
 import LoaderExampleLoader from "../Loading";
 
 // styles
 import { Container, Content, InfoData } from "./styles";
 
-type DatasProps = {
-  from_who: string;
-  to_who: string;
-  value: number;
-  date: Date;
-};
-
 type InfoListTransactionsAndDepositProps = {
   loading: boolean;
-  datas: DatasProps[];
+  datas: TransactionsDatasProps[];
 };
 
 const InfoListTransactionsAndDeposit = ({
@@ -24,8 +20,8 @@ const InfoListTransactionsAndDeposit = ({
 }: InfoListTransactionsAndDepositProps) => {
 	return (
 		<Container>
-			{loading ? (
-				datas.map((data: DatasProps) => (
+			{loading && datas && datas.length > 0 ? (
+				datas?.map((data: TransactionsDatasProps) => (
 					<>
 						<Content>
 							<InfoData>
@@ -39,9 +35,7 @@ const InfoListTransactionsAndDeposit = ({
 							<InfoData>
 								<h4>Data:</h4>
 								<p>
-									{new Intl.DateTimeFormat("pt-BR").format(
-										new Date(data.date),
-									)}
+									{new Intl.DateTimeFormat("pt-BR").format(new Date(data.date))}
 								</p>
 							</InfoData>
 							<InfoData>
@@ -53,11 +47,19 @@ const InfoListTransactionsAndDeposit = ({
 									}).format(data.value as unknown as number)}
 								</p>
 							</InfoData>
+							<InfoData>
+								<h4>Tipo</h4>
+								<p>
+									{data.to_who ? "Transferencia" : "Deposito"}
+								</p>
+							</InfoData>
 						</Content>
 					</>
 				))
 			) : (
-				<LoaderExampleLoader />
+				<>
+					<LoaderExampleLoader />
+				</>
 			)}
 		</Container>
 	);
