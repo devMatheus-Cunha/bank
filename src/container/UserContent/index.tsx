@@ -36,6 +36,7 @@ import {
 	ContainerActionsButtons,
 	ContentButton,
 	Title,
+	ContainerTransactions,
 } from "./styles";
 
 const UserContent = () => {
@@ -80,14 +81,13 @@ const UserContent = () => {
 		});
 
 		setTimeout(() => {
-			if (requestDatas?.data) {
-				setLoading(true);
+			if (requestDatas?.data && requestTransactions?.data) {
 				setUserData(requestDatas?.data);
 				setTrasactionsDatas(requestTransactions?.data);
 			} else {
 				toast.error(<ToastContent content={mensageErrorDefault} />);
-				setLoading(true);
 			}
+			setLoading(true);
 		}, 750);
 	}, [id]);
 
@@ -196,8 +196,14 @@ const UserContent = () => {
 					/>
 				</Modal>
 			</ContainerActionsButtons>
-			<Title>Ultimas Transações:</Title>
+			<ContainerTransactions>
+			<Title>
+				{trasactionsDatas && trasactionsDatas.length > 0
+					? "Ultimas Transações:"
+					: "Nenhuma transação efetuada"}
+			</Title>
 			<InfoListTransactions loading={loading} datas={trasactionsDatas} />
+			</ContainerTransactions>
 		</Contaienr>
 	);
 };

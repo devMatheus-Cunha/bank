@@ -49,7 +49,7 @@ const InfoListTransactionsAndDeposit = ({
 	return (
 		<>
 			{
-				loading && datas && datas.length > 0 ? (
+				loading ? (
 					datas?.map((data: TransactionsDatasProps) => (
 						<>
 							<Container>

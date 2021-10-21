@@ -8,7 +8,6 @@ export const Contaienr = styled.div`
 export const ContainerActionsButtons = styled.div`
   margin: 0.8rem;
 `;
-
 export const ContentButton = styled.div`
   display: flex;
   flex-direction: row;
@@ -19,7 +18,11 @@ export const ContentButton = styled.div`
   width: 100%;
 `;
 
+export const ContainerTransactions = styled.div`
+  margin: 2.5rem 0;
+`;
+
 export const Title = styled.h3`
+  margin: 2.5rem 0.7rem;
   color: white;
-  padding: 0 1rem;
 `;
