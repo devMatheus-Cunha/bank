@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ITransferProps, IValuesTransferProps } from "../../../../interface";
 
 // styles
-import { Container, Content, ContentButton } from "../shared/styles";
+import { Container, ContentButton, ContentInput } from "../shared/styles";
 
 const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 	const [valuesTransfer, setValuesTransfer] = useState<IValuesTransferProps>({
@@ -14,36 +14,40 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 
 	return (
 		<Container>
-			<Content>
+			<ContentInput>
+				<p>CPF ou CNPJ</p>
 				<input
 					type="text"
 					name="id"
-					placeholder="Digite o pix..."
+					placeholder="ex: 980.897.470-86"
 					onChange={(event) =>
 						setValuesTransfer({
 							...valuesTransfer,
 							cpf_cnpj: event.target.value,
 						})}
 				/>
+			</ContentInput>
+			<ContentInput>
+				<p>Valor a transferir</p>
 				<input
 					type="number"
 					name="value"
-					placeholder="Valor..."
+					placeholder="ex: R$10,00"
 					onChange={(event) =>
 						setValuesTransfer({
 							...valuesTransfer,
 							value: parseFloat(event.target.value),
 						})}
 				/>
-				<ContentButton>
-					<button type="button" onClick={() => onCloseModal()}>
-						Cancelar
-					</button>
-					<button type="button" onClick={() => handleSubmit(valuesTransfer)}>
-						Transferir
-					</button>
-				</ContentButton>
-			</Content>
+			</ContentInput>
+			<ContentButton>
+				<button type="button" onClick={() => onCloseModal()}>
+					Cancelar
+				</button>
+				<button type="button" onClick={() => handleSubmit(valuesTransfer)}>
+					Transferir
+				</button>
+			</ContentButton>
 		</Container>
 	);
 };

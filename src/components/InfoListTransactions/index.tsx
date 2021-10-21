@@ -60,7 +60,7 @@ const InfoListTransactionsAndDeposit = ({
 											: "Deposito feito"}
 									</Title>
 									{
-										data.type !== "deposit" ? (
+										data.type === "transaction" ? (
 											<Destiny>
 												Para:
 												<span>

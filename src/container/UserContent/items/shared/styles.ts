@@ -1,14 +1,27 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
-export const Content = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem 0;
+  `;
 
-  input {
-    padding: 0.5rem;
-    margin-bottom: 0.6rem;
-  }
+export const ContentInput = styled.div`
+p{
+  padding: 0;
+  margin: 0;
+  color: var(--text-title);
+  margin-bottom: .2rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  border-radius:6px;
+  outline: none;
+}
+ 
 `;
 
 export const ContentButton = styled.div`

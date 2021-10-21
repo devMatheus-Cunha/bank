@@ -4,25 +4,26 @@ import React, { useState } from "react";
 import { IDepositProps } from "../../../../interface";
 
 // styles
-import { Container, Content, ContentButton } from "../shared/styles";
+import { Container, ContentInput, ContentButton } from "../shared/styles";
 
 const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
 	const [valueDeposit, setValueDeposit] = useState<number>(0);
 
 	return (
 		<Container>
-			<Content>
+			<ContentInput>
+				<p>Valor a depositar:</p>
 				<input
 					type="number"
 					name="value"
-					placeholder="Valor..."
+					placeholder="ex: R$10,00"
 					onChange={(event) => setValueDeposit(parseFloat(event.target.value))}
 				/>
-				<ContentButton>
-					<button type="button" onClick={() => onCloseModal()}>Cancelar</button>
-					<button type="submit" onClick={() => handleSubmit(valueDeposit)}>Depositar</button>
-				</ContentButton>
-			</Content>
+			</ContentInput>
+			<ContentButton>
+				<button type="button" onClick={() => onCloseModal()}>Cancelar</button>
+				<button type="submit" onClick={() => handleSubmit(valueDeposit)}>Depositar</button>
+			</ContentButton>
 		</Container>
 	);
 };
