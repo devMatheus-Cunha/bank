@@ -47,11 +47,12 @@ export const Balance = styled.div`
     }
   }
 `;
+
 export const ViewBalance = styled.button`
   align-self: flex-start;
   svg {
-    width: 25px;
-    height: 25px;
+    width: 21px;
+    height: 21px;
     color: #525151;
   }
 
