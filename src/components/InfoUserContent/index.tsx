@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 // components
 import LoaderExampleLoader from "../Loading";
 
 // styles
 import {
-	Container, ContentInfo, Balance, NameUser,
+	Container, ContentInfo, Balance, NameUser, ViewBalance,
 } from "./styles";
 
 // interface
@@ -16,6 +17,9 @@ interface IInfoUserContent {
 }
 
 const InfoUserContent = ({ name, wallet, loading }: IInfoUserContent) => {
+	// states
+	const [show, setShow] = useState(false)
+
 	return (
 		<Container>
 			{loading ? (
@@ -32,14 +36,23 @@ const InfoUserContent = ({ name, wallet, loading }: IInfoUserContent) => {
 								Saldo:
 								{" "}
 								<span>
-									{new Intl.NumberFormat("pt-BR", {
-										style: "currency",
-										currency: "BRL",
-									}).format((wallet?.toFixed(2) || 0) as unknown as number)}
+									{
+										show ? (
+											<div />
+										) : (
+											new Intl.NumberFormat("pt-BR", {
+												style: "currency",
+												currency: "BRL",
+											}).format((wallet?.toFixed(2) || 0) as unknown as number)
+										)
+									}
 								</span>
 							</p>
 						</Balance>
 					</ContentInfo>
+					<ViewBalance onClick={() => setShow(!show)}>
+						{show ? <BsEyeSlash /> : <BsEye />}
+					</ViewBalance>
 				</>
 			) : (
 				<LoaderExampleLoader />

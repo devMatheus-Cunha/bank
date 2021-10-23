@@ -1,3 +1,4 @@
+import { BsEyeSlash } from "react-icons/bs";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -6,6 +7,9 @@ export const Container = styled.div`
   border-radius: 1rem;
   margin: 0.8rem;
   padding: 1rem;
+
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const ContentInfo = styled.div`
@@ -18,12 +22,38 @@ export const NameUser = styled.h3`
 `;
 
 export const Balance = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
+
   p {
+    display: flex;
+    align-items: center;
+    gap: 0 0.2rem;
     font-size: 13px;
+
     span {
       color: #525151;
       font-size: 14px;
       font-weight: bold;
+
+      > div {
+        background-color: #525151;
+        border-radius: 5px;
+        opacity: 0.5;
+        width: 50px;
+        height: 12px;
+      }
     }
   }
+`;
+export const ViewBalance = styled.button`
+  align-self: flex-start;
+  svg {
+    width: 25px;
+    height: 25px;
+    color: #525151;
+  }
+
+  border: none;
 `;
