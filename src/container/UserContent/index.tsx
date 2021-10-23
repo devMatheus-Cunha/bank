@@ -197,12 +197,12 @@ const UserContent = () => {
 				</Modal>
 			</ContainerActionsButtons>
 			<ContainerTransactions>
-			<Title>
-				{trasactionsDatas && trasactionsDatas.length > 0
-					? "Ultimas Transações:"
-					: "Nenhuma transação efetuada"}
-			</Title>
-			<InfoListTransactions loading={loading} datas={trasactionsDatas} />
+				<Title>
+					{trasactionsDatas && trasactionsDatas.length > 0
+						? "Ultimas Transações:"
+						: "Nenhuma transação efetuada"}
+				</Title>
+				<InfoListTransactions loading={loading} datas={trasactionsDatas} />
 			</ContainerTransactions>
 		</Contaienr>
 	);
