@@ -4,41 +4,46 @@ import React from "react";
 import LoaderExampleLoader from "../Loading";
 
 // styles
-import { Container, ContentInfo, ContentBalance } from "./styles";
+import {
+	Container, ContentInfo, Balance, NameUser,
+} from "./styles";
 
 // interface
 interface IInfoUserContent {
-  name?: string,
-  wallet?: number,
-	loading: boolean,
+  name?: string;
+  wallet?: number;
+  loading: boolean;
 }
 
 const InfoUserContent = ({ name, wallet, loading }: IInfoUserContent) => {
 	return (
 		<Container>
-			{
-				loading ? (
-					<>
-						<ContentInfo>
-							<h2>
-								Olá,
+			{loading ? (
+				<>
+					<ContentInfo>
+						<NameUser>
+							Olá,
+							{" "}
+							<strong>{name || "Usurario"}</strong>
+							{" "}
+						</NameUser>
+						<Balance>
+							<p>
+								Saldo:
 								{" "}
-								<strong>{name || "Usurario"}</strong>
-								{" "}
-							</h2>
-						</ContentInfo>
-						<ContentBalance>
-							<h1>Saldo</h1>
-							<h2>
-								{new Intl.NumberFormat("pt-BR", {	style: "currency",	currency: "BRL"	}).format((wallet?.toFixed(2) || 0)as unknown as number)}
-							</h2>
-						</ContentBalance>
-					</>
-				)
-					: (
-						<LoaderExampleLoader />
-					)
-			}
+								<span>
+									{new Intl.NumberFormat("pt-BR", {
+										style: "currency",
+										currency: "BRL",
+									}).format((wallet?.toFixed(2) || 0) as unknown as number)}
+								</span>
+							</p>
+						</Balance>
+					</ContentInfo>
+				</>
+			) : (
+				<LoaderExampleLoader />
+			)}
 		</Container>
 	);
 };

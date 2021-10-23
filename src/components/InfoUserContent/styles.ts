@@ -2,32 +2,28 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--background);
-  padding: 1rem;
-  margin: 0.8rem;
+  color: #525151;
   border-radius: 1rem;
-  min-height: 100px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0.8rem;
+  padding: 1rem;
 `;
 
 export const ContentInfo = styled.div`
-  h2 {
-    color: var(--text-title);
-    margin-bottom: 1.4rem;
-  }
+  display: flex;
+  flex-direction: column;
 `;
-export const ContentBalance = styled.div`
-  h1 {
-    color: var(--text-title);
-    font-size: 17px;
-    padding: 0;
-    margin: 0;
-  }
-  h2 {
-    margin: 0.4rem 0;
-    color: var(--text-title);
-    font-size: 20px;
+
+export const NameUser = styled.h3`
+  font-weight: 500;
+`;
+
+export const Balance = styled.div`
+  p {
+    font-size: 13px;
+    span {
+      color: #525151;
+      font-size: 14px;
+      font-weight: bold;
+    }
   }
 `;

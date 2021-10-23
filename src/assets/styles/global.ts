@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     --green-picpay-dark: #263224;
     
     --blue-light: #365AD6;
-    --text-title: #223324;
+    /* --text-title: #223324; */
     --white: #ffffff;
     
     --text-title: #858383
