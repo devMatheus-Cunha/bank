@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: var(--background);
-  color: #525151;
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.text};
   border-radius: 1rem;
   margin: 0.8rem;
   padding: 1rem;
@@ -32,12 +32,12 @@ export const Balance = styled.div`
     font-size: 13px;
 
     span {
-      color: #525151;
+      color: ${({ theme }) => theme.colors.text};
       font-size: 14px;
       font-weight: bold;
 
       > div {
-        background-color: #525151;
+        background-color: ${({ theme }) => theme.colors.text};
         border-radius: 5px;
         opacity: 0.4;
         width: 50px;
@@ -56,6 +56,6 @@ export const ViewBalance = styled.button`
   svg {
     width: 21px;
     height: 21px;
-    color: #525151;
+    color: ${({ theme }) => theme.colors.text};
   }
 `;

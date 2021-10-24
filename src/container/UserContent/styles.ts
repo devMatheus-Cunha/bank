@@ -25,6 +25,6 @@ export const ContainerTransactions = styled.div`
 
 export const Title = styled.h3`
   margin: 2.5rem 0.7rem;
-  color:  #525151;
+  color:  var(--text);
   font-weight: bold;
 `;

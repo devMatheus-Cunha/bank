@@ -41,7 +41,7 @@ export const ContentButton = styled.div`
 
     font-size: 17px;
    &:last-child{
-    background-color: var(--green-picpay);
+    background-color: var(--green-dark);
     color: var(--white);
 
     &:hover{
