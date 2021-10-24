@@ -15,7 +15,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 	return (
 		<Container>
 			<ContentInput>
-				<p>CPF ou CNPJ</p>
+				<p>CPF ou CNPJ:</p>
 				<input
 					type="text"
 					name="id"
@@ -28,7 +28,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 				/>
 			</ContentInput>
 			<ContentInput>
-				<p>Valor a transferir</p>
+				<p>Valor a transferir:</p>
 				<input
 					type="number"
 					name="value"

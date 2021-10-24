@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  color: var(--text-title);
-  background-color: var(--background);
+  background-color: ${({ theme }) => theme.colors.section};
   border-radius: 1rem;
 
   padding: 0.8rem;
@@ -10,7 +9,7 @@ export const Container = styled.div`
 
   display: flex;
   justify-content: space-between;
-
+  color: ${({ theme }) => theme.colors.text};
   p {
     margin: 0;
     padding: 0;
@@ -28,18 +27,17 @@ export const ContentFirst = styled.div`
 
 export const Title = styled.p`
   font-weight: bold;
-  color: var(--text);
 `;
 
 export const Wallet = styled.p`
-  color: var(--text);
 `;
 
 export const Destiny = styled.p`
   font-size: 13px;
+
   span {
     font-weight: 500;
-    color: var(--text);
+
   }
 `;
 
@@ -56,11 +54,12 @@ export const Details = styled.div`
   margin: 0 auto;
   button {
     border: none;
+    background-color: transparent;
 
     svg {
       height: 20px;
       width: 20px;
-      color: var(--text);
+      color: ${({ theme }) => theme.colors.text};
     }
   }
 `;
