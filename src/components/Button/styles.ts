@@ -4,10 +4,10 @@ export const Container = styled.div`
   width: 100%;
 
   button {
-    background-color: var(--blue-light);
+    background-color:${({ theme }) => theme.colors.green200};
     outline: none;
     border: none;
-    color: var(--white);
+    color: ${({ theme }) => theme.colors.text};
 
     border: none;
 
@@ -24,7 +24,7 @@ export const Container = styled.div`
       font-size: 15px;
       letter-spacing: 0.1rem;
       font-family: "Poppins", sans-serif;
-      color: var(--white);
+      color: ${({ theme }) => theme.colors.text};
     }
   }
 `;

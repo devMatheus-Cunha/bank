@@ -18,8 +18,8 @@ export const Button = styled.button`
   font-size: 14px;
   letter-spacing: 0.1rem;
   font-family: 'Poppins', sans-serif;
-  color: var(--white);
+  color:  ${({ theme }) => theme.colors.text};
 
-  background-color: var(--blue-light);
+  background-color: ${({ theme }) => theme.colors.green200};
   border: none;
 `;

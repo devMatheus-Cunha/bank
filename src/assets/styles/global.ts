@@ -36,9 +36,11 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif !important; 
 
   input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.section} inset !important;
+    -webkit-box-shadow: 0 0 0 30px ${({ theme }) =>
+      theme.colors.section} inset !important;
     -webkit-text-fill-color: ${({ theme }) => theme.colors.text} !important;
   }
+}
 
   body, input, textarea, button {
     font-weight: 400;

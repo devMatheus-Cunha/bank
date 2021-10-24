@@ -25,7 +25,8 @@ export const Content = styled.div`
     border: none;
     outline: 0;
     padding: 5px 10px;
-    background: ${({ theme }) => theme.colors.section};;
+    background: ${({ theme }) => theme.colors.section};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   img {
