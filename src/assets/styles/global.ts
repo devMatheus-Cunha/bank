@@ -2,17 +2,16 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --background: #F0F1E9;
-    --green-picpay: #11c76f;
+    --background: #F6F5FA;
     --green-picpay-light: #77D284;
-    --green-picpay-dark: #263224;
+    --green-clear: #C2E7D6;
+    --green-dark: #5cb88e;
     
     --blue-light: #365AD6;
-    /* --text-title: #223324; */
     --white: #ffffff;
     
-    --text-title: #858383
     --text: #525151
+    --text-title: #858383
   }
 
   * {
@@ -22,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   html {
+    -webkit-tap-highlight-color: transparent !important; /*pode ser transparent também*/
     @media (max-width: 1080px) {
       font-size: 93.75%; // 15px
     }
@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    background: var(--green-picpay-dark);
+    background: var(--green-clear);
     -webkit-font-smoothing: antialiased;
     font-family: 'Poppins', sans-serif !important;
   }

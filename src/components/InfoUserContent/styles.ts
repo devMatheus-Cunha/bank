@@ -39,7 +39,7 @@ export const Balance = styled.div`
       > div {
         background-color: #525151;
         border-radius: 5px;
-        opacity: 0.5;
+        opacity: 0.4;
         width: 50px;
         height: 12px;
       }
@@ -49,11 +49,13 @@ export const Balance = styled.div`
 
 export const ViewBalance = styled.button`
   align-self: flex-start;
+  border: none;
+  outline: 0;
+  background-color: transparent;
+
   svg {
     width: 21px;
     height: 21px;
     color: #525151;
   }
-
-  border: none;
 `;

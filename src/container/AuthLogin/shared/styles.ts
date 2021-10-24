@@ -13,7 +13,7 @@ export const Content = styled.div`
   align-items: center;
 
   label {
-    color: #ffff;
+    color: #525151;
     font-size: 14px;
     margin-bottom: 5px;
   }
@@ -25,7 +25,7 @@ export const Content = styled.div`
     outline: 0;
     padding: 5px 10px;
   }
-  
+
   img {
     width: 140px;
     height: 130px;
@@ -52,7 +52,7 @@ export const ContentInput = styled.div`
   flex-direction: column;
   margin-bottom: 15px;
   label {
-    color: #ffff;
+    color: #525151;
     font-size: 14px;
   }
 `;
@@ -66,10 +66,11 @@ export const ContentInputPassword = styled.div`
     outline: 0;
     padding-right: 0.2rem;
   }
-  button > svg{
+  button > svg {
     height: 18px;
     width: 18px;
     margin-right: 0.3rem;
+    color: #525151;
   }
 `;
 
@@ -106,13 +107,13 @@ export const IsBackButton = styled.button`
   background-color: transparent;
   justify-content: center;
   display: flex;
-  color: #ffff;
+  color: #525151;
 `;
 
 export const ContentFormControlLabel = styled.div`
   label {
     > span {
-      color: white;
+      color: #525151;
       &:first-child > span {
         color: #11c76f !important;
       }
