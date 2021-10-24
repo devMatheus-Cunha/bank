@@ -15,7 +15,7 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import { generetePDF, mensageErrorDefault } from "../../utils";
+import { mensageErrorDefault } from "../../utils";
 
 // components
 import ToastContent from "../../components/ToastContent";
@@ -129,14 +129,14 @@ const UserContent = () => {
 				body: formated,
 			});
 
-			const handleGetPDF = async () => {
-				const request = await Model({
-					route: "/picpay/admin/user/report",
-					request: "GET",
-					pdf: "arraybuffer",
-				});
-				generetePDF(request.data);
-			};
+			// const handleGetPDF = async () => {
+			// 	const request = await Model({
+			// 		route: "/picpay/admin/user/report",
+			// 		request: "GET",
+			// 		pdf: "arraybuffer",
+			// 	});
+			// 	generetePDF(request.data);
+			// };
 
 			if (request?.data) {
 				toast.success(<ToastContent content="Transação feita" />);
