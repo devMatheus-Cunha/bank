@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// icons
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 // components

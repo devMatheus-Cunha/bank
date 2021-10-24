@@ -154,6 +154,9 @@ const UserContent = () => {
 		responseRequestUserData();
 	}, [responseRequestUserData]);
 
+	/// //////////////////////
+	// render
+	/// //////////////////////
 	return (
 		<Contaienr>
 			<InfoUserContent
