@@ -1,22 +1,18 @@
 import React from "react";
 
-// icons
-import { VscClose } from "react-icons/vsc";
+// styles
+import { Container, ContentButton } from "./styles";
 
-// import { Container } from './styles';
-
-const ContainerModalDetails = ({ onCloseModal }: any) => {
+const ContainerModalDetails = ({ onCloseModal, data }: any) => {
 	return (
-		<div>
-			<button
-				type="button"
-				onClick={onCloseModal}
-				className="react-modal-close"
-			>
-				<VscClose />
-			</button>
-			<h4>Detalhes Transação</h4>
-		</div>
+		<Container>
+			<p>{data.type}</p>
+			<p>{data.value}</p>
+			<p>{data.date}</p>
+			<ContentButton>
+				<button type="button" onClick={() => onCloseModal()}>Fechar</button>
+			</ContentButton>
+		</Container>
 	);
 };
 
