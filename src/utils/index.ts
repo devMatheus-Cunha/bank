@@ -1,4 +1,4 @@
-export const url = "http://e06a-2804-14c-5b80-80b4-616c-4d51-6017-b957.ngrok.io";
+export const url = "http://1de2-2804-14c-5b80-80b4-616c-4d51-6017-b957.ngrok.io";
 
 export const headers = {
 	Accept: "application/json",

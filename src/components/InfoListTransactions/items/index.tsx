@@ -9,6 +9,7 @@ const ContainerModalDetails = ({ onCloseModal, data }: any) => {
 			<p>{data.type}</p>
 			<p>{data.value}</p>
 			<p>{data.date}</p>
+			<p>{data.to_who}</p>
 			<ContentButton>
 				<button type="button" onClick={() => onCloseModal()}>Fechar</button>
 			</ContentButton>

@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.section};
   border-radius: 1rem;
+  color: ${({ theme }) => theme.colors.text};
 
   padding: 0.8rem;
-  margin: 1rem;
+  margin: 1.5rem 1rem;
 
   display: flex;
   justify-content: space-between;
-  color: ${({ theme }) => theme.colors.text};
+
   p {
     margin: 0;
     padding: 0;
@@ -29,15 +30,13 @@ export const Title = styled.p`
   font-weight: bold;
 `;
 
-export const Wallet = styled.p`
-`;
+export const Wallet = styled.p``;
 
 export const Destiny = styled.p`
   font-size: 13px;
 
   span {
     font-weight: 500;
-
   }
 `;
 

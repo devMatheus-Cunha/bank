@@ -94,7 +94,6 @@ const InfoListTransactionsAndDeposit = ({
 										className="react-modal-content"
 									>
 										<ContainerModalDetails
-											// handleSubmit={() => console.log("")}
 											onCloseModal={handleCloseModalDetails}
 											data={data}
 										/>

@@ -20,11 +20,23 @@ export const ContentButton = styled.div`
 `;
 
 export const ContainerTransactions = styled.div`
-  margin: 2.5rem 0;
+
+  max-height: 61vh;
+
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.colors.section};
+  }
 `;
 
 export const Title = styled.h3`
-  margin: 2.5rem 0.7rem;
+  margin: 2.1rem 0.7rem 1rem 0.7rem;
   color: ${({ theme }) => theme.colors.text};
   font-weight: bold;
 `;

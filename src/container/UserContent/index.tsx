@@ -199,12 +199,12 @@ const UserContent = () => {
 					/>
 				</Modal>
 			</ContainerActionsButtons>
+			<Title>
+				{trasactionsDatas && trasactionsDatas.length > 0
+					? "Ultimas Transações:"
+					: "Nenhuma transação efetuada"}
+			</Title>
 			<ContainerTransactions>
-				<Title>
-					{trasactionsDatas && trasactionsDatas.length > 0
-						? "Ultimas Transações:"
-						: "Nenhuma transação efetuada"}
-				</Title>
 				<InfoListTransactions loading={loading} datas={trasactionsDatas} />
 			</ContainerTransactions>
 		</Contaienr>

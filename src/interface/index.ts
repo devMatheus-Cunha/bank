@@ -70,6 +70,7 @@ export interface IGetIdProvider {
 // interface  transactions datas
 /// //////////////////////
 export interface TransactionsDatasProps {
+  id: string;
   from_who: string;
   to_who: string;
   value: number;
