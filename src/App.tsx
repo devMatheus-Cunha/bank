@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "semantic-ui-css/semantic.min.css"
+import "semantic-ui-css/semantic.min.css";
 
 // view
 import Auth from "./view/auth";
@@ -18,6 +18,10 @@ import { GetIdProvider } from "./contexts/getIdProvider";
 Modal.setAppElement("#root");
 
 function App() {
+	// styles to Toast
+	const stylesToast = {
+		background: "#2c2c2e",
+	};
 	return (
 		<>
 			<BrowserRouter>
@@ -37,6 +41,7 @@ function App() {
 				closeOnClick
 				theme="dark"
 				draggable
+				toastStyle={stylesToast}
 			/>
 		</>
 	);
