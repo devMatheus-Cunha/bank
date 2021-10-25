@@ -1,17 +1,14 @@
 /* eslint-disable max-len */
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 // utils
 import logoPicPay from "../../assets/img/logo.svg";
+import CustomizedMenus from "../ToggleMenu";
 
 // styles
-import { Container, Button } from "./styles";
+import { Container } from "./styles";
 
 const Header = () => {
-	// hooks
-	const history = useHistory();
-
 	return (
 		<Container>
 			<img
@@ -22,9 +19,7 @@ const Header = () => {
 				loading="lazy"
 				decoding="async"
 			/>
-			<Button type="button" onClick={() => history.push("/")}>
-				Sair
-			</Button>
+			<CustomizedMenus />
 		</Container>
 	);
 };
