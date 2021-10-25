@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CountUp from "react-countup";
 
 // icons
 import { BsEyeSlash, BsEye } from "react-icons/bs";
@@ -42,10 +43,16 @@ const InfoUserContent = ({ name, wallet, loading }: IInfoUserContent) => {
 										show ? (
 											<div />
 										) : (
-											new Intl.NumberFormat("pt-BR", {
-												style: "currency",
-												currency: "BRL",
-											}).format((wallet?.toFixed(2) || 0) as unknown as number)
+											<>
+												<span>R$ </span>
+												<CountUp
+													end={wallet as number}
+													duration={1.5}
+													separator="."
+													decimal=","
+													decimals={2}
+												/>
+											</>
 										)
 									}
 								</span>
