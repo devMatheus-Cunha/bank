@@ -37,7 +37,7 @@ const InfoListTransactionsAndDeposit = ({
 	const [isModal, setisModal] = useState(false);
 
 	// handle open modal
-	const handleOpenModaDetails = () => {
+	const handleOpenModaDetails = async () => {
 		setisModal(true);
 	};
 
@@ -51,7 +51,7 @@ const InfoListTransactionsAndDeposit = ({
 			{loading ? (
 				datas?.map((data: TransactionsDatasProps) => (
 					<>
-						<Container>
+						<Container key={data.id}>
 							<ContentFirst>
 								<Title>
 									{data.type === "transaction"
@@ -84,7 +84,10 @@ const InfoListTransactionsAndDeposit = ({
 									}).format(new Date(data.date))}
 								</DateTransaction>
 								<Details>
-									<button type="button" onClick={() => handleOpenModaDetails()}>
+									<button
+										type="button"
+										onClick={() => handleOpenModaDetails()}
+									>
 										<BiDetail />
 									</button>
 									<Modal
@@ -95,6 +98,7 @@ const InfoListTransactionsAndDeposit = ({
 									>
 										<ContainerModalDetails
 											onCloseModal={handleCloseModalDetails}
+											loading={loading}
 											data={data}
 										/>
 									</Modal>
