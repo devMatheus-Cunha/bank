@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CurrencyInput from "react-currency-input-field";
 
 // interface
 import { ITransferProps, IValuesTransferProps } from "../../../../interface";
@@ -8,9 +9,9 @@ import { Container, ContentButton, ContentInput } from "../shared/styles";
 
 const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 	const [valuesTransfer, setValuesTransfer] = useState<IValuesTransferProps>({
-		cpf_cnpj: "",
-		value: 0,
-	});
+  	cpf_cnpj: "",
+  	value: "",
+  });
 
 	return (
 		<Container>
@@ -29,15 +30,19 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 			</ContentInput>
 			<ContentInput>
 				<p>Valor a transferir:</p>
-				<input
-					type="number"
+				<CurrencyInput
+					id="validation-example-2-field"
 					name="value"
-					placeholder="ex: R$10,00"
-					onChange={(event) =>
+					placeholder="R$1,234,567"
+					allowDecimals={false}
+					className="form-control"
+					onValueChange={(value) =>
 						setValuesTransfer({
 							...valuesTransfer,
-							value: parseFloat(event.target.value),
+							value,
 						})}
+					prefix="R$"
+					step={10}
 				/>
 			</ContentInput>
 			<ContentButton>

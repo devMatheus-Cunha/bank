@@ -91,32 +91,30 @@ const UserContent = () => {
 			])
 		).map(({ data }) => data);
 
-		const formatedResponse = getSendAndReceive.reduce((current, acc) => [
-			...current,
-			...acc.map((data: TransactionsDatasProps) => {
-				return {
-					...data,
-					type: "receivedTransaction",
-				};
-			}),
-		])
+		if (requestDatas?.data && getSendAndReceive) {
+			const formatedResponse = getSendAndReceive.reduce((current, acc) => [
+				...current,
+				...acc.map((data: TransactionsDatasProps) => {
+					return {
+						...data,
+						type: "receivedTransaction",
+					};
+				}),
+			])
 
-		setTimeout(() => {
-			if (requestDatas?.data && getSendAndReceive) {
-				setUserData(requestDatas?.data);
-				setTrasactionsDatas(formatedResponse);
-			} else {
-				toast.error(<ToastContent content={mensageErrorDefault} />);
-			}
-			setLoading(true);
-		}, 750);
+			setUserData(requestDatas?.data);
+			setTrasactionsDatas(formatedResponse);
+		} else {
+			toast.error(<ToastContent content={mensageErrorDefault} />);
+		}
+		setLoading(true);
 	}, [id]);
 
 	// handle actions modal
 	const handleDepositWallet = useCallback(
-		async (data: number) => {
+		async (data: string) => {
 			const formated = {
-				value: data,
+				value: parseFloat(data),
 			};
 
 			const request = await Model({
@@ -141,7 +139,7 @@ const UserContent = () => {
 		async (data: IValuesTransferProps) => {
 			const formated = {
 				cpf_cnpj: data.cpf_cnpj,
-				value: data.value,
+				value: parseFloat(data.value),
 			};
 
 			const request = await Model({

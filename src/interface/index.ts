@@ -19,7 +19,7 @@ export interface IDataProps {
 /// //////////////////////
 export interface IValuesTransferProps {
   cpf_cnpj: string;
-  value: number;
+  value: any;
 }
 
 export interface ITransferProps {
@@ -31,12 +31,12 @@ export interface ITransferProps {
 // interface for Deposit
 /// //////////////////////
 export interface IValuesDepostiProps {
-  value: number;
+  value: any;
 }
 
 export interface IDepositProps {
   onCloseModal: () => void;
-  handleSubmit: (data: number) => void;
+  handleSubmit: (data: string) => void;
 }
 
 /// //////////////////////
@@ -84,6 +84,6 @@ export interface TransactionsDatasProps {
 export interface IModelRequest {
   route: string;
   request: "GET" | "POST" | "DELETE" | "PUT";
-  body?: IValuesCreateAccountProps| IValuesLoginProps| IValuesDepostiProps | IValuesTransferProps | number
+  body?: IValuesCreateAccountProps| IValuesLoginProps| IValuesDepostiProps | IValuesTransferProps | string
   responseType?: "arraybuffer" | "blob" | "stream";
 }
