@@ -75,7 +75,7 @@ export interface TransactionsDatasProps {
   to_who: string;
   value: number;
   date: Date;
-  type: "deposit" | "transaction"
+  type: "deposit" | "transaction" | "receivedTransaction"
 }
 
 /// //////////////////////
@@ -85,5 +85,5 @@ export interface IModelRequest {
   route: string;
   request: "GET" | "POST" | "DELETE" | "PUT";
   body?: IValuesCreateAccountProps| IValuesLoginProps| IValuesDepostiProps | IValuesTransferProps | number
-  pdf?: "arraybuffer" | "blob";
+  responseType?: "arraybuffer" | "blob" | "stream";
 }
