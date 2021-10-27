@@ -46,6 +46,19 @@ const InfoListTransactionsAndDeposit = ({
 		setisModal(false);
 	};
 
+	function validationTitle(type: string) {
+		switch (type) {
+		case "transaction":
+			return "Tranferencia enviada";
+		case "deposit":
+			return "Deposito feito";
+		case "receivedTransaction":
+			return "Tranferencia recebida";
+		default:
+			return "";
+		}
+	}
+
 	return (
 		<>
 			{loading ? (
@@ -53,21 +66,17 @@ const InfoListTransactionsAndDeposit = ({
 					<>
 						<Container key={data.id}>
 							<ContentFirst>
-								<Title>
-									{data.type === "transaction"
-										? "	Transferencia enviada"
-										: "Deposito feito"}
-								</Title>
-								{data.type === "transaction" ? (
+								<Title>{validationTitle(data.type)}</Title>
+								{data.type === "deposit" ? (
+									<p style={{ marginTop: "10px" }} />
+								) : (
 									<Destiny>
-										Para:
+										{data.type === "transaction" ? "Para:" : "De:"}
 										<span>
 											{" "}
-											{data.to_who}
+											{data.type === "transaction" ? data.to_who : data.from_who}
 										</span>
 									</Destiny>
-								) : (
-									<p style={{ marginTop: "10px" }} />
 								)}
 								<Wallet>
 									{new Intl.NumberFormat("pt-BR", {
@@ -84,10 +93,7 @@ const InfoListTransactionsAndDeposit = ({
 									}).format(new Date(data.date))}
 								</DateTransaction>
 								<Details>
-									<button
-										type="button"
-										onClick={() => handleOpenModaDetails()}
-									>
+									<button type="button" onClick={() => handleOpenModaDetails()}>
 										<BiDetail />
 									</button>
 									<Modal
