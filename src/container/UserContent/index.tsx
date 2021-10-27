@@ -75,15 +75,36 @@ const UserContent = () => {
 			request: "GET",
 		});
 
-		const requestTransactions = await Model({
-			route: `/picpay/transactions/log/${requestDatas?.data?.cpf_cnpj}`,
-			request: "GET",
-		});
+		const getSendAndReceive = (
+			await Promise.all([
+				Model({
+					route: `/picpay/transactions/log/send/${requestDatas?.data?.cpf_cnpj}`,
+					request: "GET",
+					responseType: "stream",
+				}),
+
+				Model({
+					route: `/picpay/transactions/log/receive/${requestDatas?.data?.cpf_cnpj}`,
+					request: "GET",
+					responseType: "stream",
+				}),
+			])
+		).map(({ data }) => data);
+
+		const formatedResponse = getSendAndReceive.reduce((current, acc) => [
+			...current,
+			...acc.map((data: TransactionsDatasProps) => {
+				return {
+					...data,
+					type: "receivedTransaction",
+				};
+			}),
+		])
 
 		setTimeout(() => {
-			if (requestDatas?.data && requestTransactions?.data) {
+			if (requestDatas?.data && getSendAndReceive) {
 				setUserData(requestDatas?.data);
-				setTrasactionsDatas(requestTransactions?.data);
+				setTrasactionsDatas(formatedResponse);
 			} else {
 				toast.error(<ToastContent content={mensageErrorDefault} />);
 			}
