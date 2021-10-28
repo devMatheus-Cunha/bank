@@ -1,4 +1,4 @@
-export const url = "http://4f52-2804-14c-5b80-80b4-c84f-b841-cfec-b2a6.ngrok.io"
+export const url = "http://edd8-2804-14c-5b80-80b4-1d06-487c-8f60-b032.ngrok.io";
 
 export const headers = {
 	Accept: "application/json",
@@ -19,6 +19,24 @@ export const generetePDF = (data: string) => {
 	// link.setAttribute("download", "lista_etiquetas.pdf");
 	// document.body.appendChild(link);
 	// link.click();
+};
+
+export const formatDateTwoValues = (date: Date): string => {
+	const formated = new Intl.DateTimeFormat("pt-BR", {
+		day: "numeric",
+		month: "numeric",
+	}).format(new Date(date));
+
+	return formated;
+};
+
+export const formatMoney = (money: number): string => {
+	const formated = new Intl.NumberFormat("pt-BR", {
+		style: "currency",
+		currency: "BRL",
+	}).format(money);
+
+	return formated;
 };
 
 export const dataMockTransactions = [

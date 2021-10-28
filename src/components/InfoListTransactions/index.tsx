@@ -10,6 +10,9 @@ import ContainerModalDetails from "./items";
 // interfaces
 import { TransactionsDatasProps } from "../../interface";
 
+// utils
+import { formatDateTwoValues, formatMoney } from "../../utils";
+
 // components
 import LoaderComponent from "../Loading";
 
@@ -79,18 +82,12 @@ const InfoListTransactionsAndDeposit = ({
 									</Destiny>
 								)}
 								<Wallet>
-									{new Intl.NumberFormat("pt-BR", {
-										style: "currency",
-										currency: "BRL",
-									}).format(data.value as unknown as number)}
+									{formatMoney(data.value)}
 								</Wallet>
 							</ContentFirst>
 							<ContentSecond>
 								<DateTransaction>
-									{new Intl.DateTimeFormat("pt-BR", {
-										day: "numeric",
-										month: "numeric",
-									}).format(new Date(data.date))}
+									{formatDateTwoValues(data.date)}
 								</DateTransaction>
 								<Details>
 									<button type="button" onClick={() => handleOpenModaDetails()}>
