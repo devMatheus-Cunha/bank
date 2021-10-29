@@ -6,8 +6,7 @@ export const Container = styled.div`
   color: ${({ theme }) => theme.colors.text};
 
   padding: 0.8rem;
-  margin: 1.5rem 1rem;
-
+  margin: 0 1rem 1.5rem 1rem;
   display: flex;
   justify-content: space-between;
 
