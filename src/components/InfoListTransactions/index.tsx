@@ -111,7 +111,9 @@ const InfoListTransactionsAndDeposit = ({
 					</>
 				))
 			) : (
-				<LoaderComponent />
+				<div style={{ marginTop: "1.5rem" }}>
+					<LoaderComponent />
+				</div>
 			)}
 		</>
 	);

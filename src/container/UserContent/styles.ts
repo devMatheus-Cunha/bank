@@ -20,8 +20,8 @@ export const ContentButton = styled.div`
 `;
 
 export const ContainerTransactions = styled.div`
-
-  max-height: 61vh;
+  max-height: 55.8vh;
+  min-height: 55.8vh;
 
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -39,4 +39,12 @@ export const Title = styled.h3`
   margin: 2.1rem 0.7rem 1rem 0.7rem;
   color: ${({ theme }) => theme.colors.text};
   font-weight: bold;
+`;
+
+export const ContainerFilter = styled.div`
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+
+  margin: 0.5rem 2.3rem 0.7rem 0rem ;
 `;
