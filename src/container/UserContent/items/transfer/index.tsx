@@ -11,7 +11,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 	const [valuesTransfer, setValuesTransfer] = useState<IValuesTransferProps>({
   	cpf_cnpj: "",
   	value: "",
-  });
+	});
 
 	return (
 		<Container>

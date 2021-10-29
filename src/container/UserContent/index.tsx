@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Modal from "react-modal";
 import { toast } from "react-toastify";
+import Modal from "react-modal";
 
 // icons
 import { BiTransfer } from "react-icons/bi";
@@ -16,11 +16,13 @@ import Transfer from "./items/transfer";
 
 // utils
 import { mensageErrorDefault } from "../../utils";
+import { dropdownOptions } from "./utils";
 
 // components
-import ToastContent from "../../components/ToastContent";
-import InfoUserContent from "../../components/InfoUserContent";
 import ButtonComponent from "../../components/Button";
+import ToastContent from "../../components/ToastContent";
+import DropDownOptions from "../../components/SelectInput";
+import InfoUserContent from "../../components/InfoUserContent";
 import InfoListTransactions from "../../components/InfoListTransactions";
 
 // interface
@@ -37,12 +39,15 @@ import {
 	ContentButton,
 	Title,
 	ContainerTransactions,
+	ContainerFilter,
 } from "./styles";
 
 const UserContent = () => {
 	// states
-	const [loading, setLoading] = useState(false);
+	const [loadingDataInfoUser, setLoadingDataInfoUser] = useState(false);
+	const [loadingDataTransactios, setLoadingDataTransactios] = useState(false);
 	const [userData, setUserData] = useState<IDataProps>();
+	const [typeFilterTransactions, setTypeFilterTransactions] = useState("all");
 	const [trasactionsDatas, setTrasactionsDatas] = useState<
     TransactionsDatasProps[]
   >([]);
@@ -75,40 +80,49 @@ const UserContent = () => {
 			request: "GET",
 		});
 
-		const getSendAndReceive = (
-			await Promise.all([
-				Model({
-					route: `/picpay/transactions/log/send/${requestDatas?.data?.cpf_cnpj}`,
-					request: "GET",
-					responseType: "stream",
-				}),
-
-				Model({
-					route: `/picpay/transactions/log/receive/${requestDatas?.data?.cpf_cnpj}`,
-					request: "GET",
-					responseType: "stream",
-				}),
-			])
-		).map(({ data }) => data);
-
-		if (requestDatas?.data && getSendAndReceive) {
-			const formatedResponse = getSendAndReceive.reduce((current, acc) => [
-				...current,
-				...acc.map((data: TransactionsDatasProps) => {
-					return {
-						...data,
-						type: "receivedTransaction",
-					};
-				}),
-			])
-
+		if (requestDatas?.data) {
 			setUserData(requestDatas?.data);
-			setTrasactionsDatas(formatedResponse);
+			setLoadingDataInfoUser(true);
+
+			const getTransactionsSendAndReceive = (
+				await Promise.all([
+					Model({
+						route: `/picpay/transactions/log/send/${requestDatas?.data?.cpf_cnpj}`,
+						request: "GET",
+						responseType: "stream",
+					}),
+
+					Model({
+						route: `/picpay/transactions/log/receive/${requestDatas?.data?.cpf_cnpj}`,
+						request: "GET",
+						responseType: "stream",
+					}),
+				])
+			).map(({ data }) => data);
+
+			if (getTransactionsSendAndReceive) {
+				const formatedResponse = getTransactionsSendAndReceive.reduce((current, acc) => [
+					...current,
+					...acc.map((data: TransactionsDatasProps) => {
+						return {
+							...data,
+							type: "receivedTransaction",
+						};
+					}),
+				]);
+
+				const filter = formatedResponse.filter((item: TransactionsDatasProps) => {
+					return typeFilterTransactions === "all"
+						? item
+						: typeFilterTransactions === item.type;
+				});
+				setTrasactionsDatas(filter);
+				setLoadingDataTransactios(true);
+			}
 		} else {
 			toast.error(<ToastContent content={mensageErrorDefault} />);
 		}
-		setLoading(true);
-	}, [id]);
+	}, [id, typeFilterTransactions]);
 
 	// handle actions modal
 	const handleDepositWallet = useCallback(
@@ -127,7 +141,7 @@ const UserContent = () => {
 				toast.success(<ToastContent content="Deposito feito" />);
 				responseRequestUserData();
 				handleOnCloseModal();
-				setLoading(false);
+				setLoadingDataInfoUser(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
@@ -161,7 +175,7 @@ const UserContent = () => {
 				toast.success(<ToastContent content="Transação feita" />);
 				responseRequestUserData();
 				handleOnCloseModal();
-				setLoading(false);
+				setLoadingDataInfoUser(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
@@ -181,7 +195,7 @@ const UserContent = () => {
 			<InfoUserContent
 				name={userData?.complete_name}
 				wallet={userData?.wallet}
-				loading={loading}
+				loading={loadingDataInfoUser}
 			/>
 			<ContainerActionsButtons>
 				<ContentButton>
@@ -223,8 +237,18 @@ const UserContent = () => {
 					? "Ultimas Transações:"
 					: "Nenhuma transação efetuada"}
 			</Title>
+			<ContainerFilter>
+				<DropDownOptions
+					options={dropdownOptions}
+					defaultValue={typeFilterTransactions}
+					onChange={(event) => {
+						setTypeFilterTransactions(event.target.value)
+						setLoadingDataTransactios(false)
+					}}
+				/>
+			</ContainerFilter>
 			<ContainerTransactions>
-				<InfoListTransactions loading={loading} datas={trasactionsDatas} />
+				<InfoListTransactions loading={loadingDataTransactios} datas={trasactionsDatas} />
 			</ContainerTransactions>
 		</Contaienr>
 	);
