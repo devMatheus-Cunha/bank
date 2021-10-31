@@ -6,6 +6,10 @@ This project was developed with the following technologies:
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Component](https://styled-components.com/)
+- [Context API](https://pt-br.reactjs.org/docs/context.html)
+- [Formik](https://formik.org/docs/examples/typescript)
+- [Semantic-UI](https://react.semantic-ui.com/)
+- [Chakra-UI](https://chakra-ui.com/)
 - [Node](https://nodejs.org/en/about/)
 - [Mongo](https://www.mongodb.com/try)
 
