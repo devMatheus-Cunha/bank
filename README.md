@@ -1,6 +1,6 @@
 @MeMoGroup
 
-## About Project
+## 💻 About Project
 Project developed in partnership with [Andre Isaac](https://github.com/devAndre-Isaac) where I will integrate the backend made for the Picpay challenge. 
 
 It has functionality to Login/Create accounts, transaction actions and deposits made, and we bring all the information to assist the user in using the "interface".
@@ -19,7 +19,7 @@ This project was developed with the following technologies:
 - [Semantic-UI](https://react.semantic-ui.com/)
 - [Chakra-UI](https://chakra-ui.com/)
 
-## How to run
+## 🚀 How to run
 
 ```bash
 $ git clone https://github.com/devMatheus-Gomes/picpay-frontend.git
