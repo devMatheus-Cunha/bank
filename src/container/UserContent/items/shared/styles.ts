@@ -7,23 +7,9 @@ export const Container = styled.div`
   `;
 
 export const ContentInput = styled.div`
-p{
-  padding: 0;
-  margin: 0;
-  color: ${({ theme }) => theme.colors.textSecond};
-  margin-bottom: .2rem;
-}
-
-input {
-  width: 100%;
-  padding: 0.7rem;
-  border: none;
-  border-radius:6px;
-  outline: none;
-  background-color: ${({ theme }) => theme.colors.section};
-  color: ${({ theme }) => theme.colors.text}
-}
-
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
 `;
 
 export const ContentButton = styled.div`

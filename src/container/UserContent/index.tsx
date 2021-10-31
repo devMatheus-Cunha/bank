@@ -7,7 +7,6 @@ import Modal from "react-modal";
 import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
-// models
 import { Model } from "../../models";
 
 // content modal
@@ -117,11 +116,12 @@ const UserContent = () => {
 						: typeFilterTransactions === item.type;
 				});
 				setTrasactionsDatas(filter);
-				setLoadingDataTransactios(true);
 			}
 		} else {
 			toast.error(<ToastContent content={mensageErrorDefault} />);
 		}
+		setLoadingDataTransactios(true);
+		setLoadingDataInfoUser(true);
 	}, [id, typeFilterTransactions]);
 
 	// handle actions modal
@@ -142,6 +142,7 @@ const UserContent = () => {
 				responseRequestUserData();
 				handleOnCloseModal();
 				setLoadingDataInfoUser(false);
+				setLoadingDataTransactios(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
@@ -176,6 +177,7 @@ const UserContent = () => {
 				responseRequestUserData();
 				handleOnCloseModal();
 				setLoadingDataInfoUser(false);
+				setLoadingDataTransactios(false);
 			} else {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
