@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
 
 // toast
@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 // formik
 import { Formik, Form } from "formik";
 
-// models
-import { Model } from "../../models";
+// components
+import InputComponent from "../../components/InputComponent";
 
 // toast
 import ToastContent from "../../components/ToastContent";
@@ -18,6 +18,9 @@ import { IValuesLoginProps } from "../../interface";
 
 // utils
 import logoPicPay from "../../assets/img/logo.svg";
+
+// context
+import { AuthContext } from "../../contexts/AuthContext";
 
 // validation
 import validation from "./validation";
@@ -31,32 +34,25 @@ import {
 	HandleSubmitButton,
 	IsBackButton,
 } from "./shared/styles";
-import InputComponent from "../../components/InputComponent";
 
 const UserLogin = () => {
 	// hooks
 	const history = useHistory();
 
+	// context
+	const { signIn } = useContext(AuthContext)
+
 	// functions
-	const handleSubmitLogin = async (datas: IValuesLoginProps) => {
-		const formated = {
-			email: datas.email,
-			password: datas.password,
-		};
+	async function handleSubmitLogin(datas: IValuesLoginProps) {
+		const request = await signIn(datas)
 
-		const request = await Model({
-			request: "POST",
-			route: "/picpay/user/auth",
-			body: formated,
-		});
-
-		if (request.data?.validUser?.id) {
-			await history.push(`/home/${request.data?.validUser?.id}`);
+		if (request?.data?.validUser?.id) {
+			history.push(`/home/${request?.data?.validUser?.id}`);
 			toast.success(<ToastContent content="Login feito!" />);
 		} else {
 			toast.error(<ToastContent content={request?.response?.data} />);
 		}
-	};
+	}
 
 	/// //////////////////////
 	// render
