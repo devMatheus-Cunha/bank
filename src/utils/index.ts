@@ -1,4 +1,6 @@
-export const url = "http://e1a2-2804-14c-5b80-80b4-791a-7027-7fc-763c.ngrok.io";
+import { validateCNPJ, validateCPF } from "validations-br";
+
+export const url = "http://e227-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
 
 export const headers = {
 	Accept: "application/json",
@@ -59,3 +61,11 @@ export const dataMockTransactions = [
 		value: 100,
 	},
 ];
+
+export const validationCPFAndCNPJ = {
+	name: "cpf_cnpj",
+	message: "CPF ou CNPJ invalido",
+	test: (value: any) => {
+		return value?.length > 13 ? validateCNPJ(value) : validateCPF(value)
+	},
+}
