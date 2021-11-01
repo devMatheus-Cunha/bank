@@ -1,6 +1,6 @@
 import { validateCNPJ, validateCPF } from "validations-br";
 
-export const url = "http://e227-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
+export const url = "http://52e0-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
 
 export const headers = {
 	Accept: "application/json",

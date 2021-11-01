@@ -34,14 +34,14 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 								type="number"
 								name="cpf_cnpj"
 								placeholder="ex: 980.897.470-86"
-								isError
+								required
 							/>
 							<InputComponent
 								name="value"
 								placeholder="R$1,234,567"
 								label="Valor a transferir:"
 								type="number"
-								isError
+								required
 							/>
 						</ContentInput>
 						<ContentButton>

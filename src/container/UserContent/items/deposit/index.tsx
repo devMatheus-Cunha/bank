@@ -33,7 +33,7 @@ const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
 								placeholder="R$1,234,567"
 								label="Valor a transferir:"
 								type="number"
-								isError
+								required
 							/>
 						</ContentInput>
 						<ContentButton>
