@@ -13,7 +13,7 @@ import PageInfo from "./view/home";
 import Create from "./view/auth/Create";
 
 // contexts
-import { AuthContext } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 Modal.setAppElement("#root");
 
@@ -24,15 +24,15 @@ function App() {
 	};
 	return (
 		<>
-			<BrowserRouter>
-				<AuthContext.Provider value={[]}>
+			<AuthProvider>
+				<BrowserRouter>
 					<Switch>
 						<Route path="/" exact component={Auth} />
 						<Route path="/home/:id" component={PageInfo} />
 						<Route path="/create" exact component={Create} />
 					</Switch>
-				</AuthContext.Provider>
-			</BrowserRouter>
+				</BrowserRouter>
+			</AuthProvider>
 
 			<ToastContainer
 				position="top-right"
