@@ -9,17 +9,18 @@ interface IHeaderFilter {
     value: string | number;
     label: string | number;
   }[];
-	onChange(event: React.ChangeEvent<HTMLSelectElement>): void | undefined;
+  onChange(event: React.ChangeEvent<HTMLSelectElement>): void | undefined;
   defaultValue?: string | number;
 }
 
-const DropDownOptions = ({ options, defaultValue, onChange }: IHeaderFilter) => {
+const DropDownOptions = ({
+	options,
+	defaultValue,
+	onChange,
+}: IHeaderFilter) => {
 	return (
 		<Container>
-			<select
-				defaultValue={defaultValue}
-				onChange={onChange}
-			>
+			<select defaultValue={defaultValue} onChange={onChange}>
 				{options.map((option) => (
 					<>
 						<option key={option.value} value={option.value}>

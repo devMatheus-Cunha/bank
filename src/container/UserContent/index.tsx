@@ -88,13 +88,11 @@ const UserContent = () => {
 					Model({
 						route: `/picpay/transactions/log/send/${requestDatas?.data?.cpf_cnpj}`,
 						request: "GET",
-						responseType: "stream",
 					}),
 
 					Model({
 						route: `/picpay/transactions/log/receive/${requestDatas?.data?.cpf_cnpj}`,
 						request: "GET",
-						responseType: "stream",
 					}),
 				])
 			).map(({ data }) => data);

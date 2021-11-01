@@ -10,7 +10,6 @@ import { GlobalStyle } from "./assets/styles/global";
 
 // themes
 import dark from "./assets/styles/themes/dark";
-import light from "./assets/styles/themes/light";
 
 ReactDOM.render(
 	<React.StrictMode>
