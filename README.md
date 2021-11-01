@@ -16,6 +16,7 @@ This project was developed with the following technologies:
 - [Styled Component](https://styled-components.com/)
 - [Context API](https://pt-br.reactjs.org/docs/context.html)
 - [Formik](https://formik.org/docs/examples/typescript)
+- [Yup](https://dev.to/szib/yup-1ib0)
 - [Semantic-UI](https://react.semantic-ui.com/)
 - [Chakra-UI](https://chakra-ui.com/)
 
