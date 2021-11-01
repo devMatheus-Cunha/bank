@@ -19,4 +19,8 @@ input {
   color: ${({ theme }) => theme.colors.text}
 }
 
+span{
+  color: red;
+}
+
 `;
