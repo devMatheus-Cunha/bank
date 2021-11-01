@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 
 // toast
@@ -6,9 +6,6 @@ import { toast } from "react-toastify";
 
 // formik
 import { Formik, Form } from "formik";
-
-// icons
-import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 // models
 import { Model } from "../../models";
@@ -37,9 +34,6 @@ import {
 import InputComponent from "../../components/InputComponent";
 
 const UserLogin = () => {
-	// states
-	const [show, setShow] = useState(false);
-
 	// hooks
 	const history = useHistory();
 
@@ -84,11 +78,8 @@ const UserLogin = () => {
 					</ContentTitle>
 					<Formik
 						initialValues={{
-							complete_name: "",
-							cpf_cnpj: "",
 							email: "",
 							password: "",
-							wallet: 0,
 						}}
 						onSubmit={(values: any) => handleSubmitLogin(values)}
 						validationSchema={validation}

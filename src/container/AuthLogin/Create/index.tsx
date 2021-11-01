@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 // formik
@@ -6,9 +6,6 @@ import { Form, Formik } from "formik";
 
 // toast
 import { toast } from "react-toastify";
-
-// icons
-import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 // models
 import { Model } from "../../../models";
@@ -37,9 +34,6 @@ import {
 import InputComponent from "../../../components/InputComponent";
 
 const UserCreate = () => {
-	// states
-	const [show, setShow] = useState(false);
-
 	// hooks
 	const history = useHistory();
 
@@ -51,7 +45,7 @@ const UserCreate = () => {
 			email: datas.email,
 			password: datas.password,
 			complete_name: datas.complete_name,
-			cpf_cnpj: datas.cpf_cnpj,
+			cpf_cnpj: String(datas.cpf_cnpj),
 			isSeller: datas.isSeller,
 			wallet: datas.wallet,
 		};
@@ -95,8 +89,9 @@ const UserCreate = () => {
 							email: "",
 							password: "",
 							wallet: 0,
+							isSeller: false,
 						}}
-						onSubmit={(values: any) => handleSubmitCreateAccount(values)}
+						onSubmit={(values: IValuesCreateAccountProps) => handleSubmitCreateAccount(values)}
 						validationSchema={validation}
 					>
 						{({ isValid }) => (
