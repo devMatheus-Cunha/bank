@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
+
+// formik
+import { Form, Formik } from "formik";
+
+// toast
 import { toast } from "react-toastify";
-import {
-	Button,
-	Input,
-	FormLabel,
-	InputGroup,
-	InputRightElement,
-} from "@chakra-ui/react";
 
 // icons
 import { BsEyeSlash, BsEye } from "react-icons/bs";
@@ -26,32 +22,24 @@ import { IValuesCreateAccountProps } from "../../../interface";
 // utils
 import logoPicPay from "../../../assets/img/logo.svg";
 
+// validation
+import validation from "./validation";
+
 // styles
 import {
 	Container,
 	Content,
-	Form,
-	ContentInput,
+	ContentForm,
 	ContentTitle,
 	HandleSubmitButton,
 	IsBackButton,
-	ContentFormControlLabel,
-	ContentInputPassword,
 } from "../shared/styles";
+import InputComponent from "../../../components/InputComponent";
 
 const UserCreate = () => {
 	// hooks
 	const history = useHistory();
 
-	// states
-	const [statesCreateAccount, setStateCreateAccount] = useState({
-		complete_name: "",
-		cpf_cnpj: "",
-		email: "",
-		password: "",
-		isSeller: false,
-		wallet: 0,
-	});
 	const [show, setShow] = useState(false);
 
 	const handleSubmitCreateAccount = async (
@@ -93,117 +81,69 @@ const UserCreate = () => {
 		<>
 			<Container>
 				<Content>
-					<img
-						width="120"
-						height="40"
-						src={logoPicPay}
-						alt="Logo do PicPay"
-						loading="lazy"
-						decoding="async"
-					/>
 					<ContentTitle>
+						<img
+							width="120"
+							height="40"
+							src={logoPicPay}
+							alt="Logo do PicPay"
+							loading="lazy"
+							decoding="async"
+						/>
 						<h1 className="user-login-title">Criar Conta</h1>
 					</ContentTitle>
-					<Form>
-						<ContentInput>
-							<label htmlFor="complete_name">User</label>
-							<input
-								type="text"
-								id="complete_name"
-								name="complete_name"
-								placeholder="Nome"
-								onChange={(event) => {
-									setStateCreateAccount({
-										...statesCreateAccount,
-										complete_name: event.target.value,
-									});
-								}}
-								value={statesCreateAccount.complete_name}
-								required
-							/>
-						</ContentInput>
-						<ContentInput>
-							<label htmlFor="cpf_cnpj">Cpf/Cnpj</label>
-							<input
-								type="text"
-								id="cpf_cnpj"
-								name="cpf_cnpj"
-								placeholder="Cpf/Cnpj"
-								onChange={(event) => {
-									setStateCreateAccount({
-										...statesCreateAccount,
-										cpf_cnpj: event.target.value,
-									});
-								}}
-								value={statesCreateAccount.cpf_cnpj}
-								required
-							/>
-						</ContentInput>
-						<ContentInput>
-							<label htmlFor="email">Email</label>
-							<input
-								type="text"
-								name="email"
-								id="email"
-								placeholder="E-mail"
-								onChange={(event) => {
-									setStateCreateAccount({
-										...statesCreateAccount,
-										email: event.target.value,
-									});
-								}}
-								value={statesCreateAccount.email}
-								required
-							/>
-						</ContentInput>
-
-						<ContentInputPassword>
-							<FormLabel>Senha</FormLabel>
-							<InputGroup size="md">
-								<Input
-									type={show ? "text" : "password"}
-									placeholder="Senha"
-									name="password"
-									pr="4.5rem"
-									width="100%"
-									errorBorderColor="red"
-									onChange={(event) => {
-										setStateCreateAccount({
-											...statesCreateAccount,
-											password: event.target.value,
-										});
-									}}
-								/>
-								<InputRightElement>
-									<Button h="2.5rem" onClick={() => setShow(!show)}>
-										{show ? <BsEyeSlash /> : <BsEye />}
-									</Button>
-								</InputRightElement>
-							</InputGroup>
-						</ContentInputPassword>
-						<ContentFormControlLabel>
-							<FormControlLabel
-								control={(
-									<Switch
-										checked={statesCreateAccount.isSeller}
-										onChange={(event) => {
-											setStateCreateAccount({
-												...statesCreateAccount,
-												isSeller: event.target.checked,
-											});
-										}}
-										color="primary"
-									/>
-								)}
-								label="Lojista"
-							/>
-						</ContentFormControlLabel>
-					</Form>
-					<HandleSubmitButton
-						onClick={() => handleSubmitCreateAccount(statesCreateAccount)}
+					<Formik
+						initialValues={{
+							complete_name: "",
+							cpf_cnpj: "",
+							email: "",
+							password: "",
+							wallet: 0,
+						}}
+						onSubmit={(values: any) => handleSubmitCreateAccount(values)}
+						validationSchema={validation}
 					>
-						Criar conta
-					</HandleSubmitButton>
+						{({ isValid }) => (
+							<Form>
+								<ContentForm>
+									<InputComponent
+										name="complete_name"
+										type="text"
+										placeholder="Matheus..."
+										label="Nome"
+										required
+									/>
+									<InputComponent
+										name="cpf_cnpj"
+										placeholder="ex: 980.897.470-86"
+										label="CPF ou CNPJ"
+										type="number"
+										required
+									/>
+									<InputComponent
+										name="email"
+										placeholder="teste@teste.com"
+										label="Email"
+										type="email"
+										required
+									/>
+									<InputComponent
+										name="password"
+										placeholder="*********"
+										label="Senha"
+										type="number"
+										required
+									/>
+									<HandleSubmitButton
+										type="submit"
+										disabled={!isValid}
+									>
+										Criar conta
+									</HandleSubmitButton>
+								</ContentForm>
+							</Form>
+						)}
+					</Formik>
 					<IsBackButton onClick={() => history.push("/")}>Login</IsBackButton>
 				</Content>
 			</Container>
