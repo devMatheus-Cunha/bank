@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+
+// toast
 import { toast } from "react-toastify";
-import {
-	Button,
-	Input,
-	FormLabel,
-	InputGroup,
-	InputRightElement,
-} from "@chakra-ui/react";
+
+// formik
+import { Formik, Form } from "formik";
 
 // icons
 import { BsEyeSlash, BsEye } from "react-icons/bs";
@@ -24,24 +22,22 @@ import { IValuesLoginProps } from "../../interface";
 // utils
 import logoPicPay from "../../assets/img/logo.svg";
 
+// validation
+import validation from "./validation";
+
 // styles
 import {
 	Container,
 	Content,
-	Form,
-	ContentInput,
-	ContentInputPassword,
+	ContentForm,
 	ContentTitle,
 	HandleSubmitButton,
 	IsBackButton,
 } from "./shared/styles";
+import InputComponent from "../../components/InputComponent";
 
 const UserLogin = () => {
 	// states
-	const [statesLogin, setStatesLogin] = useState({
-		email: "",
-		password: "",
-	});
 	const [show, setShow] = useState(false);
 
 	// hooks
@@ -75,63 +71,52 @@ const UserLogin = () => {
 		<>
 			<Container>
 				<Content>
-					<img
-						width="120"
-						height="40"
-						src={logoPicPay}
-						alt="Logo do PicPay"
-						loading="lazy"
-						decoding="async"
-					/>
 					<ContentTitle>
+						<img
+							width="120"
+							height="40"
+							src={logoPicPay}
+							alt="Logo do PicPay"
+							loading="lazy"
+							decoding="async"
+						/>
 						<h1 className="user-login-title">Login</h1>
 					</ContentTitle>
-					<Form>
-						<ContentInput>
-							<label htmlFor="email">E-mail</label>
-							<input
-								type="email"
-								name="email"
-								id="email"
-								placeholder="E-mail"
-								onChange={(event) => {
-									setStatesLogin({
-										...statesLogin,
-										email: event.target.value,
-									});
-								}}
-								value={statesLogin.email}
-								required
-							/>
-						</ContentInput>
-						<ContentInputPassword>
-							<FormLabel>Senha</FormLabel>
-							<InputGroup size="md">
-								<Input
-									type={show ? "text" : "password"}
-									placeholder="Senha"
-									name="password"
-									pr="4.5rem"
-									width="100%"
-									errorBorderColor="red"
-									onChange={(event) => {
-										setStatesLogin({
-											...statesLogin,
-											password: event.target.value,
-										});
-									}}
-								/>
-								<InputRightElement>
-									<Button h="2.5rem" onClick={() => setShow(!show)}>
-										{show ? <BsEyeSlash /> : <BsEye />}
-									</Button>
-								</InputRightElement>
-							</InputGroup>
-						</ContentInputPassword>
-					</Form>
-					<HandleSubmitButton onClick={() => handleSubmitLogin(statesLogin)}>
-						Logar
-					</HandleSubmitButton>
+					<Formik
+						initialValues={{
+							complete_name: "",
+							cpf_cnpj: "",
+							email: "",
+							password: "",
+							wallet: 0,
+						}}
+						onSubmit={(values: any) => handleSubmitLogin(values)}
+						validationSchema={validation}
+					>
+						{({ isValid }) => (
+							<Form>
+								<ContentForm>
+									<InputComponent
+										name="email"
+										placeholder="teste@teste.com"
+										label="Email"
+										type="email"
+										required
+									/>
+									<InputComponent
+										name="password"
+										placeholder="*********"
+										label="Senha"
+										type="number"
+										required
+									/>
+									<HandleSubmitButton type="submit" disabled={!isValid}>
+										Logar
+									</HandleSubmitButton>
+								</ContentForm>
+							</Form>
+						)}
+					</Formik>
 					<IsBackButton onClick={() => history.push("/create")}>
 						Criar conta
 					</IsBackButton>
