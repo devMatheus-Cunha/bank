@@ -37,11 +37,13 @@ import {
 import InputComponent from "../../../components/InputComponent";
 
 const UserCreate = () => {
+	// states
+	const [show, setShow] = useState(false);
+
 	// hooks
 	const history = useHistory();
 
-	const [show, setShow] = useState(false);
-
+	// functions
 	const handleSubmitCreateAccount = async (
 		datas: IValuesCreateAccountProps,
 	) => {
