@@ -10,8 +10,8 @@ interface IInputComponentProps {
   name: string;
   placeholder: string;
   type: string;
-  label: string;
-  isError?: any;
+  label?: string;
+	required?: boolean;
 }
 
 const InputComponent = ({
@@ -19,17 +19,17 @@ const InputComponent = ({
 	placeholder,
 	type,
 	label,
-	isError = false,
+	required,
 }: IInputComponentProps) => {
 	return (
 		<ContentInput>
-			<label htmlFor={name}>{label}</label>
+			<label htmlFor={name}>{required ? `${label} *` : `${label}`}</label>
 			<Field
 				name={name}
 				placeholder={placeholder}
 				type={type}
 			/>
-			{isError ? (
+			{required ? (
 				<>
 					<span>
 						<ErrorMessage name={name} />

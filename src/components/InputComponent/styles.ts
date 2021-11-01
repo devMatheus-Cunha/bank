@@ -21,6 +21,7 @@ input {
 
 span{
   color: red;
+  font-size: 13px;
 }
 
 `;
