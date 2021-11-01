@@ -1,34 +1,56 @@
-import React, { useState } from "react";
-import CurrencyInput from "react-currency-input-field";
+import React from "react";
+
+// formik
+import { Formik, Form } from "formik";
+
+// components
+import InputComponent from "../../../../components/InputComponent";
 
 // interface
 import { IDepositProps } from "../../../../interface";
+
+// validation
+import validation from "./validation";
 
 // styles
 import { Container, ContentInput, ContentButton } from "../shared/styles";
 
 const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
-	const [valueDeposit, setValueDeposit] = useState<any>();
-
 	return (
 		<Container>
-			<ContentInput>
-				<p>Valor a depositar:</p>
-				<CurrencyInput
-					id="validation-example-2-field"
-					placeholder="R$1,234,567"
-					allowDecimals={false}
-					className="form-control"
-					onValueChange={(value) => setValueDeposit(value)}
-					prefix="R$"
-					step={10}
-					name="value"
-				/>
-			</ContentInput>
-			<ContentButton>
-				<button type="button" onClick={() => onCloseModal()}>Cancelar</button>
-				<button type="submit" onClick={() => handleSubmit(valueDeposit)}>Depositar</button>
-			</ContentButton>
+			<Formik
+				initialValues={{
+					value: 0,
+				}}
+				onSubmit={(values: any) => handleSubmit(values)}
+				validationSchema={validation}
+			>
+				{({ isValid }) => (
+					<Form>
+						<ContentInput>
+							<InputComponent
+								name="value"
+								placeholder="R$1,234,567"
+								label="Valor a transferir:"
+								type="number"
+								isError
+							/>
+						</ContentInput>
+						<ContentButton>
+							<button type="button" onClick={() => onCloseModal()}>
+								Cancelar
+							</button>
+							<button type="submit" disabled={!isValid}>
+								Transferir
+							</button>
+						</ContentButton>
+						<ContentButton>
+							<button type="button" onClick={() => onCloseModal()}>Cancelar</button>
+							<button type="submit">Depositar</button>
+						</ContentButton>
+					</Form>
+				)}
+			</Formik>
 		</Container>
 	);
 };
