@@ -107,7 +107,7 @@ const UserLogin = () => {
 										name="password"
 										placeholder="*********"
 										label="Senha"
-										type="number"
+										type="password"
 										required
 									/>
 									<HandleSubmitButton type="submit" disabled={!isValid}>

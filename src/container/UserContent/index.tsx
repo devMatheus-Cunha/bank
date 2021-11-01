@@ -126,15 +126,11 @@ const UserContent = () => {
 
 	// handle actions modal
 	const handleDepositWallet = useCallback(
-		async (data: number) => {
-			const formated = {
-				value: Number(data),
-			};
-
+		async (data: string) => {
 			const request = await Model({
 				request: "POST",
 				route: `/picpay/deposit/save/${id}`,
-				body: formated,
+				body: data,
 			});
 
 			if (request?.data) {
@@ -162,15 +158,6 @@ const UserContent = () => {
 				route: `/picpay/transactions/${id}`,
 				body: formated,
 			});
-
-			// const handleGetPDF = async () => {
-			// 	const request = await Model({
-			// 		route: "/picpay/admin/user/report",
-			// 		request: "GET",
-			// 		pdf: "arraybuffer",
-			// 	});
-			// 	generetePDF(request.data);
-			// };
 
 			if (request?.data) {
 				toast.success(<ToastContent content="Transação feita" />);

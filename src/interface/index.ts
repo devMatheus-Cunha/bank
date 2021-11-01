@@ -36,7 +36,7 @@ export interface IValuesDepostiProps {
 
 export interface IDepositProps {
   onCloseModal: () => void;
-  handleSubmit: (data: number) => void;
+  handleSubmit: (data: string) => void;
 }
 
 /// //////////////////////

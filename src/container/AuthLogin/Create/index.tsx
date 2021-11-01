@@ -56,23 +56,17 @@ const UserCreate = () => {
 			wallet: datas.wallet,
 		};
 
-		const validateValues = formated.complete_name.length && formated.email.length && formated.password.length && formated.cpf_cnpj.length > 0
+		const request = await Model({
+			request: "POST",
+			route: "/picpay/user",
+			body: formated,
+		});
 
-		if (validateValues) {
-			const request = await Model({
-				request: "POST",
-				route: "/picpay/user",
-				body: formated,
-			});
-
-			if (request?.data?.id) {
-				await history.push(`/home/${request?.data?.id}`);
-				toast.success(<ToastContent content="Conta criada!" />);
-			} else {
-				toast.error(<ToastContent content={request?.data} />);
-			}
+		if (request?.data?.id) {
+			await history.push(`/home/${request?.data?.id}`);
+			toast.success(<ToastContent content="Conta criada!" />);
 		} else {
-			toast.error(<ToastContent content="Preencha todos os campos abaixo!" />);
+			toast.error(<ToastContent content={request?.data} />);
 		}
 	};
 
@@ -133,7 +127,7 @@ const UserCreate = () => {
 										name="password"
 										placeholder="*********"
 										label="Senha"
-										type="number"
+										type="password"
 										required
 									/>
 									<HandleSubmitButton

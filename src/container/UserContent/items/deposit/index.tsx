@@ -20,7 +20,7 @@ const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
 		<Container>
 			<Formik
 				initialValues={{
-					value: 0,
+					value: "",
 				}}
 				onSubmit={(values: any) => handleSubmit(values)}
 				validationSchema={validation}
@@ -31,7 +31,7 @@ const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
 							<InputComponent
 								name="value"
 								placeholder="R$1,234,567"
-								label="Valor a transferir:"
+								label="Valor a transferir"
 								type="number"
 								required
 							/>
@@ -41,12 +41,8 @@ const Deposit = ({ onCloseModal, handleSubmit }: IDepositProps) => {
 								Cancelar
 							</button>
 							<button type="submit" disabled={!isValid}>
-								Transferir
+								Depositar
 							</button>
-						</ContentButton>
-						<ContentButton>
-							<button type="button" onClick={() => onCloseModal()}>Cancelar</button>
-							<button type="submit">Depositar</button>
 						</ContentButton>
 					</Form>
 				)}
