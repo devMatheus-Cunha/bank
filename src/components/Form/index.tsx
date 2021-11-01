@@ -8,10 +8,20 @@ interface IFormComponent {
   initialValues: Record<string, string>;
   onSubmit: (values: any) => void;
   children: ReactNode;
+  validation?: any;
 }
-const FormComponent = ({ initialValues, onSubmit, children }: IFormComponent) => {
+const FormComponent = ({
+	initialValues,
+	onSubmit,
+	children,
+	validation,
+}: IFormComponent) => {
 	return (
-		<Formik initialValues={initialValues} onSubmit={onSubmit}>
+		<Formik
+			initialValues={initialValues}
+			onSubmit={onSubmit}
+			validationSchema={validation}
+		>
 			<Form>{children}</Form>
 		</Formik>
 	);

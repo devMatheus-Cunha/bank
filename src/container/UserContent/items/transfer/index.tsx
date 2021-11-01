@@ -1,6 +1,11 @@
 import React from "react";
+
+// components
 import FormComponent from "../../../../components/Form";
 import InputComponent from "../../../../components/InputComponent";
+
+// validation
+import validation from "./validation";
 
 // interface
 import { ITransferProps, IValuesTransferProps } from "../../../../interface";
@@ -17,6 +22,7 @@ const Transfer = ({ handleSubmit, onCloseModal }: ITransferProps) => {
 					value: "",
 				}}
 				onSubmit={(values: IValuesTransferProps) => handleSubmit(values)}
+				validation={validation}
 			>
 				<ContentInput>
 					<InputComponent
