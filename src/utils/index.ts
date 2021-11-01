@@ -1,12 +1,5 @@
 import { validateCNPJ, validateCPF } from "validations-br";
 
-export const url = "http://71e9-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io";
-
-export const headers = {
-	Accept: "application/json",
-	"Content-Type": "application/json",
-};
-
 export const mensageErrorDefault = "Erro! Tente novamente mais tarde...";
 
 export const generetePDF = (data: string) => {
