@@ -4,6 +4,13 @@ import Modal from "react-modal";
 // icons
 import { BiDetail } from "react-icons/bi";
 
+// toast
+import { toast } from "react-toastify";
+import ToastContent from "../ToastContent";
+
+// models
+import { Model } from "../../models";
+
 // items
 import ContainerModalDetails from "./items";
 
@@ -11,7 +18,7 @@ import ContainerModalDetails from "./items";
 import { TransactionsDatasProps } from "../../interface";
 
 // utils
-import { formatDateTwoValues, formatMoney } from "../../utils";
+import { formatDateTwoValues, formatMoney, mensageErrorDefault } from "../../utils";
 
 // components
 import LoaderComponent from "../Loading";
@@ -37,16 +44,32 @@ const InfoListTransactionsAndDeposit = ({
 	loading,
 	datas,
 }: InfoListTransactionsAndDepositProps) => {
-	const [isModal, setisModal] = useState(false);
+	const [isModal, setIsModal] = useState(false);
+	const [dataTransaction, setDataTransaction] = useState("");
+	const [loadingModal, setLoadingModal] = useState(false);
 
-	// handle open modal
-	const handleOpenModaDetails = async () => {
-		setisModal(true);
-	};
+	const handleOpenModaDetails = async (data: any) => {
+		setIsModal(true);
+
+		const requestDatas = await Model({
+			route: `/picpay/transactions/view/${data.id}`,
+			request: "GET",
+		});
+
+		if (requestDatas?.data) {
+			setTimeout(() => {
+				setDataTransaction(requestDatas.data);
+				setLoadingModal(true)
+			}, 500);
+		} else {
+			toast.error(<ToastContent content={mensageErrorDefault} />);
+		}
+	}
 
 	// handle close modal
 	const handleCloseModalDetails = () => {
-		setisModal(false);
+		setIsModal(false);
+		setLoadingModal(false)
 	};
 
 	function validationTitle(type: string) {
@@ -90,21 +113,9 @@ const InfoListTransactionsAndDeposit = ({
 									{formatDateTwoValues(data.date)}
 								</DateTransaction>
 								<Details>
-									<button type="button" onClick={() => handleOpenModaDetails()}>
+									<button type="button" onClick={() => handleOpenModaDetails(data)}>
 										<BiDetail />
 									</button>
-									<Modal
-										isOpen={isModal}
-										onRequestClose={handleCloseModalDetails}
-										overlayClassName="react-modal-overlay"
-										className="react-modal-content"
-									>
-										<ContainerModalDetails
-											onCloseModal={handleCloseModalDetails}
-											loading={loading}
-											data={data}
-										/>
-									</Modal>
 								</Details>
 							</ContentSecond>
 						</Container>
@@ -115,6 +126,18 @@ const InfoListTransactionsAndDeposit = ({
 					<LoaderComponent />
 				</div>
 			)}
+			<Modal
+				isOpen={isModal}
+				onRequestClose={handleCloseModalDetails}
+				overlayClassName="react-modal-overlay"
+				className="react-modal-content"
+			>
+				<ContainerModalDetails
+					onCloseModal={handleCloseModalDetails}
+					loading={loadingModal}
+					data={dataTransaction}
+				/>
+			</Modal>
 		</>
 	);
 };

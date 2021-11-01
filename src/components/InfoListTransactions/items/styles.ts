@@ -6,26 +6,35 @@ export const Container = styled.div`
   gap: 1rem 0;
 
   color: ${({ theme }) => theme.colors.text};
-  `;
+`;
 
 export const ContentButton = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: center;
-  
+
   margin-top: 1rem;
-  
+
   button {
     height: 2.7rem;
     width: 40%;
-    
+
     padding: 0.5rem;
     border: none;
     border-radius: 4px;
-    
+
     background-color: transparent;
     text-decoration: underline;
     font-size: 17px;
     color: ${({ theme }) => theme.colors.text};
   }
 `;
+
+export const ContentTypeAndDate = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Title = styled.div``;
+
+export const DateTransactin = styled.div``;
