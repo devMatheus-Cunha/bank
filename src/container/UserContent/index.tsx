@@ -126,9 +126,9 @@ const UserContent = () => {
 
 	// handle actions modal
 	const handleDepositWallet = useCallback(
-		async (data: string) => {
+		async (data: number) => {
 			const formated = {
-				value: parseFloat(data),
+				value: Number(data),
 			};
 
 			const request = await Model({
