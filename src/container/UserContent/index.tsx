@@ -153,7 +153,7 @@ const UserContent = () => {
 	const handleTransferWallet = useCallback(
 		async (data: IValuesTransferProps) => {
 			const formated = {
-				cpf_cnpj: data.cpf_cnpj,
+				cpf_cnpj: String(data.cpf_cnpj),
 				value: parseFloat(data.value),
 			};
 

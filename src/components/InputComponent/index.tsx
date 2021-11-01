@@ -24,13 +24,15 @@ const InputComponent = ({
 	return (
 		<ContentInput>
 			<label htmlFor={name}>{label}</label>
-			<Field name={name} placeholder={placeholder} type={type} />
+			<Field
+				name={name}
+				placeholder={placeholder}
+				type={type}
+			/>
 			{isError ? (
 				<>
 					<span>
-						<ErrorMessage
-							name={name}
-						/>
+						<ErrorMessage name={name} />
 					</span>
 				</>
 			) : (
