@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const cookies = Cookies.get();
 
 export const api = axios.create({
-	baseURL: "http://980f-2804-14c-5b80-80b4-a1f6-7d66-967e-642.ngrok.io",
+	baseURL: "http://8758-2804-14c-5b80-80b4-b0a4-4e5f-3f81-87b6.ngrok.io",
 	headers: {
 		Authorization: `Bearer ${cookies.paypicToken}`,
 		Accept: "application/json",
