@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 // models
 import { Model } from "../models/request";
+import { api } from "../models/api/service";
 
 type UserProps = {
     id: string;
@@ -27,7 +28,6 @@ type AuthContextProps = {
   isAuthemticated: boolean;
   user: UserProps | undefined;
   setUser: any
-  paypicToken: any
 };
 
 type AuthProviderProps = {
@@ -37,10 +37,11 @@ type AuthProviderProps = {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
+	// states
 	const [user, setUser] = useState<UserProps>();
-	const isAuthemticated = !!user;
-	const { paypicToken } = Cookies.get()
+	const [isAuthemticated, setIsAuthemticated] = useState(false)
 
+	// funcitons
 	async function signIn(valuesBody: SignInCredentials) {
 		const response = await Model({
 			request: "POST",
@@ -49,24 +50,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
 		});
 
 		const { validUser, token } = response.data;
-
 		Cookies.set("paypicToken", token, {
 			expires: 60 * 60 * 24 * 30, // 30 days
 			path: "/",
 		});
-
 		setUser(validUser);
+		api.defaults.headers.Authorization = `Bearer ${token}`
+
 		return response;
 	}
 
-	// useEffect(() => {
-	// 	if (!paypicToken) {
-	// 		 Model({
-	// 			route: `/picpay/admin/user/${user?.id}`,
-	// 			request: "GET",
-	// 		})
-	// 	}
-	// }, [paypicToken, user?.id])
+	// useEffects
+	useEffect(() => {
+		const { paypicToken: token } = Cookies.get()
+
+		if (token) {
+			api.defaults.headers.Authorization = `Bearer ${token}`
+			setIsAuthemticated(true)
+		}
+	}, [])
+
+	console.log(isAuthemticated)
 
 	return (
 		<AuthContext.Provider
@@ -75,7 +79,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 				isAuthemticated,
 				user,
 				setUser,
-				paypicToken,
 			}}
 		>
 			{children}
