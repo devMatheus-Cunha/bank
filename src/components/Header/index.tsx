@@ -2,7 +2,6 @@
 import React from "react";
 
 // utils
-import logoPicPay from "../../assets/img/logo.svg";
 import CustomizedMenus from "../ToggleMenu";
 
 // styles
@@ -14,8 +13,7 @@ const Header = () => {
 			<img
 				width="80"
 				height="30"
-				src={logoPicPay}
-				alt="Logo do PicPay"
+				alt="Logo do Bank"
 				loading="lazy"
 				decoding="async"
 			/>

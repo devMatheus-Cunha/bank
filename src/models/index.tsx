@@ -1,20 +1,27 @@
-import axios from "axios";
+import Cookies from "js-cookie";
+
+// services
+import { api } from "../api/service";
 
 // interface
 import { IModelRequest } from "../interface";
 
-// utils
-import { url, headers } from "../utils";
+// cookies
+const { paypicToken } = Cookies.get();
 
 export const Model = async ({
 	route, request, body, responseType,
 }: IModelRequest) => {
-	const response = await axios({
+	const response = await api({
 		method: request,
-		url: `${url}${route}`,
+		url: route,
 		data: body,
-		headers,
 		responseType,
+		headers: {
+			Authorization: `Bearer ${paypicToken}`,
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
 	}).catch((err) => err);
 
 	const userData = await response;

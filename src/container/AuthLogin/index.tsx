@@ -16,9 +16,6 @@ import ToastContent from "../../components/ToastContent";
 // interface
 import { IValuesLoginProps } from "../../interface";
 
-// utils
-import logoPicPay from "../../assets/img/logo.svg";
-
 // context
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -44,13 +41,12 @@ const UserLogin = () => {
 
 	// functions
 	async function handleSubmitLogin(datas: IValuesLoginProps) {
-		const request = await signIn(datas)
-
-		if (request?.data?.validUser?.id) {
+		try {
+			const request = await signIn(datas)
 			history.push(`/home/${request?.data?.validUser?.id}`);
 			toast.success(<ToastContent content="Login feito!" />);
-		} else {
-			toast.error(<ToastContent content={request?.response?.data} />);
+		} catch (error) {
+			toast.error(<ToastContent content="Error ao fazer login!" />);
 		}
 	}
 
@@ -65,8 +61,7 @@ const UserLogin = () => {
 						<img
 							width="120"
 							height="40"
-							src={logoPicPay}
-							alt="Logo do PicPay"
+							alt="Logo do Bank"
 							loading="lazy"
 							decoding="async"
 						/>
