@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from "react";
+import Cookies from "js-cookie";
 
 // material ui
 import { useHistory } from "react-router-dom";
@@ -40,10 +41,16 @@ export default function LongMenu() {
 	// hooks
 	const history = useHistory();
 
-	// handle functiions
+	// handle functions
 	const handleClick = (event: any) => {
 		setAnchorEl(event.currentTarget);
 	};
+
+	const handleLogout = (link: string) => {
+		Cookies.remove("paypicToken", { path: "/" }) // removed!
+		history.push(link)
+	}
+
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
@@ -77,7 +84,7 @@ export default function LongMenu() {
 			>
 				{itemList.map((item) => (
 					<MenuItem key={item.id} onClick={handleClose}>
-						<Button type="button" onClick={() => history.push(item.link)}>
+						<Button type="button" onClick={() => handleLogout(item.link)}>
 							{item.label}
 							{" "}
 							{item.icon}
