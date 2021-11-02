@@ -1,8 +1,7 @@
-import React, { ReactNode, useState } from "react";
-import Cookies from "js-cookie";
+import React, { ReactNode, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 // material ui
-import { useHistory } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Fade from "@mui/material/Fade";
@@ -11,6 +10,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 // icons
 import { IoExitOutline } from "react-icons/io5";
+
+// context
+import { AuthContext } from "../../contexts/AuthContext";
 
 // styles
 import { Container, Button } from "./styles";
@@ -41,14 +43,17 @@ export default function LongMenu() {
 	// hooks
 	const history = useHistory();
 
+	// context
+	const { logOut } = useContext(AuthContext);
+
 	// handle functions
 	const handleClick = (event: any) => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleLogout = (link: string) => {
-		Cookies.remove("paypicToken", { path: "/" }) // removed!
-		history.push(link)
+	const handleLogOut = (route: string) => {
+		logOut()
+		history.push(route)
 	}
 
 	const handleClose = () => {
@@ -84,7 +89,7 @@ export default function LongMenu() {
 			>
 				{itemList.map((item) => (
 					<MenuItem key={item.id} onClick={handleClose}>
-						<Button type="button" onClick={() => handleLogout(item.link)}>
+						<Button type="button" onClick={() => handleLogOut(item.link)}>
 							{item.label}
 							{" "}
 							{item.icon}
