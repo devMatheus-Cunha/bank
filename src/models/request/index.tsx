@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { api } from "../api/service";
 
 // interface
-import { IModelRequest } from "../interface";
+import { IModelRequest } from "../../interface";
 
 // cookies
 const { paypicToken } = Cookies.get();

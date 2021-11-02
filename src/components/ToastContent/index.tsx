@@ -1,7 +1,7 @@
 import React from "react";
 
 // utils
-import { mensageErrorDefault } from "../../utils";
+import { mensageErrorDefault } from "../../utils/mockData";
 
 // styles
 import { Container } from "./styles";

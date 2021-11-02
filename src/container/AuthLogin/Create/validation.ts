@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 // utils
-import { validationCPFAndCNPJ } from "../../../utils";
+import { validationCPFAndCNPJ } from "../../../utils/functions";
 
 export default Yup.object().shape({
 	complete_name: Yup.string().required("Preencha com seu nome."),

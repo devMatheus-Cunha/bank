@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import ToastContent from "../ToastContent";
 
 // models
-import { Model } from "../../models";
+import { Model } from "../../models/request";
 
 // items
 import ContainerModalDetails from "./items";
@@ -18,7 +18,8 @@ import ContainerModalDetails from "./items";
 import { TransactionsDatasProps } from "../../interface";
 
 // utils
-import { formatDateTwoValues, formatMoney, mensageErrorDefault } from "../../utils";
+import { formatDateTwoValues, formatMoney } from "../../utils/formated";
+import { mensageErrorDefault } from "../../utils/mockData";
 
 // components
 import LoaderComponent from "../Loading";

@@ -8,7 +8,7 @@ import { Form, Formik } from "formik";
 import { toast } from "react-toastify";
 
 // models
-import { Model } from "../../../models";
+import { Model } from "../../../models/request";
 
 // compoenents
 import ToastContent from "../../../components/ToastContent";

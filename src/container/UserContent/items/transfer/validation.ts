@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 // utils
-import { validationCPFAndCNPJ } from "../../../../utils";
+import { validationCPFAndCNPJ } from "../../../../utils/functions";
 
 export default Yup.object().shape({
 	cpf_cnpj:	Yup

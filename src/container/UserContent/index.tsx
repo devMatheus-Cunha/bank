@@ -9,14 +9,14 @@ import Modal from "react-modal";
 import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
-import { Model } from "../../models";
+import { Model } from "../../models/request";
 
 // content modal
 import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import { mensageErrorDefault } from "../../utils";
+import { mensageErrorDefault } from "../../utils/mockData";
 import { dropdownOptions } from "./utils";
 
 // components

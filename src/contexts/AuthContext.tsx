@@ -4,7 +4,7 @@ import {
 import Cookies from "js-cookie";
 
 // models
-import { Model } from "../models";
+import { Model } from "../models/request";
 
 type UserProps = {
     id: string;
