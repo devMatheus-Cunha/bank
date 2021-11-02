@@ -1,7 +1,7 @@
 @MeMoGroup
 
 ## 💻 About Project
-Project developed in partnership with [Andre Isaac](https://github.com/devAndre-Isaac) where I will integrate the backend made for the Picpay challenge. 
+Project developed in partnership with [Andre Isaac](https://github.com/devAndre-Isaac) where I will integrate the backend by the same.
 
 It has functionality to Login/Create accounts, transaction actions and deposits made, and we bring all the information to assist the user in using the "interface".
 
