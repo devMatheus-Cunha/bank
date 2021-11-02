@@ -23,8 +23,8 @@ This project was developed with the following technologies:
 ## 🚀 How to run
 
 ```bash
-$ git clone https://github.com/devMatheus-Gomes/picpay-frontend.git
-$ cd picpay-frontend
+$ git clone https://github.com/devMatheus-Cunha/bank.git
+$ cd bank
 ```
 
 To start it, follow the steps below:
