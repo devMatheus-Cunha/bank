@@ -16,9 +16,6 @@ import ToastContent from "../../../components/ToastContent";
 // interface
 import { IValuesCreateAccountProps } from "../../../interface";
 
-// utils
-import bank from "../../../assets/img/logo.svg";
-
 // validation
 import validation from "./validation";
 
@@ -75,7 +72,6 @@ const UserCreate = () => {
 						<img
 							width="120"
 							height="40"
-							src={bank}
 							alt="Logo do Bank"
 							loading="lazy"
 							decoding="async"
