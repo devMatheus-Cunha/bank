@@ -23,7 +23,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import validation from "./validation";
 
 // images
-import logoBank from "../../assets/img/logo.svg"
+import logoBank from "../../assets/img/logo.svg";
 
 // styles
 import {
@@ -40,16 +40,17 @@ const UserLogin = () => {
 	const history = useHistory();
 
 	// context
-	const { signIn } = useContext(AuthContext)
+	const { signIn } = useContext(AuthContext);
 
 	// functions
 	async function handleSubmitLogin(datas: IValuesLoginProps) {
-		try {
-			const request = await signIn(datas)
+		const request = await signIn(datas);
+
+		if (request?.data?.validUser?.id) {
 			history.push(`/home/${request?.data?.validUser?.id}`);
 			toast.success(<ToastContent content="Login feito!" />);
-		} catch (error) {
-			toast.error(<ToastContent content="Error ao fazer login!" />);
+		} else {
+			toast.error(<ToastContent content="Error ao fazer o login!" />);
 		}
 	}
 
