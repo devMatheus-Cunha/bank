@@ -1,14 +1,17 @@
 import React, {
 	useState, useCallback, useEffect, useContext,
 } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import Modal from "react-modal";
+
+// toast
+import { toast } from "react-toastify";
 
 // icons
 import { BiTransfer } from "react-icons/bi";
 import { IoWalletOutline } from "react-icons/io5";
 
+// models
 import { Model } from "../../models/request";
 
 // content modal
@@ -16,7 +19,6 @@ import Deposit from "./items/deposit";
 import Transfer from "./items/transfer";
 
 // utils
-import { mensageErrorDefault } from "../../utils/mockData";
 import { dropdownOptions } from "./utils";
 
 // components
@@ -27,11 +29,7 @@ import InfoUserContent from "../../components/InfoUserContent";
 import InfoListTransactions from "../../components/InfoListTransactions";
 
 // interface
-import {
-	IDataProps,
-	IValuesTransferProps,
-	TransactionsDatasProps,
-} from "../../interface";
+import { IValuesTransferProps } from "../../interface";
 
 // styles
 import {
@@ -43,25 +41,26 @@ import {
 	ContainerFilter,
 } from "./styles";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useGetDataUser } from "../../hooks/useGetDataUser";
 
 const UserContent = () => {
-	// states
-	const [loadingDataInfoUser, setLoadingDataInfoUser] = useState(false);
-	const [loadingDataTransactios, setLoadingDataTransactios] = useState(false);
-	const [userData, setUserData] = useState<IDataProps>();
-	const [typeFilterTransactions, setTypeFilterTransactions] = useState("all");
-	const [trasactionsDatas, setTrasactionsDatas] = useState<
-    TransactionsDatasProps[]
-  >([]);
-
 	// state modal
 	const [isTransferWalletModalOpen, setIsTransferWalletModalOpen] = useState(false);
 	const [isDepositWalletModalOpen, setIsDepositWalletModalOpen] = useState(false);
 
 	// hooks
 	const { id } = useParams<{ id: string }>();
-	const { paypicToken, setUser, user } = useContext(AuthContext)
-	const history = useHistory();
+	const { user } = useContext(AuthContext);
+	const {
+		responseRequestUserData,
+		loadingDataInfoUser,
+		loadingDataTransactios,
+		setLoadingDataTransactios,
+		setLoadingDataInfoUser,
+		typeFilterTransactions,
+		setTypeFilterTransactions,
+		trasactionsDatas,
+	} = useGetDataUser(id);
 
 	// handle open modal
 	const handleOpenModaTransfer = () => {
@@ -76,61 +75,6 @@ const UserContent = () => {
 		setIsTransferWalletModalOpen(false);
 		setIsDepositWalletModalOpen(false);
 	};
-
-	// request get data
-	const responseRequestUserData = useCallback(async () => {
-		if (paypicToken) {
-			const requestDatas = await Model({
-				route: `/picpay/admin/user/${id}`,
-				request: "GET",
-			});
-
-			if (requestDatas?.data) {
-				setUser(requestDatas?.data);
-				setLoadingDataInfoUser(true);
-
-				const getTransactionsSendAndReceive = (
-					await Promise.all([
-						Model({
-							route: `/picpay/transactions/log/send/${requestDatas?.data?.cpf_cnpj}`,
-							request: "GET",
-						}),
-
-						Model({
-							route: `/picpay/transactions/log/receive/${requestDatas?.data?.cpf_cnpj}`,
-							request: "GET",
-						}),
-					])
-				).map(({ data }) => data);
-
-				if (getTransactionsSendAndReceive) {
-					const formatedResponse = getTransactionsSendAndReceive.reduce((current, acc) => [
-						...current,
-						...acc.map((data: TransactionsDatasProps) => {
-							return {
-								...data,
-								type: "receivedTransaction",
-							};
-						}),
-					]);
-
-					const filter = formatedResponse.filter((item: TransactionsDatasProps) => {
-						return typeFilterTransactions === "all"
-							? item
-							: typeFilterTransactions === item.type;
-					});
-					setTrasactionsDatas(filter);
-				}
-			} else {
-				toast.error(<ToastContent content={mensageErrorDefault} />);
-			}
-		} else {
-			history.push("/")
-			toast.error(<ToastContent content="E preciso fazer o login!" />);
-		}
-		setLoadingDataTransactios(true);
-		setLoadingDataInfoUser(true);
-	}, [history, id, paypicToken, setUser, typeFilterTransactions]);
 
 	// handle actions modal
 	const handleDepositWallet = useCallback(
@@ -151,7 +95,7 @@ const UserContent = () => {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
-		[id, responseRequestUserData],
+		[id, responseRequestUserData, setLoadingDataInfoUser, setLoadingDataTransactios],
 	);
 
 	const handleTransferWallet = useCallback(
@@ -177,7 +121,7 @@ const UserContent = () => {
 				toast.error(<ToastContent content={request?.response?.data} />);
 			}
 		},
-		[id, responseRequestUserData],
+		[id, responseRequestUserData, setLoadingDataInfoUser, setLoadingDataTransactios],
 	);
 
 	useEffect(() => {
@@ -239,13 +183,16 @@ const UserContent = () => {
 					options={dropdownOptions}
 					defaultValue={typeFilterTransactions}
 					onChange={(event) => {
-						setTypeFilterTransactions(event.target.value)
-						setLoadingDataTransactios(false)
+						setTypeFilterTransactions(event.target.value);
+						setLoadingDataTransactios(false);
 					}}
 				/>
 			</ContainerFilter>
 			<ContainerTransactions>
-				<InfoListTransactions loading={loadingDataTransactios} datas={trasactionsDatas} />
+				<InfoListTransactions
+					loading={loadingDataTransactios}
+					datas={trasactionsDatas}
+				/>
 			</ContainerTransactions>
 		</Contaienr>
 	);
