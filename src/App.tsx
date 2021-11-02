@@ -1,5 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
+import { ThemeProvider } from "styled-components";
+
 // toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +13,12 @@ import Routes from "./routes/routes";
 // contexts
 import { AuthProvider } from "./contexts/AuthContext";
 
+// themes
+import dark from "./assets/styles/themes/dark";
+
+// global styles
+import { GlobalStyle } from "./assets/styles/global";
+
 Modal.setAppElement("#root");
 
 function App() {
@@ -21,7 +29,10 @@ function App() {
 	return (
 		<>
 			<AuthProvider>
-				<Routes />
+				<ThemeProvider theme={dark}>
+					<Routes />
+					<GlobalStyle />
+				</ThemeProvider>
 			</AuthProvider>
 
 			<ToastContainer
