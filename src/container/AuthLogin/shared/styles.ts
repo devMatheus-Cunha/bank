@@ -15,13 +15,10 @@ export const Content = styled.div`
 export const ContentTitle = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 2rem 0;
 
-  img {
-    width: 140px;
-    height: 120px;
-  }
+  margin:  0 auto;
+
 
   h1 {
     font-weight: 37px;

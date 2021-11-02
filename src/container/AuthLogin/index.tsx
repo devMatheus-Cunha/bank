@@ -22,6 +22,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 // validation
 import validation from "./validation";
 
+// images
+import logoBank from "../../assets/img/logo.svg"
+
 // styles
 import {
 	Container,
@@ -61,6 +64,7 @@ const UserLogin = () => {
 						<img
 							width="120"
 							height="40"
+							src={logoBank}
 							alt="Logo do Bank"
 							loading="lazy"
 							decoding="async"
