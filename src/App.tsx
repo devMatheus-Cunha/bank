@@ -1,16 +1,12 @@
 import React from "react";
 import Modal from "react-modal";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 // toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "semantic-ui-css/semantic.min.css";
 
-// view
-import Auth from "./view/auth";
-import PageInfo from "./view/home";
-import Create from "./view/auth/Create";
+// routes
+import Routes from "./routes/routes";
 
 // contexts
 import { AuthProvider } from "./contexts/AuthContext";
@@ -25,13 +21,7 @@ function App() {
 	return (
 		<>
 			<AuthProvider>
-				<BrowserRouter>
-					<Switch>
-						<Route path="/" exact component={Auth} />
-						<Route path="/home/:id" component={PageInfo} />
-						<Route path="/create" exact component={Create} />
-					</Switch>
-				</BrowserRouter>
+				<Routes />
 			</AuthProvider>
 
 			<ToastContainer
